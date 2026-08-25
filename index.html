@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SUNU SOLUTION | Boutique & Gestion Téléphones & Accessoires - Dakar</title>
+  <meta name="description"
+    content="SUNU SOLUTION - Vente de téléphones portables (Tecno, Samsung, iPhone, Infinix, Redmi) et accessoires de haute qualité aux meilleurs prix en Francs CFA à Dakar.">
+
+  <!-- Favicon Logo -->
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="apple-touch-icon" href="logo.png">
+
+  <!-- Google Fonts: Plus Jakarta Sans & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- Font Awesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div class="top-bar">
+    <div class="container top-bar-content">
+      <div class="top-bar-left">
+        <span><i class="fa-solid fa-truck-fast"></i> Livraison express à Dakar & partout au Sénégal !</span>
+      </div>
+      <div class="top-bar-right">
+        <span class="live-status"><span class="pulse-dot"></span> Boutique Ouverte 7j/7</span>
+        <a href="tel:+221763143333"><i class="fa-solid fa-phone"></i> +221 76 314 33 33</a>
+        <a href="https://wa.me/221763143333" target="_blank" class="whatsapp-top-link"><i
+            class="fa-brands fa-whatsapp"></i> SAV WhatsApp</a>
+        <a href="https://www.facebook.com/sunusolutionshop" target="_blank" style="color: #60a5fa;"><i
+            class="fa-brands fa-facebook"></i> Page Facebook</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Navigation Header -->
+  <header class="main-header" id="mainHeader">
+    <div class="container header-container">
+      <!-- Logo -->
+      <a href="#accueil" class="brand-logo">
+        <div class="logo-icon logo-img-wrap">
+          <img src="logo.png" alt="SUNU SOLUTION Logo" class="brand-logo-img">
+        </div>
+        <div class="logo-text">
+          <span class="brand-name">SUNU <span class="accent-text">SOLUTION</span></span>
+          <span class="brand-sub">Smartphones & Accessoires - Dakar</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="nav-menu" id="navMenu">
+        <a href="#accueil" class="nav-link active"><i class="fa-solid fa-house"></i> Accueil</a>
+        <a href="#catalogue" class="nav-link" onclick="navFilterCategory('telephonie')"><i class="fa-solid fa-mobile-screen"></i> Téléphonie</a>
+        <a href="#catalogue" class="nav-link" onclick="navFilterCategory('accessoires')"><i class="fa-solid fa-headphones"></i> Accessoires</a>
+        <a href="#catalogue" class="nav-link" onclick="navFilterCategory('electromenager')"><i class="fa-solid fa-tv"></i> Électroménager</a>
+        <a href="admin.html" class="nav-link admin-nav-link" onclick="openAdminAccessModal(event)"><i class="fa-solid fa-lock"></i> Espace Admin</a>
+        <a href="#contacts" class="nav-link"><i class="fa-solid fa-envelope"></i> Contacts</a>
+      </nav>
+
+      <!-- Header Action Buttons -->
+      <div class="header-actions">
+        <!-- Search bar toggle on mobile / mini search -->
+        <div class="search-box-header">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="headerSearchInput" placeholder="Rechercher Tecno, Samsung, iPhone, Coque...">
+        </div>
+
+        <!-- Admin Access Button -->
+        <button class="mode-switch-btn" id="modeSwitchBtn" onclick="openAdminAccessModal(event)"
+          title="Accéder à l'espace d'administration sécurisé">
+          <i class="fa-solid fa-lock"></i>
+          <span class="mode-text">Espace Admin</span>
+        </button>
+
+        <!-- Cart Button -->
+        <button class="cart-btn" id="cartBtn" aria-label="Ouvrir le panier">
+          <i class="fa-solid fa-bag-shopping"></i>
+          <span class="cart-badge" id="cartCountBadge">0</span>
+        </button>
+
+        <!-- Mobile Menu Toggle -->
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Ouvrir le menu">
+          <i class="fa-solid fa-bars-staggered"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Notification Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- MAIN APP CONTENT -->
+  <main id="mainAppContent">
+
+    <!-- ==============================================
+         SECTION 1: HERO & OFFRES VEDETTES
+         ============================================== -->
+    <section class="hero-section" id="accueil">
+      <div class="hero-bg-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+      </div>
+      <div class="container hero-grid">
+        <!-- Hero Text -->
+        <div class="hero-content">
+          <div class="hero-badge">
+            <i class="fa-solid fa-shield-halved"></i> SUNU SOLUTION • 100% Produits Authentiques
+          </div>
+          <h1 class="hero-title">
+            Votre Boutique de <span class="gradient-text">Téléphones & Accessoires</span> à Dakar
+          </h1>
+          <p class="hero-description">
+            Retrouvez les meilleures offres de <strong>SUNU SOLUTION</strong> sur les smartphones Tecno (Spark 20, Spark
+            40), Samsung (Galaxy A05, A15), iPhone, Infinix et tous vos accessoires (chargeurs rapides, powerbanks,
+            écouteurs sans fil, coques) avec garantie et livraison rapide.
+          </p>
+
+          <div class="hero-cta-group">
+            <a href="#catalogue" class="btn btn-primary btn-lg">
+              <i class="fa-solid fa-cart-shopping"></i> Voir le Catalogue & Prix (FCFA)
+            </a>
+            <button class="btn btn-outline btn-lg" id="heroQuickOrderBtn">
+              <i class="fa-brands fa-whatsapp"></i> Commander sur WhatsApp
+            </button>
+          </div>
+
+          <!-- Hero Features Strip -->
+          <div class="hero-badges-row">
+            <div class="hero-badge-item">
+              <i class="fa-solid fa-truck-ramp-box"></i>
+              <div>
+                <strong>Livraison Partout au Sénégal</strong>
+                <span>Dakar, Pikine, Guédiawaye, Régions</span>
+              </div>
+            </div>
+            <div class="hero-badge-item">
+              <i class="fa-solid fa-award"></i>
+              <div>
+                <strong>Garantie 12 à 24 Mois</strong>
+                <span>SAV remplacement certifié</span>
+              </div>
+            </div>
+            <div class="hero-badge-item">
+              <i class="fa-solid fa-lock"></i>
+              <div>
+                <strong>Paiement Facile & Sécurisé</strong>
+                <span>Wave, Orange Money, À la livraison</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Card Showcase -->
+        <div class="hero-visual">
+          <div class="hero-card-glow">
+            <div class="hero-card-header">
+              <span class="hero-tag-hot"><i class="fa-solid fa-fire"></i> Best-Seller SUNU SOLUTION</span>
+              <span class="hero-stars"><i class="fa-solid fa-star"></i> 4.9/5 (180+ avis)</span>
+            </div>
+            <div class="hero-image-wrap">
+              <img src="https://images.unsplash.com/photo-1598327105666-5b89351aff97?auto=format&fit=crop&w=700&q=80"
+                alt="Tecno Spark 20" class="hero-phone-img" id="heroFeaturedImg">
+            </div>
+            <div class="hero-card-details">
+              <div class="hero-card-info">
+                <h3>Tecno Spark 20 (128 Go + 8 Go RAM)</h3>
+                <p>Garantie 12 Mois • Écran 90Hz • Batterie 5000 mAh • Caméra 50 Mpx</p>
+              </div>
+              <div class="hero-card-price-action">
+                <div class="price-box">
+                  <span class="price-old">95 000 FCFA</span>
+                  <span class="price-current">85 000 FCFA</span>
+                </div>
+                <button class="btn btn-primary btn-sm" onclick="quickAddToCart(1)">
+                  <i class="fa-solid fa-bag-shopping"></i> Commander
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================================
+         SECTION 2: PROMOTIONS & CATEGORIES RAPIDES
+         ============================================== -->
+    <section class="quick-categories-section">
+      <div class="container">
+        <div class="categories-carousel">
+          <div class="cat-pill active" onclick="filterByCategory('all')">
+            <i class="fa-solid fa-border-all"></i> Tous les articles
+          </div>
+          <div class="cat-pill" onclick="filterByCategory('telephonie')">
+            <i class="fa-solid fa-mobile-screen"></i> Téléphonie
+          </div>
+          <div class="cat-pill" onclick="filterByCategory('accessoires')">
+            <i class="fa-solid fa-headphones"></i> Accessoires
+          </div>
+          <div class="cat-pill" onclick="filterByCategory('electromenager')">
+            <i class="fa-solid fa-tv"></i> Électroménager
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================================
+         SECTION 3: SECTION PRIX & CATALOGUE PRODUITS
+         ============================================== -->
+    <section class="products-section" id="catalogue">
+      <div class="container">
+
+        <!-- Section Title -->
+        <div class="section-header">
+          <div class="section-tag"><i class="fa-solid fa-tag"></i> Tarifs & Disponibilités</div>
+          <h2 class="section-title">Nos Téléphones & Accessoires aux <span class="gradient-text">Meilleurs Prix</span>
+          </h2>
+          <p class="section-subtitle">Consultez nos Produits, nos promotions et vérifiez les stocks disponibles en temps
+            réel.</p>
+        </div>
+
+        <!-- Filter and Search Bar Control -->
+        <div class="catalog-controls-card">
+          <div class="search-input-wrapper">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="catalogSearchInput"
+              placeholder="Rechercher par nom, marque (Apple, Samsung, Xiaomi) ou accessoire...">
+            <button class="clear-search-btn" id="clearSearchBtn" title="Effacer la recherche"><i
+                class="fa-solid fa-xmark"></i></button>
+          </div>
+
+          <div class="filter-controls-group">
+            <div class="select-wrapper">
+              <label for="priceSortSelect"><i class="fa-solid fa-arrow-down-wide-short"></i> Trier par :</label>
+              <select id="priceSortSelect" class="form-select">
+                <option value="featured">Populaires & Nouveautés</option>
+                <option value="price-asc">Prix : Moins cher au plus cher</option>
+                <option value="price-desc">Prix : Plus cher au moins cher</option>
+                <option value="rating">Meilleures évaluations</option>
+              </select>
+            </div>
+
+            <div class="select-wrapper">
+              <label for="stockFilterSelect"><i class="fa-solid fa-box-archive"></i> Disponibilité :</label>
+              <select id="stockFilterSelect" class="form-select">
+                <option value="all">Tous les stocks</option>
+                <option value="in-stock">En stock uniquement</option>
+                <option value="promo">En promotion</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dynamic Product Counter and Stats -->
+        <div class="catalog-status-bar">
+          <span id="productResultsCount"><i class="fa-solid fa-circle-check"></i> Chargement des articles...</span>
+          <div class="view-toggle-btns">
+            <button class="btn-icon active" id="viewGridBtn" title="Affichage Grille"><i
+                class="fa-solid fa-grip"></i></button>
+            <button class="btn-icon" id="viewListBtn" title="Affichage Liste"><i class="fa-solid fa-list"></i></button>
+          </div>
+        </div>
+
+        <!-- Products Grid Container -->
+        <div class="products-grid" id="productsGridContainer">
+          <!-- Dynamically filled by app.js -->
+        </div>
+
+        <!-- Empty state when no products found -->
+        <div class="empty-state" id="noProductsFound" style="display: none;">
+          <div class="empty-icon"><i class="fa-solid fa-box-open"></i></div>
+          <h3>Aucun produit trouvé</h3>
+          <p>Essayez de modifier votre recherche ou sélectionnez une autre catégorie.</p>
+          <button class="btn btn-primary" onclick="resetFilters()">Réinitialiser les filtres</button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==============================================
+         SECTION 4: TÉMOIGNAGES CLIENTS (3 AVIS)
+         ============================================== -->
+    <section class="testimonials-section" id="temoignages">
+      <div class="container">
+
+        <div class="section-header">
+          <div class="section-tag"><i class="fa-solid fa-comments"></i> Retours d'expérience</div>
+          <h2 class="section-title">Ce que disent nos <span class="gradient-text">Clients Satisfaits</span></h2>
+          <p class="section-subtitle">Découvrez les retours vérifiés de nos clients sur leurs achats de smartphones et
+            accessoires chez PhonePulse.</p>
+        </div>
+
+        <!-- 3 Testimonials Cards Grid -->
+        <div class="testimonials-grid">
+
+          <!-- Testimonial 1 -->
+          <div class="testimonial-card">
+            <div class="testimonial-top">
+              <div class="user-avatar-wrap">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80"
+                  alt="Sarah M." class="user-avatar">
+                <span class="verified-badge" title="Achat vérifié"><i class="fa-solid fa-circle-check"></i></span>
+              </div>
+              <div class="user-info">
+                <h4 class="user-name">Sarah M.</h4>
+                <span class="user-city"><i class="fa-solid fa-location-dot"></i> Abidjan, Côte d'Ivoire</span>
+                <div class="stars-row">
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                </div>
+              </div>
+            </div>
+
+            <div class="testimonial-body">
+              <div class="quote-icon"><i class="fa-solid fa-quote-left"></i></div>
+              <p class="review-text">
+                "J'ai commandé un iPhone 15 Pro Max et le pack d'accessoires de protection. Reçu en moins de 24h chrono
+                dans un emballage ultra sécurisé ! Le téléphone est parfait et les prix en FCFA sont très compétitifs."
+              </p>
+            </div>
+
+            <div class="testimonial-footer">
+              <div class="purchased-item">
+                <i class="fa-solid fa-bag-shopping"></i> Acheté : <strong>iPhone 15 Pro Max + Coque MagSafe</strong>
+              </div>
+              <span class="review-date">Il y a 3 jours</span>
+            </div>
+          </div>
+
+          <!-- Testimonial 2 -->
+          <div class="testimonial-card featured-testimonial">
+            <div class="featured-badge"><i class="fa-solid fa-award"></i> Avis Coup de Cœur</div>
+            <div class="testimonial-top">
+              <div class="user-avatar-wrap">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80"
+                  alt="Alexandre D." class="user-avatar">
+                <span class="verified-badge" title="Achat vérifié"><i class="fa-solid fa-circle-check"></i></span>
+              </div>
+              <div class="user-info">
+                <h4 class="user-name">Mamadou D.</h4>
+                <span class="user-city"><i class="fa-solid fa-location-dot"></i> Dakar, Sénégal</span>
+                <div class="stars-row">
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                </div>
+              </div>
+            </div>
+
+            <div class="testimonial-body">
+              <div class="quote-icon"><i class="fa-solid fa-quote-left"></i></div>
+              <p class="review-text">
+                "Service client exemplaire sur WhatsApp ! Paiement facile par Wave / Orange Money. Le conseiller m'a
+                guidé parfaitement pour mon Samsung S24 Ultra. Le chargeur rapide GaN 65W est d'une grande efficacité.
+                Je recommande à 100% !"
+              </p>
+            </div>
+
+            <div class="testimonial-footer">
+              <div class="purchased-item">
+                <i class="fa-solid fa-bag-shopping"></i> Acheté : <strong>Samsung Galaxy S24 Ultra 512 Go</strong>
+              </div>
+              <span class="review-date">Il y a 1 semaine</span>
+            </div>
+          </div>
+
+          <!-- Testimonial 3 -->
+          <div class="testimonial-card">
+            <div class="testimonial-top">
+              <div class="user-avatar-wrap">
+                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80"
+                  alt="Karim B." class="user-avatar">
+                <span class="verified-badge" title="Achat vérifié"><i class="fa-solid fa-circle-check"></i></span>
+              </div>
+              <div class="user-info">
+                <h4 class="user-name">Karim B.</h4>
+                <span class="user-city"><i class="fa-solid fa-location-dot"></i> Lomé, Togo</span>
+                <div class="stars-row">
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                </div>
+              </div>
+            </div>
+
+            <div class="testimonial-body">
+              <div class="quote-icon"><i class="fa-solid fa-quote-left"></i></div>
+              <p class="review-text">
+                "J'ai pris des écouteurs sans fil Pro et deux verres trempés de rechange. La pose a été facile avec le
+                kit fourni. Qualité audio exceptionnelle pour le prix et livraison très rapide. Boutique très sérieuse
+                !"
+              </p>
+            </div>
+
+            <div class="testimonial-footer">
+              <div class="purchased-item">
+                <i class="fa-solid fa-bag-shopping"></i> Acheté : <strong>Écouteurs PulsePods Pro + Verres
+                  Trempés</strong>
+              </div>
+              <span class="review-date">Il y a 2 semaines</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Overall Rating Banner -->
+        <div class="overall-rating-card">
+          <div class="rating-number">4.9<span>/5</span></div>
+          <div class="rating-stars-large">
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+          </div>
+          <div class="rating-text">
+            <strong>Excellente satisfaction client</strong>
+            <span>Basé sur plus de 350+ avis vérifiés en boutique et en ligne</span>
+          </div>
+          <a href="https://wa.me/221770000000" target="_blank" class="btn btn-outline btn-sm">
+            <i class="fa-solid fa-pen-to-square"></i> Laisser un avis
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==============================================
+         SECTION 5: ESPACE GESTION & CRM SÉCURISÉ (ADMIN)
+         ============================================== -->
+    <section class="management-section" id="gestion"
+      style="background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%); color: #ffffff; padding: 4.5rem 0;">
+      <div class="container">
+        <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+          <div class="section-tag"
+            style="background: rgba(37, 99, 235, 0.2); color: #60a5fa; border: 1px solid rgba(96, 165, 250, 0.3); display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.4rem 1rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600; margin-bottom: 1rem;">
+            <i class="fa-solid fa-lock"></i> Espace Réservé • Direction & Gérance
+          </div>
+          <h2
+            style="font-size: 2.2rem; font-family: var(--font-heading); font-weight: 800; margin-bottom: 1rem; color: #ffffff;">
+            Panneau d'Administration <span class="gradient-text">Sécurisé</span>
+          </h2>
+          <p style="color: #cbd5e1; font-size: 1.05rem; line-height: 1.6; margin-bottom: 2rem;">
+            Gérez vos stocks de téléphones (Tecno, Samsung, iPhone), encaissez les ventes en magasin, modifiez les prix
+            en FCFA et exportez vos données en toute confidentialité.
+          </p>
+          <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+            <button class="btn btn-primary btn-lg" onclick="openAdminAccessModal(event)"
+              style="box-shadow: 0 10px 25px rgba(37, 99, 235, 0.4);">
+              <i class="fa-solid fa-key"></i> Déverrouiller l'Espace Admin
+            </button>
+            <a href="admin.html" class="btn btn-outline btn-lg"
+              style="color: #ffffff; border-color: rgba(255,255,255,0.4);">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Accès Direct (admin.html)
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==============================================
+       FOOTER COMPLET AVEC CONTACTS & RESEAUX SOCIAUX
+       ============================================== -->
+  <footer class="main-footer" id="contacts">
+    <!-- Footer Wave / Top Divider -->
+    <div class="footer-top-divider"></div>
+
+    <div class="container footer-container">
+
+      <!-- Column 1: Brand Info -->
+      <div class="footer-col brand-col">
+        <a href="#accueil" class="brand-logo footer-logo">
+          <div class="logo-icon logo-img-wrap">
+            <img src="logo.png" alt="SUNU SOLUTION Logo" class="brand-logo-img">
+          </div>
+          <div class="logo-text">
+            <span class="brand-name text-white">SUNU <span class="accent-text">SOLUTION</span></span>
+            <span class="brand-sub text-white-50">Smartphones & Accessoires - Dakar</span>
+          </div>
+        </a>
+        <p class="footer-about">
+          <strong>SUNU SOLUTION</strong> (@sunusolutionshop) est votre boutique de référence à Dakar pour l'achat de
+          smartphones neufs (Tecno, Samsung, iPhone, Infinix, Redmi) et accessoires certifiés au meilleur prix du marché
+          sénégalais.
+        </p>
+
+        <!-- Social Networks Icons -->
+        <div class="social-links-title">Suivez-nous sur les réseaux :</div>
+        <div class="social-icons-row">
+          <a href="https://www.facebook.com/sunusolutionshop" target="_blank" class="social-icon facebook"
+            title="Facebook SUNU SOLUTION"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="https://wa.me/221763143333" target="_blank" class="social-icon whatsapp"
+            title="WhatsApp (+221 76 314 33 33)"><i class="fa-brands fa-whatsapp"></i></a>
+          <a href="https://instagram.com" target="_blank" class="social-icon instagram" title="Instagram"><i
+              class="fa-brands fa-instagram"></i></a>
+          <a href="https://tiktok.com" target="_blank" class="social-icon tiktok" title="TikTok"><i
+              class="fa-brands fa-tiktok"></i></a>
+          <a href="https://youtube.com" target="_blank" class="social-icon youtube" title="YouTube"><i
+              class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+
+      <!-- Column 2: Quick Links -->
+      <div class="footer-col">
+        <h4 class="footer-heading">Rayons & Navigation</h4>
+        <ul class="footer-links">
+          <li><a href="#accueil"><i class="fa-solid fa-angle-right"></i> Accueil</a></li>
+          <li><a href="#catalogue" onclick="navFilterCategory('telephonie')"><i class="fa-solid fa-angle-right"></i> Téléphonie & Smartphones</a></li>
+          <li><a href="#catalogue" onclick="navFilterCategory('accessoires')"><i class="fa-solid fa-angle-right"></i> Accessoires & Chargeurs</a></li>
+          <li><a href="#catalogue" onclick="navFilterCategory('electromenager')"><i class="fa-solid fa-angle-right"></i> Électroménager & TV</a></li>
+          <li><a href="admin.html" onclick="openAdminAccessModal(event)"><i class="fa-solid fa-angle-right"></i> Espace Admin 🔒</a></li>
+          <li><a href="https://www.facebook.com/sunusolutionshop" target="_blank"><i
+                class="fa-solid fa-angle-right"></i> Page Facebook Officielle</a></li>
+        </ul>
+      </div>
+
+      <!-- Column 3: Contacts & Coordonnées -->
+      <div class="footer-col contact-col">
+        <h4 class="footer-heading">Boutique & Commandes</h4>
+        <ul class="contact-info-list">
+          <li>
+            <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
+            <div>
+              <strong>Adresse de la Boutique :</strong>
+              <span>Dalifort-Foirail, Dakar, Sénégal</span>
+            </div>
+          </li>
+          <li>
+            <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
+            <div>
+              <strong>Téléphones Directs :</strong>
+              <a href="tel:+221763143333">+221 76 314 33 33</a> / <a href="tel:+221782579999">+221 78 257 99 99</a>
+            </div>
+          </li>
+          <li>
+            <div class="contact-icon"><i class="fa-brands fa-whatsapp"></i></div>
+            <div>
+              <strong>WhatsApp Commandes & SAV :</strong>
+              <a href="https://wa.me/221763143333" target="_blank">+221 76 314 33 33</a>
+            </div>
+          </li>
+          <li>
+            <div class="contact-icon"><i class="fa-brands fa-facebook"></i></div>
+            <div>
+              <strong>Page Facebook Officielle :</strong>
+              <a href="https://www.facebook.com/sunusolutionshop" target="_blank">@sunusolutionshop</a>
+            </div>
+          </li>
+          <li>
+            <div class="contact-icon"><i class="fa-solid fa-clock"></i></div>
+            <div>
+              <strong>Horaires d'ouverture :</strong>
+              <span>Du Lundi au Dimanche : 08h00 - 21h00</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Column 4: Newsletter & Reassurance -->
+      <div class="footer-col newsletter-col">
+        <h4 class="footer-heading">Offres Exclusives SUNU</h4>
+        <p class="newsletter-text">Inscrivez-vous pour recevoir les arrivages de nouveaux téléphones et promotions.</p>
+
+        <form class="footer-newsletter-form" id="newsletterForm">
+          <div class="input-with-btn">
+            <input type="email" id="newsletterEmail" placeholder="Votre numéro WhatsApp ou email..." required>
+            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i></button>
+          </div>
+          <span class="form-privacy"><i class="fa-solid fa-shield"></i> Confidentialité garantie.</span>
+        </form>
+
+        <div class="reassurance-badges">
+          <div class="reassurance-pill"><i class="fa-solid fa-check"></i> Garantie 12 à 24 Mois</div>
+          <div class="reassurance-pill"><i class="fa-solid fa-check"></i> Paiement Wave / Orange Money</div>
+          <div class="reassurance-pill"><i class="fa-solid fa-check"></i> Livraison Rapide Dakar & Régions</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Footer Bottom Copyright Bar -->
+    <div class="footer-bottom-bar">
+      <div class="container bottom-bar-flex">
+        <p class="copyright-text">
+          &copy; 2024 - 2026 <strong>SUNU SOLUTION</strong> (@sunusolutionshop). Tous droits réservés. Vente de
+          téléphones et accessoires.
+        </p>
+        <div class="payment-methods">
+          <span>Paiements acceptés :</span>
+          <span class="payment-badge-mobile"><i class="fa-solid fa-mobile-screen"></i> Wave / Orange Money</span>
+          <i class="fa-brands fa-cc-visa" title="Visa"></i>
+          <i class="fa-brands fa-cc-mastercard" title="Mastercard"></i>
+          <i class="fa-solid fa-money-bill-wave" title="Espèces à la livraison"></i>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==============================================
+       MODALS & DRAWERS
+       ============================================== -->
+
+  <!-- 1. CART DRAWER (Panier d'achat) -->
+  <div class="drawer-overlay" id="cartOverlay" onclick="closeCartDrawer()"></div>
+  <aside class="cart-drawer" id="cartDrawer">
+    <div class="cart-header">
+      <div class="cart-title">
+        <i class="fa-solid fa-bag-shopping"></i>
+        <h3>Mon Panier (<span id="cartDrawerCount">0</span>)</h3>
+      </div>
+      <button class="close-drawer-btn" onclick="closeCartDrawer()" aria-label="Fermer"><i
+          class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <div class="cart-items-list" id="cartItemsList">
+      <!-- Items dynamically added here -->
+    </div>
+
+    <div class="cart-footer" id="cartFooter">
+      <div class="cart-summary-line">
+        <span>Sous-total</span>
+        <strong id="cartSubtotal">0 FCFA</strong>
+      </div>
+      <div class="cart-summary-line">
+        <span>Livraison</span>
+        <span class="delivery-tag" id="cartShippingTag">Gratuite dès 35 000 FCFA</span>
+      </div>
+      <div class="cart-total-line">
+        <span>Total TTC</span>
+        <strong class="total-price" id="cartTotal">0 FCFA</strong>
+      </div>
+
+      <div class="cart-actions-group">
+        <button class="btn btn-primary btn-block btn-lg" onclick="openCheckoutModal()">
+          <i class="fa-solid fa-credit-card"></i> Valider la Commande
+        </button>
+        <button class="btn btn-whatsapp btn-block" onclick="checkoutViaWhatsApp()">
+          <i class="fa-brands fa-whatsapp"></i> Commander via WhatsApp
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- 2. PRODUCT DETAILS MODAL (Spécifications et Aperçu) -->
+  <div class="modal-backdrop" id="productModal" style="display: none;">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <button class="modal-close-btn" onclick="closeProductModal()"><i class="fa-solid fa-xmark"></i></button>
+        <div class="modal-body" id="productModalBody">
+          <!-- Injected dynamically -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. CHECKOUT MODAL (Formulaire de finalisation) -->
+  <div class="modal-backdrop" id="checkoutModal" style="display: none;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <button class="modal-close-btn" onclick="closeCheckoutModal()"><i class="fa-solid fa-xmark"></i></button>
+        <div class="modal-header">
+          <i class="fa-solid fa-truck-fast"></i>
+          <h3>Finaliser votre Commande</h3>
+        </div>
+        <form id="checkoutForm" onsubmit="submitOrder(event)">
+          <div class="form-group">
+            <label for="orderCustName">Nom & Prénom *</label>
+            <input type="text" id="orderCustName" class="form-control" placeholder="ex: Amadou Diallo" required>
+          </div>
+          <div class="form-group">
+            <label for="orderCustPhone">Numéro de Téléphone / WhatsApp *</label>
+            <input type="tel" id="orderCustPhone" class="form-control" placeholder="ex: 77 123 45 67" required>
+          </div>
+          <div class="form-group">
+            <label for="orderCustCity">Ville / Quartier *</label>
+            <input type="text" id="orderCustCity" class="form-control"
+              placeholder="ex: Dakar, Plateau / Abidjan, Cocody" required>
+          </div>
+          <div class="form-group">
+            <label for="orderCustAddress">Adresse de livraison détaillée *</label>
+            <textarea id="orderCustAddress" class="form-control" rows="2" placeholder="Rue, repère, numéro de porte..."
+              required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="orderPaymentMethod">Mode de Paiement souhaité *</label>
+            <select id="orderPaymentMethod" class="form-control" required>
+              <option value="Paiement à la livraison">Paiement à la livraison (Espèces / Mobile Money)</option>
+              <option value="Wave">Wave</option>
+              <option value="Orange Money">Orange Money</option>
+              <option value="MTN / Moov Money">MTN / Moov Money</option>
+              <option value="Carte Bancaire">Carte Bancaire (Visa / Mastercard)</option>
+            </select>
+          </div>
+
+          <div class="order-recap-box">
+            <div class="recap-row">
+              <span>Montant à payer :</span>
+              <strong id="modalRecapTotal">0 FCFA</strong>
+            </div>
+          </div>
+
+          <div class="modal-footer-btns">
+            <button type="button" class="btn btn-outline" onclick="closeCheckoutModal()">Annuler</button>
+            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-check"></i> Confirmer la Vente</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. ADMIN LOGIN POPUP MODAL -->
+  <div class="modal-backdrop" id="adminAccessModal" style="display: none;">
+    <div class="modal-dialog" style="max-width: 440px;">
+      <div class="modal-content">
+        <button class="modal-close-btn" onclick="closeAdminAccessModal()"><i class="fa-solid fa-xmark"></i></button>
+        <div class="modal-header" style="text-align: center; flex-direction: column; gap: 0.5rem;">
+          <div class="login-logo-wrap" style="width: 60px; height: 60px; margin: 0 auto;">
+            <img src="logo.png" alt="SUNU SOLUTION Logo" class="login-logo">
+          </div>
+          <h3 style="font-size: 1.35rem; color: var(--text-main); margin: 0;">Espace Administrateur</h3>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0;">Entrez votre mot de passe pour accéder à
+            la gestion.</p>
+        </div>
+
+        <form id="adminQuickLoginForm" onsubmit="submitAdminQuickLogin(event)" style="margin-top: 1rem;">
+          <div class="form-group">
+            <label for="quickAdminPassInput">Mot de passe Administrateur</label>
+            <div class="input-icon-group">
+              <i class="fa-solid fa-key"></i>
+              <input type="password" id="quickAdminPassInput" class="form-control"
+                placeholder="Entrez le mot de passe..." required autofocus>
+              <button type="button" class="toggle-pwd-btn" onclick="toggleQuickPasswordVisibility(this)"
+                title="Afficher/Masquer">
+                <i class="fa-solid fa-eye"></i>
+              </button>
+            </div>
+            <span class="login-hint"><i class="fa-solid fa-circle-info"></i> Par défaut :
+              <strong>admin123</strong></span>
+          </div>
+
+          <div class="modal-footer-btns" style="margin-top: 1.5rem;">
+            <button type="button" class="btn btn-outline" onclick="closeAdminAccessModal()">Annuler</button>
+            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-unlock"></i> Déverrouiller &
+              Accéder</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript Codebase -->
+  <script src="app.js"></script>
+</body>
+
+</html>

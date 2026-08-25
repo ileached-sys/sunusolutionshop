@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Administration & Gestion | SUNU SOLUTION Dakar</title>
+  <meta name="description" content="Espace sécurisé de gestion et administration des stocks et ventes de SUNU SOLUTION.">
+  
+  <!-- Favicon Logo -->
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="apple-touch-icon" href="logo.png">
+
+  <!-- Google Fonts: Plus Jakarta Sans & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="admin-body">
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- ==============================================
+       1. LOGIN SCREEN (Visible si non authentifié)
+       ============================================== -->
+  <div class="admin-login-screen" id="adminLoginScreen">
+    <div class="login-card">
+      <div class="login-header">
+        <div class="login-logo-wrap">
+          <img src="logo.png" alt="SUNU SOLUTION Logo" class="login-logo">
+        </div>
+        <h2>SUNU <span class="accent-text">SOLUTION</span></h2>
+        <p class="login-subtitle"><i class="fa-solid fa-lock"></i> Espace Sécurisé d'Administration</p>
+      </div>
+
+      <form id="adminLoginForm" onsubmit="handleAdminLogin(event)" class="login-form">
+        <div class="form-group">
+          <label for="adminUsernameInput">Identifiant</label>
+          <div class="input-icon-group">
+            <i class="fa-solid fa-user-shield"></i>
+            <input type="text" id="adminUsernameInput" class="form-control" value="admin" required autocomplete="username">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="adminPasswordInput">Mot de passe</label>
+          <div class="input-icon-group">
+            <i class="fa-solid fa-key"></i>
+            <input type="password" id="adminPasswordInput" class="form-control" placeholder="Entrez le mot de passe..." required autocomplete="current-password">
+            <button type="button" class="toggle-pwd-btn" onclick="togglePasswordVisibility('adminPasswordInput', this)" title="Afficher/Masquer">
+              <i class="fa-solid fa-eye"></i>
+            </button>
+          </div>
+          <span class="login-hint"><i class="fa-solid fa-circle-info"></i> Mot de passe par défaut : <strong>admin123</strong></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block btn-lg">
+          <i class="fa-solid fa-arrow-right-to-bracket"></i> Se Connecter
+        </button>
+
+        <div class="login-footer-links">
+          <a href="index.html" class="back-to-store-link">
+            <i class="fa-solid fa-arrow-left"></i> Retour à la Boutique en Ligne
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==============================================
+       2. DASHBOARD ADMIN (Visible après connexion)
+       ============================================== -->
+  <div class="admin-dashboard-layout" id="adminDashboardLayout" style="display: none;">
+    
+    <!-- Admin Top Navbar -->
+    <header class="admin-topbar">
+      <div class="admin-topbar-left">
+        <a href="admin.html" class="brand-logo">
+          <div class="logo-icon logo-img-wrap">
+            <img src="logo.png" alt="SUNU SOLUTION Logo" class="brand-logo-img">
+          </div>
+          <div class="logo-text">
+            <span class="brand-name">SUNU <span class="accent-text">SOLUTION</span></span>
+            <span class="brand-sub">Panneau d'Administration</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="admin-topbar-right">
+        <a href="index.html" class="btn btn-outline btn-sm" target="_blank" title="Ouvrir la vitrine client">
+          <i class="fa-solid fa-store"></i> Voir la Boutique
+        </a>
+        
+        <div class="admin-user-pill">
+          <span class="user-avatar-dot"></span>
+          <span class="user-name-text" id="loggedAdminName">Admin</span>
+        </div>
+
+        <button class="btn btn-outline-danger btn-sm" onclick="handleAdminLogout()" title="Fermer la session">
+          <i class="fa-solid fa-power-off"></i> Déconnexion
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Dashboard Container -->
+    <main class="admin-main-content">
+      <div class="container">
+        
+        <!-- Welcome Banner -->
+        <div class="admin-welcome-banner">
+          <div>
+            <h1>Tableau de Bord <span class="gradient-text">Gestion & Stocks</span></h1>
+            <p>Supervisez vos produits, gérez vos stocks en direct et enregistrez vos ventes à Dakar.</p>
+          </div>
+          <div class="banner-quick-actions">
+            <button class="btn btn-primary" onclick="openManualSaleModal()">
+              <i class="fa-solid fa-cash-register"></i> Encaisser une Vente
+            </button>
+            <button class="btn btn-outline" onclick="switchAdminTab('addTab')">
+              <i class="fa-solid fa-plus"></i> Nouveau Produit
+            </button>
+          </div>
+        </div>
+
+        <!-- 4 KPI Cards -->
+        <div class="kpi-cards-grid">
+          <div class="kpi-card">
+            <div class="kpi-icon icon-blue"><i class="fa-solid fa-wallet"></i></div>
+            <div class="kpi-data">
+              <span class="kpi-label">Valeur du Stock Total</span>
+              <h3 class="kpi-value" id="kpiStockValue">0 FCFA</h3>
+              <span class="kpi-trend positive"><i class="fa-solid fa-arrow-trend-up"></i> Inventaire valorisé</span>
+            </div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-icon icon-cyan"><i class="fa-solid fa-boxes-stacked"></i></div>
+            <div class="kpi-data">
+              <span class="kpi-label">Articles en Stock</span>
+              <h3 class="kpi-value" id="kpiTotalUnits">0</h3>
+              <span class="kpi-trend neutral" id="kpiTotalProductsRef">0 références</span>
+            </div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-icon icon-emerald"><i class="fa-solid fa-cart-check"></i></div>
+            <div class="kpi-data">
+              <span class="kpi-label">Commandes / Ventes</span>
+              <h3 class="kpi-value" id="kpiTotalSales">0</h3>
+              <span class="kpi-trend positive" id="kpiSalesRevenue">0 FCFA encaissés</span>
+            </div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-icon icon-amber"><i class="fa-solid fa-triangle-exclamation"></i></div>
+            <div class="kpi-data">
+              <span class="kpi-label">Alertes Stock Faible</span>
+              <h3 class="kpi-value" id="kpiLowStockAlerts">0</h3>
+              <span class="kpi-trend warning">Moins de 5 unités</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Admin Management Tabs Container -->
+        <div class="admin-tabs-card">
+          <div class="admin-tab-headers">
+            <button class="admin-tab-btn active" onclick="switchAdminTab('stockTab')">
+              <i class="fa-solid fa-table-list"></i> Inventaire des Stocks (<span id="tabStockCount">0</span>)
+            </button>
+            <button class="admin-tab-btn" onclick="switchAdminTab('addTab')">
+              <i class="fa-solid fa-circle-plus"></i> Ajouter un Produit / Accessoire
+            </button>
+            <button class="admin-tab-btn" onclick="switchAdminTab('salesTab')">
+              <i class="fa-solid fa-receipt"></i> Commandes & Ventes (<span id="tabSalesCount">0</span>)
+            </button>
+            <button class="admin-tab-btn" onclick="switchAdminTab('settingsTab')">
+              <i class="fa-solid fa-shield-halved"></i> Sécurité & Données
+            </button>
+          </div>
+
+          <div class="admin-tab-body">
+            
+            <!-- TAB 1: INVENTAIRE DES STOCKS -->
+            <div class="admin-tab-content active" id="stockTab">
+              <div class="tab-toolbar">
+                <div class="tab-search">
+                  <i class="fa-solid fa-magnifying-glass"></i>
+                  <input type="text" id="adminStockSearch" placeholder="Rechercher par nom, marque, catégorie...">
+                </div>
+                <div class="tab-actions">
+                  <button class="btn btn-primary btn-sm" onclick="switchAdminTab('addTab')">
+                    <i class="fa-solid fa-plus"></i> Ajouter un Article
+                  </button>
+                  <button class="btn btn-outline btn-sm" onclick="exportStockCSV()">
+                    <i class="fa-solid fa-file-export"></i> Exporter CSV
+                  </button>
+                </div>
+              </div>
+
+              <div class="table-responsive">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Produit</th>
+                      <th>Catégorie</th>
+                      <th>Prix Vente (FCFA)</th>
+                      <th>Prix Promo</th>
+                      <th>Stock Actuel</th>
+                      <th>Statut</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="adminStockTableBody">
+                    <!-- Dynamic -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- TAB 2: AJOUTER UN PRODUIT -->
+            <div class="admin-tab-content" id="addTab">
+              <form id="addProductForm" class="add-product-form">
+                <div class="form-grid">
+                  
+                  <div class="form-group">
+                    <label for="newProdName">Nom du Produit / Modèle *</label>
+                    <input type="text" id="newProdName" class="form-control" placeholder="ex: Tecno Spark 20 128Go" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="newProdCategory">Catégorie *</label>
+                    <select id="newProdCategory" class="form-control" required>
+                      <option value="telephonie">📱 Téléphonie (Smartphones & Téléphones)</option>
+                      <option value="accessoires">🎧 Accessoires (Écouteurs, Chargeurs, Coques...)</option>
+                      <option value="electromenager">📺 Électroménager & Maison (TV, Électronique...)</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="newProdPrice">Prix de Vente (FCFA) *</label>
+                    <input type="number" id="newProdPrice" class="form-control" step="100" min="0" placeholder="ex: 85000" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="newProdOldPrice">Prix Barré (FCFA)</label>
+                    <input type="number" id="newProdOldPrice" class="form-control" step="100" min="0" placeholder="ex: 95000 (facultatif)">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="newProdStock">Quantité en Stock *</label>
+                    <input type="number" id="newProdStock" class="form-control" min="0" placeholder="ex: 20" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="newProdBadge">Badge Promotionnel</label>
+                    <select id="newProdBadge" class="form-control">
+                      <option value="">Aucun badge</option>
+                      <option value="Best Seller SUNU">Best Seller SUNU</option>
+                      <option value="Nouveau Arrivage">Nouveau Arrivage</option>
+                      <option value="Promo Spéciale">Promo Spéciale</option>
+                      <option value="Exclusivité">Exclusivité</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group full-width">
+                    <label for="newProdImage">URL de l'image *</label>
+                    <div class="image-input-row">
+                      <input type="url" id="newProdImage" class="form-control" placeholder="https://images.unsplash.com/..." required>
+                      <button type="button" class="btn btn-outline btn-sm" onclick="setPresetImage()">Image suggérée</button>
+                    </div>
+                  </div>
+
+                  <div class="form-group full-width">
+                    <label for="newProdSpecs">Spécifications clés (séparées par des virgules)</label>
+                    <input type="text" id="newProdSpecs" class="form-control" placeholder="ex: 128 Go, 8 Go RAM, Batterie 5000 mAh, Garantie 12 Mois">
+                  </div>
+
+                  <div class="form-group full-width">
+                    <label for="newProdDesc">Description détaillée</label>
+                    <textarea id="newProdDesc" class="form-control" rows="3" placeholder="Description du produit ou des accessoires inclus..."></textarea>
+                  </div>
+
+                </div>
+
+                <div class="form-footer">
+                  <button type="reset" class="btn btn-outline">Réinitialiser</button>
+                  <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Enregistrer le Produit</button>
+                </div>
+              </form>
+            </div>
+
+            <!-- TAB 3: COMMANDES & VENTES -->
+            <div class="admin-tab-content" id="salesTab">
+              <div class="tab-toolbar">
+                <div class="sales-summary-chips">
+                  <span class="chip chip-blue"><i class="fa-solid fa-cart-shopping"></i> Ventes directes et commandes enregistrées</span>
+                </div>
+                <button class="btn btn-primary btn-sm" onclick="openManualSaleModal()">
+                  <i class="fa-solid fa-cash-register"></i> Encaisser une vente manuelle
+                </button>
+              </div>
+
+              <div class="table-responsive">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Réf. Commande</th>
+                      <th>Date</th>
+                      <th>Client</th>
+                      <th>Articles</th>
+                      <th>Montant Total (FCFA)</th>
+                      <th>Mode Paiement</th>
+                      <th>Statut</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="adminSalesTableBody">
+                    <!-- Dynamic -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- TAB 4: SÉCURITÉ & DONNÉES -->
+            <div class="admin-tab-content" id="settingsTab">
+              <div class="settings-grid">
+                
+                <!-- Change Password Card -->
+                <div class="settings-card">
+                  <h4><i class="fa-solid fa-key"></i> Sécurité du Mot de Passe</h4>
+                  <p>Modifiez le mot de passe d'accès à l'espace d'administration de la boutique.</p>
+                  
+                  <form id="changePasswordForm" onsubmit="handleChangePassword(event)" style="display: flex; flex-direction: column; gap: 0.85rem;">
+                    <div class="form-group">
+                      <label for="currentPassword">Mot de passe actuel</label>
+                      <input type="password" id="currentPassword" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="newPassword">Nouveau mot de passe</label>
+                      <input type="password" id="newPassword" class="form-control" minlength="4" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-sm" style="align-self: flex-start;">
+                      <i class="fa-solid fa-lock"></i> Mettre à jour le mot de passe
+                    </button>
+                  </form>
+                </div>
+
+                <!-- Backup & Reset Card -->
+                <div class="settings-card">
+                  <h4><i class="fa-solid fa-database"></i> Sauvegarde & Données</h4>
+                  <p>Téléchargez la base de données au format JSON ou restaurez le catalogue d'origine SUNU SOLUTION.</p>
+                  
+                  <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1rem;">
+                    <button class="btn btn-primary btn-sm" onclick="exportDatabaseJSON()">
+                      <i class="fa-solid fa-download"></i> Télécharger Sauvegarde JSON
+                    </button>
+                    <button class="btn btn-outline-danger btn-sm" onclick="resetToDefaultData()">
+                      <i class="fa-solid fa-rotate-left"></i> Restaurer catalogue par défaut
+                    </button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- ==============================================
+       MODALS DE GESTION
+       ============================================== -->
+
+  <!-- 1. MANUAL SALE MODAL -->
+  <div class="modal-backdrop" id="manualSaleModal" style="display: none;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <button class="modal-close-btn" onclick="closeManualSaleModal()"><i class="fa-solid fa-xmark"></i></button>
+        <div class="modal-header">
+          <i class="fa-solid fa-cash-register"></i>
+          <h3>Encaisser une Vente en Magasin (FCFA)</h3>
+        </div>
+        <form id="manualSaleForm" onsubmit="submitManualSale(event)">
+          <div class="form-group">
+            <label for="saleProductSelect">Sélectionner le Produit *</label>
+            <select id="saleProductSelect" class="form-control" required>
+              <!-- Options filled dynamically -->
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="saleQuantity">Quantité vendue *</label>
+            <input type="number" id="saleQuantity" class="form-control" min="1" value="1" required>
+          </div>
+          <div class="form-group">
+            <label for="saleCustName">Nom du Client / Quartier</label>
+            <input type="text" id="saleCustName" class="form-control" placeholder="ex: Client Comptoir Dalifort">
+          </div>
+          <div class="form-group">
+            <label for="salePaymentMethod">Mode de Règlement *</label>
+            <select id="salePaymentMethod" class="form-control" required>
+              <option value="Espèces">Espèces</option>
+              <option value="Wave">Wave</option>
+              <option value="Orange Money">Orange Money</option>
+              <option value="Carte Bancaire">Carte Bancaire (TPE)</option>
+              <option value="Virement">Virement Bancaire</option>
+            </select>
+          </div>
+          <div class="modal-footer-btns">
+            <button type="button" class="btn btn-outline" onclick="closeManualSaleModal()">Annuler</button>
+            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Enregistrer & Déduire Stock</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. EDIT PRODUCT MODAL -->
+  <div class="modal-backdrop" id="editProductModal" style="display: none;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <button class="modal-close-btn" onclick="closeEditProductModal()"><i class="fa-solid fa-xmark"></i></button>
+        <div class="modal-header">
+          <i class="fa-solid fa-pen-to-square"></i>
+          <h3>Modifier le Produit</h3>
+        </div>
+        <form id="editProductForm" onsubmit="saveEditedProduct(event)">
+          <input type="hidden" id="editProdId">
+          <div class="form-group">
+            <label for="editProdName">Nom du Produit *</label>
+            <input type="text" id="editProdName" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="editProdPrice">Prix de Vente (FCFA) *</label>
+            <input type="number" id="editProdPrice" class="form-control" step="100" min="0" required>
+          </div>
+          <div class="form-group">
+            <label for="editProdOldPrice">Prix Barré (FCFA)</label>
+            <input type="number" id="editProdOldPrice" class="form-control" step="100" min="0">
+          </div>
+          <div class="form-group">
+            <label for="editProdStock">Quantité en Stock *</label>
+            <input type="number" id="editProdStock" class="form-control" min="0" required>
+          </div>
+          <div class="form-group">
+            <label for="editProdCategory">Catégorie *</label>
+            <select id="editProdCategory" class="form-control" required>
+              <option value="telephonie">📱 Téléphonie (Smartphones & Téléphones)</option>
+              <option value="accessoires">🎧 Accessoires (Écouteurs, Chargeurs, Coques...)</option>
+              <option value="electromenager">📺 Électroménager & Maison (TV, Électronique...)</option>
+            </select>
+          </div>
+          <div class="modal-footer-btns">
+            <button type="button" class="btn btn-outline" onclick="closeEditProductModal()">Annuler</button>
+            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-check"></i> Mettre à jour</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Admin JavaScript Logic -->
+  <script src="admin.js"></script>
+</body>
+</html>
