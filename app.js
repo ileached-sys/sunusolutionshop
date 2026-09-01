@@ -9,262 +9,492 @@
 // ==========================================================================
 
 const DEFAULT_PRODUCTS = [
-  // ----------------- RAYON TÉLÉPHONIE -----------------
+  // ==========================================
+  // 1. RAYON TÉLÉPHONIE (JUMIA SÉNÉGAL BEST-SELLERS)
+  // ==========================================
   {
     id: 1,
     name: "Tecno Spark 20 (128 Go + 8 Go RAM)",
     category: "telephonie",
-    price: 85000,
+    price: 84900,
     oldPrice: 95000,
     stock: 15,
-    badge: "Best Seller SUNU",
+    badge: "Best Seller Jumia",
     rating: 4.9,
-    reviewsCount: 168,
+    reviewsCount: 184,
     image: "https://images.unsplash.com/photo-1598327105666-5b89351aff97?auto=format&fit=crop&w=700&q=80",
-    specs: ["128 Go ROM", "8 Go RAM (4+4)", "Batterie 5000 mAh", "Garantie 12 Mois", "Caméra 50 MP"],
-    description: "Le best-seller de SUNU SOLUTION : 128 Go de mémoire, 8 Go de RAM, autonomie exceptionnelle et appareil photo 50 Mpx. Garanti 12 mois avec SAV à Dakar."
+    specs: ["128 Go ROM", "8 Go RAM (4+4)", "Batterie 5000 mAh", "Garantie 13 Mois", "Caméra 50 MP"],
+    description: "Le n°1 des ventes à Dakar : 128 Go de stockage, 8 Go de RAM, appareil photo 50 Mpx ultra-net et batterie 5000 mAh. Garantie constructeur 13 mois."
   },
   {
     id: 2,
-    name: "Samsung Galaxy A05 (64 Go / 128 Go)",
+    name: "Tecno Pop 8 (64 Go + 3 Go RAM)",
     category: "telephonie",
-    price: 65000,
-    oldPrice: 75000,
-    stock: 18,
-    badge: "Promo Spéciale",
-    rating: 4.8,
-    reviewsCount: 134,
-    image: "https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?auto=format&fit=crop&w=700&q=80",
-    specs: ["Écran HD+ 6.7\"", "Batterie 5000 mAh", "Charge 25W", "Appareil 50 Mpx", "Dual SIM"],
-    description: "Qualité et fiabilité Samsung avec un grand écran de 6.7 pouces, une batterie de 5000 mAh et une caméra 50 Mpx au meilleur prix chez SUNU SOLUTION."
+    price: 49900,
+    oldPrice: 59000,
+    stock: 22,
+    badge: "Prix Mini",
+    rating: 4.7,
+    reviewsCount: 142,
+    image: "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?auto=format&fit=crop&w=700&q=80",
+    specs: ["64 Go ROM", "3 Go RAM", "Écran 90Hz 6.6\"", "Batterie 5000 mAh", "Haut-parleurs Stéréo"],
+    description: "Le smartphone le plus accessible et endurant : écran 90Hz ultra-fluide, double haut-parleur DTS et batterie 5000 mAh longue durée."
   },
   {
     id: 3,
-    name: "Tecno Spark 40 (128 Go + 8 Go RAM)",
+    name: "Tecno Camon 30 (256 Go + 8 Go RAM)",
     category: "telephonie",
-    price: 115000,
-    oldPrice: 130000,
-    stock: 9,
+    price: 139000,
+    oldPrice: 155000,
+    stock: 8,
     badge: "Nouveau Arrivage",
     rating: 4.9,
-    reviewsCount: 82,
+    reviewsCount: 96,
     image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=700&q=80",
-    specs: ["Charge Rapide 45W", "Batterie 5200 mAh", "Écran 120Hz", "Norme IP64", "Design Slim"],
-    description: "Le dernier modèle Spark 40 avec recharge ultra-rapide 45W, batterie renforcée de 5200 mAh, écran 120Hz ultra-fluide et protection IP64."
+    specs: ["256 Go ROM", "Caméra 50 MP OIS", "Charge 70W Ultra", "Écran AMOLED 120Hz", "Design Cuir"],
+    description: "Le roi de la photo de nuit : capteur 50 Mpx avec stabilisation optique OIS, charge ultra-rapide 70W et magnifique écran AMOLED 120Hz."
   },
   {
     id: 4,
-    name: "Samsung Galaxy A15 (128 Go + 6 Go RAM)",
+    name: "Samsung Galaxy A05 (64 Go / 4 Go RAM)",
     category: "telephonie",
-    price: 105000,
-    oldPrice: 120000,
-    stock: 11,
-    badge: "Best Seller",
-    rating: 4.9,
-    reviewsCount: 112,
-    image: "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?auto=format&fit=crop&w=700&q=80",
-    specs: ["Super AMOLED 90Hz", "Triple Caméra 50 MP", "Puce Octa-Core", "Garantie 24 Mois"],
-    description: "Écran Super AMOLED éclatant 90Hz, 128 Go de stockage et triple capteur photo ultra-net pour immortaliser tous vos moments."
+    price: 59900,
+    oldPrice: 69000,
+    stock: 18,
+    badge: "Promo Spéciale",
+    rating: 4.8,
+    reviewsCount: 156,
+    image: "https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?auto=format&fit=crop&w=700&q=80",
+    specs: ["Écran HD+ 6.7\"", "Batterie 5000 mAh", "Charge 25W", "Appareil 50 MP", "Dual SIM"],
+    description: "Qualité et fiabilité Samsung avec un grand écran de 6.7 pouces, une batterie de 5000 mAh et une caméra 50 Mpx au meilleur prix du marché."
   },
   {
     id: 5,
-    name: "Infinix Hot 40 Pro (256 Go + 8 Go RAM)",
+    name: "Samsung Galaxy A15 4G (128 Go + 6 Go RAM)",
     category: "telephonie",
-    price: 110000,
-    oldPrice: 125000,
-    stock: 8,
-    badge: "Promo -15%",
-    rating: 4.8,
-    reviewsCount: 75,
-    image: "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?auto=format&fit=crop&w=700&q=80",
-    specs: ["256 Go ROM", "Appareil 108 MP", "Charge Rapide 33W", "Processeur Helio G99"],
-    description: "Smartphone gaming et photo haute résolution 108 Mpx avec processeur puissant Helio G99 et mémoire géante de 256 Go."
+    price: 99900,
+    oldPrice: 115000,
+    stock: 14,
+    badge: "Best Seller",
+    rating: 4.9,
+    reviewsCount: 210,
+    image: "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?auto=format&fit=crop&w=700&q=80",
+    specs: ["Super AMOLED 90Hz", "Triple Caméra 50 MP", "Puce Octa-Core Helio G99", "Garantie 24 Mois"],
+    description: "Écran Super AMOLED éclatant 90Hz, 128 Go de stockage et triple capteur photo ultra-net pour immortaliser tous vos moments."
   },
   {
     id: 6,
+    name: "Samsung Galaxy A25 5G (128 Go + 6 Go RAM)",
+    category: "telephonie",
+    price: 145000,
+    oldPrice: 165000,
+    stock: 9,
+    badge: "5G Ready",
+    rating: 4.8,
+    reviewsCount: 88,
+    image: "https://images.unsplash.com/photo-1580910051074-3eb694886505?auto=format&fit=crop&w=700&q=80",
+    specs: ["Écran 120Hz Super AMOLED", "Caméra 50 MP OIS", "Connexion 5G Ultra Rapide", "Batterie 5000 mAh"],
+    description: "Profitez de la vitesse 5G avec l'écran Super AMOLED 120Hz et la stabilisation optique photo de Samsung."
+  },
+  {
+    id: 7,
+    name: "Samsung Galaxy A55 5G (256 Go + 8 Go RAM)",
+    category: "telephonie",
+    price: 235000,
+    oldPrice: 265000,
+    stock: 7,
+    badge: "Haut de Gamme",
+    rating: 5.0,
+    reviewsCount: 115,
+    image: "https://images.unsplash.com/photo-1567581935884-3349723552ca?auto=format&fit=crop&w=700&q=80",
+    specs: ["256 Go ROM", "Finition Verre & Métal", "Résistance IP67 Eau/Poussière", "Caméra 50 MP 4K"],
+    description: "Design premium en métal et verre, étanche IP67, processeur ultra-rapide et écran fluide 120Hz pour une expérience haut de gamme."
+  },
+  {
+    id: 8,
+    name: "Samsung Galaxy S24 Ultra (256 Go Titane)",
+    category: "telephonie",
+    price: 685000,
+    oldPrice: 790000,
+    stock: 4,
+    badge: "Flagship Galaxy AI",
+    rating: 5.0,
+    reviewsCount: 74,
+    image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&w=700&q=80",
+    specs: ["Galaxy AI Intégrée", "Cadre Titane", "Zoom Optique 100x", "S-Pen Inclus", "Écran Dynamic AMOLED 2X"],
+    description: "Le smartphone le plus puissant du monde avec intelligence artificielle Galaxy AI, capteur photo 200 Mpx et stylet S-Pen intégré."
+  },
+  {
+    id: 9,
     name: "Xiaomi Redmi 13C (128 Go + 6 Go RAM)",
     category: "telephonie",
-    price: 80000,
-    oldPrice: 92000,
-    stock: 14,
-    badge: "Promo",
-    rating: 4.7,
-    reviewsCount: 96,
-    image: "https://images.unsplash.com/photo-1580910051074-3eb694886505?auto=format&fit=crop&w=700&q=80",
+    price: 74900,
+    oldPrice: 85000,
+    stock: 16,
+    badge: "Bon Plan",
+    rating: 4.8,
+    reviewsCount: 130,
+    image: "https://images.unsplash.com/photo-1546868871-7041f2a55e12?auto=format&fit=crop&w=700&q=80",
     specs: ["Écran 90Hz 6.74\"", "Capteur 50 MP IA", "Batterie 5000 mAh", "Port USB-C"],
     description: "Design élégant et moderne, batterie longue durée 5000 mAh avec charge rapide et double capteur photo 50 Mpx."
   },
   {
-    id: 7,
+    id: 10,
+    name: "Xiaomi Redmi Note 13 (256 Go + 8 Go RAM)",
+    category: "telephonie",
+    price: 119000,
+    oldPrice: 135000,
+    stock: 12,
+    badge: "Best Seller",
+    rating: 4.9,
+    reviewsCount: 165,
+    image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=700&q=80",
+    specs: ["256 Go ROM", "Écran AMOLED 120Hz", "Caméra 108 MP Ultra Claire", "Charge Rapide 33W"],
+    description: "Appareil photo 108 Mpx ultra-détaillé, écran AMOLED aux bordures ultra-fines et processeur puissant pour le multitâche."
+  },
+  {
+    id: 11,
+    name: "Infinix Hot 40 Pro (256 Go + 8 Go RAM)",
+    category: "telephonie",
+    price: 109000,
+    oldPrice: 125000,
+    stock: 10,
+    badge: "Gaming Edition",
+    rating: 4.8,
+    reviewsCount: 92,
+    image: "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?auto=format&fit=crop&w=700&q=80",
+    specs: ["256 Go ROM", "Processeur Helio G99", "Appareil 108 MP", "Charge Rapide 33W"],
+    description: "Smartphone gaming haute performance avec processeur Helio G99, mémoire géante 256 Go et caméra photo 108 Mpx."
+  },
+  {
+    id: 12,
+    name: "Itel A70 (128 Go + 4 Go RAM)",
+    category: "telephonie",
+    price: 48500,
+    oldPrice: 55000,
+    stock: 25,
+    badge: "Prix Choc",
+    rating: 4.7,
+    reviewsCount: 110,
+    image: "https://images.unsplash.com/photo-1574944985070-8f3ebc6b79d2?auto=format&fit=crop&w=700&q=80",
+    specs: ["128 Go ROM", "Écran 6.6\" HD+", "Batterie 5000 mAh", "Capteur Empreinte Digitale"],
+    description: "128 Go de stockage à moins de 50 000 FCFA ! Idéal pour les études, le travail et les réseaux sociaux avec autonomie 2 jours."
+  },
+  {
+    id: 13,
     name: "iPhone 13 (128 Go - Neuf Scellé)",
     category: "telephonie",
-    price: 330000,
-    oldPrice: 375000,
-    stock: 5,
+    price: 325000,
+    oldPrice: 370000,
+    stock: 6,
     badge: "Apple Certifié",
     rating: 4.9,
-    reviewsCount: 150,
+    reviewsCount: 195,
     image: "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?auto=format&fit=crop&w=700&q=80",
     specs: ["128 Go", "Puce A15 Bionic", "Mode Cinématique 4K", "Écran Super Retina XDR"],
     description: "L'incontournable iPhone 13 d'Apple : autonomie améliorée, puissance de la puce A15 Bionic et enregistrement vidéo cinématographique."
   },
   {
-    id: 8,
-    name: "iPhone 15 Pro Max (256 Go Titane)",
+    id: 14,
+    name: "iPhone 15 Pro Max (256 Go Titane Naturel)",
     category: "telephonie",
-    price: 780000,
-    oldPrice: 900000,
-    stock: 4,
+    price: 765000,
+    oldPrice: 890000,
+    stock: 5,
     badge: "Haut de Gamme",
     rating: 5.0,
-    reviewsCount: 98,
+    reviewsCount: 128,
     image: "https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=700&q=80",
-    specs: ["256 Go", "Titane Naturel", "Puce A17 Pro", "Zoom Optique 5x"],
-    description: "Le sommet de la technologie avec boîtier en titane ultra-résistant, bouton Action et téléobjectif 5x d'exception."
+    specs: ["256 Go", "Titane Naturel", "Puce A17 Pro", "Zoom Optique 5x", "Port USB-C"],
+    description: "Le sommet de la technologie avec boîtier en titane ultra-résistant, bouton Action personnalisable et téléobjectif 5x d'exception."
   },
 
-  // ----------------- RAYON ACCESSOIRES -----------------
-  {
-    id: 9,
-    name: "Écouteurs Sans Fil TWS Pro Bluetooth 5.3",
-    category: "accessoires",
-    price: 15000,
-    oldPrice: 20000,
-    stock: 40,
-    badge: "Best Seller",
-    rating: 4.8,
-    reviewsCount: 180,
-    image: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=700&q=80",
-    specs: ["Bluetooth 5.3", "Réduction de bruit", "Autonomie 24h", "Boîtier tactile"],
-    description: "Qualité audio haute fidélité avec basses puissantes, réduction de bruit passive et synchronisation ultra-rapide avec Android & iPhone."
-  },
-  {
-    id: 10,
-    name: "Chargeur Rapide 45W Type-C + Câble Original",
-    category: "accessoires",
-    price: 10000,
-    oldPrice: 15000,
-    stock: 55,
-    badge: "Essentiel",
-    rating: 4.9,
-    reviewsCount: 220,
-    image: "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=700&q=80",
-    specs: ["Fast Charge 45W", "Protection Surtension", "Câble Type-C renforcé 1m"],
-    description: "Chargeur secteur officiel avec technologie Fast Charge compatible Tecno, Samsung Galaxy, Xiaomi et iPhone."
-  },
-  {
-    id: 11,
-    name: "Power Bank 20 000 mAh Fast Charge Double Sortie",
-    category: "accessoires",
-    price: 18000,
-    oldPrice: 25000,
-    stock: 28,
-    badge: "Best Seller",
-    rating: 4.9,
-    reviewsCount: 145,
-    image: "https://images.unsplash.com/photo-1609592426504-d533604f86d8?auto=format&fit=crop&w=700&q=80",
-    specs: ["20 000 mAh Réels", "2x USB + 1x Type-C", "Affichage LED %", "Charge 22.5W"],
-    description: "Batterie externe haute capacité permettant jusqu'à 5 à 6 recharges complètes de votre smartphone. Idéal pour les déplacements."
-  },
-  {
-    id: 12,
-    name: "Pack Coque Antichoc + 2 Verres Trempés 9H",
-    category: "accessoires",
-    price: 7500,
-    oldPrice: 12000,
-    stock: 60,
-    badge: "Pack Promo",
-    rating: 4.8,
-    reviewsCount: 190,
-    image: "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?auto=format&fit=crop&w=700&q=80",
-    specs: ["Coque silicone antichoc", "Verre trempé 9H", "Protection intégrale 360°"],
-    description: "Protection 360 degrés contre les chocs et les rayures disponible pour tous les modèles Tecno, Samsung et iPhone."
-  },
-  {
-    id: 13,
-    name: "Smartwatch Ultra Connectée HD (Appels Bluetooth)",
-    category: "accessoires",
-    price: 22000,
-    oldPrice: 30000,
-    stock: 16,
-    badge: "Exclusivité",
-    rating: 4.8,
-    reviewsCount: 89,
-    image: "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=700&q=80",
-    specs: ["Appels & Notifs WhatsApp", "Cardio / SpO2 / Sommeil", "Boîtier Métal", "Autonomie 7j"],
-    description: "Montre intelligente complète : répondez directement à vos appels téléphoniques et suivez votre santé au quotidien."
-  },
-
-  // ----------------- RAYON ÉLECTROMÉNAGER -----------------
-  {
-    id: 14,
-    name: "Téléviseur Deska 42\" Smart Android Full HD",
-    category: "electromenager",
-    price: 120000,
-    oldPrice: 140000,
-    stock: 7,
-    badge: "Best Seller SUNU",
-    rating: 4.9,
-    reviewsCount: 145,
-    image: "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?auto=format&fit=crop&w=700&q=80",
-    specs: ["Smart Android TV", "Écran 42\" Full HD", "Wi-Fi / YouTube / Netflix", "Récepteur Satellite Intégré"],
-    description: "Téléviseur intelligent Deska 42 pouces avec Android TV, applications préinstallées (YouTube, Netflix, Prime), Wi-Fi et décodeur intégré."
-  },
+  // ==========================================
+  // 2. RAYON ACCESSOIRES (JUMIA SÉNÉGAL BEST-SELLERS)
+  // ==========================================
   {
     id: 15,
-    name: "Téléviseur Smart Android 32\" HD Sans Bordure",
-    category: "electromenager",
-    price: 75000,
-    oldPrice: 90000,
-    stock: 10,
-    badge: "Promo Spéciale",
-    rating: 4.8,
-    reviewsCount: 98,
-    image: "https://images.unsplash.com/photo-1593784991095-a205069470b6?auto=format&fit=crop&w=700&q=80",
-    specs: ["Écran 32\" HD Frameless", "Smart Android TV", "HDMI & USB Multimédia", "TNT HD Intégrée"],
-    description: "Écran LED 32 pouces sans bordure avec connectivité Android TV, idéal pour salon ou chambre avec un son surround immersif."
+    name: "Écouteurs Sans Fil Oraimo FreePods 4 ANC TWS",
+    category: "accessoires",
+    price: 21500,
+    oldPrice: 28000,
+    stock: 35,
+    badge: "Best Seller",
+    rating: 4.9,
+    reviewsCount: 240,
+    image: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=700&q=80",
+    specs: ["Réduction Active du Bruit (ANC)", "Autonomie 35.5h", "Basses HavyBass", "Application Dédiée Oraimo"],
+    description: "Les écouteurs sans fil de référence en Afrique : réduction de bruit active, basses profondes et autonomie record de 35h."
   },
   {
     id: 16,
-    name: "Mini Filtre à Eau de Robinet 5 Couches Charbon Actif",
-    category: "electromenager",
-    price: 3000,
-    oldPrice: 5000,
-    stock: 80,
-    badge: "Nouveau Arrivage",
-    rating: 4.9,
-    reviewsCount: 210,
-    image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=700&q=80",
-    specs: ["5 Niveaux de Filtration", "Charbon Actif Purifiant", "Fixation Universelle Robinet", "Élimine Chlore & Rouille"],
-    description: "Purificateur d'eau compact à charbon actif pour robinet de cuisine ou salle de bain. Élimine les impuretés, odeurs et bactéries."
+    name: "Écouteurs TWS Pro 3 Wireless Bluetooth 5.3",
+    category: "accessoires",
+    price: 12500,
+    oldPrice: 18000,
+    stock: 45,
+    badge: "Promo -30%",
+    rating: 4.8,
+    reviewsCount: 195,
+    image: "https://images.unsplash.com/photo-1600294037681-c80b4cb5b434?auto=format&fit=crop&w=700&q=80",
+    specs: ["Bluetooth 5.3", "Son Spatial HD", "Autonomie 24h", "Boîtier Tactile & Recharge Rapide"],
+    description: "Qualité audio haute fidélité avec basses percutantes, micro intégré pour vos appels et synchronisation instantanée Android & iPhone."
   },
   {
     id: 17,
-    name: "Mixeur Blender Multifonction 2-en-1 avec Moulin",
-    category: "electromenager",
-    price: 18500,
-    oldPrice: 25000,
-    stock: 22,
-    badge: "Promo",
-    rating: 4.8,
-    reviewsCount: 64,
-    image: "https://images.unsplash.com/photo-1570222094114-d054a817e56b?auto=format&fit=crop&w=700&q=80",
-    specs: ["Bol 1.5L Incassable", "Lames Inox Renforcées", "Moulin Épices & Café", "Moteur Puissant 500W"],
-    description: "Robot mixeur multifonction parfait pour jus frais, smoothies, soupes, et moulin séparé pour moudre café, piment et épices."
+    name: "Power Bank Oraimo 20 000 mAh Fast Charge 22.5W",
+    category: "accessoires",
+    price: 17900,
+    oldPrice: 24000,
+    stock: 30,
+    badge: "Best Seller",
+    rating: 4.9,
+    reviewsCount: 175,
+    image: "https://images.unsplash.com/photo-1609592426504-d533604f86d8?auto=format&fit=crop&w=700&q=80",
+    specs: ["20 000 mAh Réels", "Charge Rapide 22.5W", "2x USB + Type-C", "Affichage LED %"],
+    description: "Batterie externe officielle Oraimo permettant 5 recharges complètes de smartphone. Compatible Quick Charge et Power Delivery."
   },
   {
     id: 18,
-    name: "Fer à Repasser à Vapeur Céramique 2200W",
-    category: "electromenager",
-    price: 14000,
-    oldPrice: 19000,
-    stock: 19,
+    name: "Power Bank Haute Capacité 30 000 mAh Double Sortie USB",
+    category: "accessoires",
+    price: 23500,
+    oldPrice: 30000,
+    stock: 20,
+    badge: "Voyage & Autonomie",
+    rating: 4.8,
+    reviewsCount: 88,
+    image: "https://images.unsplash.com/photo-1622445262464-84b1456045b6?auto=format&fit=crop&w=700&q=80",
+    specs: ["30 000 mAh Géant", "Lampe Torche Intégrée", "Indicateur Digital", "3 Ports de Sortie"],
+    description: "L'autonomie absolue pour vos déplacements et voyages : jusqu'à 8 recharges de téléphone et lampe LED de secours intégrée."
+  },
+  {
+    id: 19,
+    name: "Chargeur Secteur Rapide GaN 45W Type-C + Câble Original",
+    category: "accessoires",
+    price: 9500,
+    oldPrice: 14000,
+    stock: 60,
     badge: "Essentiel",
+    rating: 4.9,
+    reviewsCount: 260,
+    image: "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=700&q=80",
+    specs: ["Technologie GaN 45W", "Câble Type-C Tressé 1m", "Protection Contre Surtension"],
+    description: "Chargeur secteur ultra-rapide compatible avec Samsung Super Fast Charge, Tecno Flash Charge, Xiaomi et iPhone."
+  },
+  {
+    id: 20,
+    name: "Smartwatch Ultra 2 AMOLED HD (Appels Bluetooth + Santé)",
+    category: "accessoires",
+    price: 19900,
+    oldPrice: 28000,
+    stock: 22,
+    badge: "Tendance 2024",
+    rating: 4.8,
+    reviewsCount: 110,
+    image: "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=700&q=80",
+    specs: ["Appels & Notifs WhatsApp", "Écran AMOLED HD", "Cardio / SpO2 / Sommeil", "2 Bracelets Offerts"],
+    description: "Montre intelligente complète : répondez à vos appels au poignet, recevez vos messages WhatsApp et suivez vos performances sportives."
+  },
+  {
+    id: 21,
+    name: "Pack Protection 360° : Coque Silicone Antichoc + 2 Verres 9H",
+    category: "accessoires",
+    price: 5000,
+    oldPrice: 8500,
+    stock: 75,
+    badge: "Pack Promo",
+    rating: 4.8,
+    reviewsCount: 320,
+    image: "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?auto=format&fit=crop&w=700&q=80",
+    specs: ["Coque Silicone Renforcée", "2 Verres Trempés 9H", "Protection Intégrale 360°"],
+    description: "La protection indispensable pour votre téléphone contre les chutes et rayures. Disponible pour tous modèles Tecno, Samsung, Xiaomi et iPhone."
+  },
+  {
+    id: 22,
+    name: "Câble de Charge Rapide 3-en-1 Nylon Tressé (Type-C / Lightning / Micro)",
+    category: "accessoires",
+    price: 3500,
+    oldPrice: 5000,
+    stock: 90,
+    badge: "Pratique",
     rating: 4.7,
-    reviewsCount: 52,
+    reviewsCount: 210,
+    image: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=700&q=80",
+    specs: ["3 Connecteurs en 1", "Nylon Tressé Ultra Résistant", "Charge Rapide 3.1A", "Longueur 1.2m"],
+    description: "Rechargez tous vos appareils avec un seul câble résistant et indéchirable en nylon tressé."
+  },
+  {
+    id: 23,
+    name: "Enceinte Bluetooth Portable Waterproof Bass Boost RGB",
+    category: "accessoires",
+    price: 16500,
+    oldPrice: 22000,
+    stock: 24,
+    badge: "Audio HD",
+    rating: 4.9,
+    reviewsCount: 85,
+    image: "https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&w=700&q=80",
+    specs: ["Son Stéréo Bass Boost", "Étanche IPX5", "Autonomie 12h", "Lumières LED Dynamiques"],
+    description: "Enceinte nomade puissante avec basses renforcées, radio FM, lecteur carte mémoire/USB et jeu de lumières festif."
+  },
+  {
+    id: 24,
+    name: "Support Téléphone Magnétique Voiture Rotation 360°",
+    category: "accessoires",
+    price: 4500,
+    oldPrice: 7000,
+    stock: 50,
+    badge: "Auto & Conduite",
+    rating: 4.8,
+    reviewsCount: 140,
+    image: "https://images.unsplash.com/photo-1586105251261-72a756497a11?auto=format&fit=crop&w=700&q=80",
+    specs: ["Aimant Néodyme Puissant", "Fixation Grille Aération", "Rotation 360°", "Compatible tous téléphones"],
+    description: "Fixez votre smartphone en un clin d'œil dans votre véhicule pour utiliser votre GPS en toute sécurité."
+  },
+
+  // ==========================================
+  // 3. RAYON ÉLECTROMÉNAGER (JUMIA SÉNÉGAL BEST-SELLERS)
+  // ==========================================
+  {
+    id: 25,
+    name: "Téléviseur Deska 43\" Smart Android Full HD Sans Bordure",
+    category: "electromenager",
+    price: 119000,
+    oldPrice: 139000,
+    stock: 8,
+    badge: "Best Seller TV",
+    rating: 4.9,
+    reviewsCount: 162,
+    image: "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?auto=format&fit=crop&w=700&q=80",
+    specs: ["Smart Android TV 43\"", "Résolution Full HD 1080p", "YouTube / Netflix / Prime Video", "Décodeur TNT & Satellite"],
+    description: "Téléviseur intelligent Deska 43 pouces Frameless : écran ultra-lumineux, Wi-Fi intégré, Google Play Store et décodeur intégré."
+  },
+  {
+    id: 26,
+    name: "Téléviseur Smart Android 32\" HD Sans Bordure Frameless",
+    category: "electromenager",
+    price: 69900,
+    oldPrice: 85000,
+    stock: 14,
+    badge: "Top Affaire",
+    rating: 4.8,
+    reviewsCount: 130,
+    image: "https://images.unsplash.com/photo-1593784991095-a205069470b6?auto=format&fit=crop&w=700&q=80",
+    specs: ["Écran 32\" HD Frameless", "Smart Android TV", "Wi-Fi / HDMI / USB", "TNT HD Intégrée"],
+    description: "Écran LED 32 pouces sans bordure avec système Android TV complet, idéal pour salon ou chambre avec un son immersif."
+  },
+  {
+    id: 27,
+    name: "Téléviseur 55\" 4K Ultra HD Smart TV HDR10+ Dolby Audio",
+    category: "electromenager",
+    price: 199000,
+    oldPrice: 240000,
+    stock: 5,
+    badge: "Cinéma Maison",
+    rating: 5.0,
+    reviewsCount: 78,
+    image: "https://images.unsplash.com/photo-1509281373149-e957c6296406?auto=format&fit=crop&w=700&q=80",
+    specs: ["55\" 4K UHD (3840x2160)", "HDR10+ & Dolby Audio", "Google TV & Chromecast", "Design Frameless Métal"],
+    description: "Une image 4K spectaculaire avec des couleurs éclatantes et un son cinéma Dolby pour sublimer vos films et matchs de football."
+  },
+  {
+    id: 28,
+    name: "Mini Filtre à Eau de Robinet 5 Couches Charbon Actif",
+    category: "electromenager",
+    price: 2500,
+    oldPrice: 4500,
+    stock: 95,
+    badge: "Santé & Éco",
+    rating: 4.9,
+    reviewsCount: 280,
+    image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=700&q=80",
+    specs: ["5 Niveaux de Filtration", "Charbon Actif Purifiant", "Fixation Universelle Robinet", "Élimine Chlore & Rouille"],
+    description: "Purificateur d'eau compact à charbon actif pour robinet de cuisine ou salle de bain. Élimine impuretés, calcaire, odeurs et résidus."
+  },
+  {
+    id: 29,
+    name: "Friteuse Sans Huile Air Fryer Digitale 6.0L 1800W",
+    category: "electromenager",
+    price: 34500,
+    oldPrice: 45000,
+    stock: 16,
+    badge: "Cuisine Saine",
+    rating: 4.9,
+    reviewsCount: 145,
+    image: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=700&q=80",
+    specs: ["Capacité Familiale 6.0L", "Cuisson 85% moins de gras", "Écran Tactile 8 Programmes", "Minuteur 60 min"],
+    description: "Cuisinez frites croustillantes, poulet doré, poissons et pâtisseries sans huile avec une cuisson rapide par circulation d'air chaud 360°."
+  },
+  {
+    id: 30,
+    name: "Robot Mixeur Blender 2-en-1 Bol Verre 1.5L + Moulin 500W",
+    category: "electromenager",
+    price: 17500,
+    oldPrice: 24000,
+    stock: 25,
+    badge: "Best Seller",
+    rating: 4.8,
+    reviewsCount: 110,
+    image: "https://images.unsplash.com/photo-1570222094114-d054a817e56b?auto=format&fit=crop&w=700&q=80",
+    specs: ["Bol 1.5L Incassable", "Lames Inox Renforcées", "Moulin Épices & Café Inclus", "Moteur Puissant 500W"],
+    description: "Robot mixeur multifonction parfait pour jus frais, smoothies, soupes sénégalaises, et moulin séparé pour piment, café et épices."
+  },
+  {
+    id: 31,
+    name: "Fer à Repasser à Vapeur Céramique 2200W Anticalcaire",
+    category: "electromenager",
+    price: 13500,
+    oldPrice: 18000,
+    stock: 20,
+    badge: "Essentiel",
+    rating: 4.8,
+    reviewsCount: 88,
     image: "https://images.unsplash.com/photo-1585659722983-3a675dabf23d?auto=format&fit=crop&w=700&q=80",
-    specs: ["Puissance 2200W", "Semelle Céramique Glisse Parfaite", "Vapeur Continue & Jet Pressing", "Système Anticalcaire"],
-    description: "Repassage rapide et soigné de tous vos vêtements avec débit vapeur haute pression et semelle céramique antiadhésive."
+    specs: ["Puissance 2200W", "Semelle Céramique Glisse Parfaite", "Jet Vapeur Pressing", "Système Antigoutte"],
+    description: "Repassage rapide et impeccable de vos boubous et vêtements avec débit vapeur haute pression et semelle céramique antiadhésive."
+  },
+  {
+    id: 32,
+    name: "Bouilloire Électrique Inox 2.0 Litres 1500W Arrêt Auto",
+    category: "electromenager",
+    price: 6900,
+    oldPrice: 9500,
+    stock: 40,
+    badge: "Prix Choc",
+    rating: 4.7,
+    reviewsCount: 155,
+    image: "https://images.unsplash.com/photo-1585771724684-38269d6639fd?auto=format&fit=crop&w=700&q=80",
+    specs: ["Capacité 2.0L", "Corps Inox Alimentaire", "Ébullition Rapide en 3 min", "Arrêt Automatique"],
+    description: "Bouilloire robuste en acier inoxydable pour préparer café, thé et eau chaude en un temps record en toute sécurité."
+  },
+  {
+    id: 33,
+    name: "Ventilateur Sur Pied Silencieux 16 Pouces 3 Vitesses",
+    category: "electromenager",
+    price: 15500,
+    oldPrice: 20000,
+    stock: 18,
+    badge: "Confort & Fraîcheur",
+    rating: 4.8,
+    reviewsCount: 95,
+    image: "https://images.unsplash.com/photo-1585338107529-13afc5f02586?auto=format&fit=crop&w=700&q=80",
+    specs: ["Diamètre 40cm (16\")", "Oscillation 90°", "Hauteur Réglable", "Moteur Cuivre Silencieux"],
+    description: "Ventilation puissante et silencieuse pour rafraîchir efficacement vos pièces pendant les journées chaudes à Dakar."
+  },
+  {
+    id: 34,
+    name: "Tondeuse Professionnelle Cheveux & Barbe Vintage T9 Métal",
+    category: "electromenager",
+    price: 7900,
+    oldPrice: 12000,
+    stock: 35,
+    badge: "Coiffure Pro",
+    rating: 4.8,
+    reviewsCount: 170,
+    image: "https://images.unsplash.com/photo-1621607512214-68297480165e?auto=format&fit=crop&w=700&q=80",
+    specs: ["Lames T-Blade Précision 0mm", "Corps Métal Gravé Dragon", "Batterie Lithium USB", "4 Sabots Inclus"],
+    description: "Tondeuse de barbier professionnelle rechargeable par USB pour contours nets, barbe impeccable et coupe de cheveux sans irritation."
   }
 ];
 
@@ -320,12 +550,12 @@ function formatFCFA(amount) {
 function initData() {
   const currencyVersion = localStorage.getItem("sunu_currency_ver");
   
-  // If first time or upgraded to Sunu Solution categories, reinit
-  if (currencyVersion !== "v4_electromenager") {
+  // If first time or upgraded to Sunu Solution Jumia categories, reinit
+  if (currencyVersion !== "v5_jumia_senegal") {
     localStorage.removeItem("phonepulse_products");
     localStorage.removeItem("phonepulse_sales");
     localStorage.removeItem("phonepulse_cart");
-    localStorage.setItem("sunu_currency_ver", "v4_electromenager");
+    localStorage.setItem("sunu_currency_ver", "v5_jumia_senegal");
   }
 
   const savedProducts = localStorage.getItem("phonepulse_products");
@@ -1042,8 +1272,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const mobileBtn = document.getElementById("mobileMenuBtn");
   const navMenu = document.getElementById("navMenu");
   if (mobileBtn && navMenu) {
-    mobileBtn.addEventListener("click", () => {
+    mobileBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
       navMenu.classList.toggle("open");
+    });
+
+    // Close when clicking outside
+    document.addEventListener("click", (e) => {
+      if (!navMenu.contains(e.target) && !mobileBtn.contains(e.target)) {
+        navMenu.classList.remove("open");
+      }
     });
   }
 

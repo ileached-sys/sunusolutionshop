@@ -11,6 +11,496 @@ const DEFAULT_ADMIN_PASS = "admin123";
 let products = [];
 let sales = [];
 
+const DEFAULT_PRODUCTS = [
+  // ==========================================
+  // 1. RAYON TÉLÉPHONIE (JUMIA SÉNÉGAL BEST-SELLERS)
+  // ==========================================
+  {
+    id: 1,
+    name: "Tecno Spark 20 (128 Go + 8 Go RAM)",
+    category: "telephonie",
+    price: 84900,
+    oldPrice: 95000,
+    stock: 15,
+    badge: "Best Seller Jumia",
+    rating: 4.9,
+    reviewsCount: 184,
+    image: "https://images.unsplash.com/photo-1598327105666-5b89351aff97?auto=format&fit=crop&w=700&q=80",
+    specs: ["128 Go ROM", "8 Go RAM (4+4)", "Batterie 5000 mAh", "Garantie 13 Mois", "Caméra 50 MP"],
+    description: "Le n°1 des ventes à Dakar : 128 Go de stockage, 8 Go de RAM, appareil photo 50 Mpx ultra-net et batterie 5000 mAh. Garantie constructeur 13 mois."
+  },
+  {
+    id: 2,
+    name: "Tecno Pop 8 (64 Go + 3 Go RAM)",
+    category: "telephonie",
+    price: 49900,
+    oldPrice: 59000,
+    stock: 22,
+    badge: "Prix Mini",
+    rating: 4.7,
+    reviewsCount: 142,
+    image: "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?auto=format&fit=crop&w=700&q=80",
+    specs: ["64 Go ROM", "3 Go RAM", "Écran 90Hz 6.6\"", "Batterie 5000 mAh", "Haut-parleurs Stéréo"],
+    description: "Le smartphone le plus accessible et endurant : écran 90Hz ultra-fluide, double haut-parleur DTS et batterie 5000 mAh longue durée."
+  },
+  {
+    id: 3,
+    name: "Tecno Camon 30 (256 Go + 8 Go RAM)",
+    category: "telephonie",
+    price: 139000,
+    oldPrice: 155000,
+    stock: 8,
+    badge: "Nouveau Arrivage",
+    rating: 4.9,
+    reviewsCount: 96,
+    image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=700&q=80",
+    specs: ["256 Go ROM", "Caméra 50 MP OIS", "Charge 70W Ultra", "Écran AMOLED 120Hz", "Design Cuir"],
+    description: "Le roi de la photo de nuit : capteur 50 Mpx avec stabilisation optique OIS, charge ultra-rapide 70W et magnifique écran AMOLED 120Hz."
+  },
+  {
+    id: 4,
+    name: "Samsung Galaxy A05 (64 Go / 4 Go RAM)",
+    category: "telephonie",
+    price: 59900,
+    oldPrice: 69000,
+    stock: 18,
+    badge: "Promo Spéciale",
+    rating: 4.8,
+    reviewsCount: 156,
+    image: "https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?auto=format&fit=crop&w=700&q=80",
+    specs: ["Écran HD+ 6.7\"", "Batterie 5000 mAh", "Charge 25W", "Appareil 50 MP", "Dual SIM"],
+    description: "Qualité et fiabilité Samsung avec un grand écran de 6.7 pouces, une batterie de 5000 mAh et une caméra 50 Mpx au meilleur prix du marché."
+  },
+  {
+    id: 5,
+    name: "Samsung Galaxy A15 4G (128 Go + 6 Go RAM)",
+    category: "telephonie",
+    price: 99900,
+    oldPrice: 115000,
+    stock: 14,
+    badge: "Best Seller",
+    rating: 4.9,
+    reviewsCount: 210,
+    image: "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?auto=format&fit=crop&w=700&q=80",
+    specs: ["Super AMOLED 90Hz", "Triple Caméra 50 MP", "Puce Octa-Core Helio G99", "Garantie 24 Mois"],
+    description: "Écran Super AMOLED éclatant 90Hz, 128 Go de stockage et triple capteur photo ultra-net pour immortaliser tous vos moments."
+  },
+  {
+    id: 6,
+    name: "Samsung Galaxy A25 5G (128 Go + 6 Go RAM)",
+    category: "telephonie",
+    price: 145000,
+    oldPrice: 165000,
+    stock: 9,
+    badge: "5G Ready",
+    rating: 4.8,
+    reviewsCount: 88,
+    image: "https://images.unsplash.com/photo-1580910051074-3eb694886505?auto=format&fit=crop&w=700&q=80",
+    specs: ["Écran 120Hz Super AMOLED", "Caméra 50 MP OIS", "Connexion 5G Ultra Rapide", "Batterie 5000 mAh"],
+    description: "Profitez de la vitesse 5G avec l'écran Super AMOLED 120Hz et la stabilisation optique photo de Samsung."
+  },
+  {
+    id: 7,
+    name: "Samsung Galaxy A55 5G (256 Go + 8 Go RAM)",
+    category: "telephonie",
+    price: 235000,
+    oldPrice: 265000,
+    stock: 7,
+    badge: "Haut de Gamme",
+    rating: 5.0,
+    reviewsCount: 115,
+    image: "https://images.unsplash.com/photo-1567581935884-3349723552ca?auto=format&fit=crop&w=700&q=80",
+    specs: ["256 Go ROM", "Finition Verre & Métal", "Résistance IP67 Eau/Poussière", "Caméra 50 MP 4K"],
+    description: "Design premium en métal et verre, étanche IP67, processeur ultra-rapide et écran fluide 120Hz pour une expérience haut de gamme."
+  },
+  {
+    id: 8,
+    name: "Samsung Galaxy S24 Ultra (256 Go Titane)",
+    category: "telephonie",
+    price: 685000,
+    oldPrice: 790000,
+    stock: 4,
+    badge: "Flagship Galaxy AI",
+    rating: 5.0,
+    reviewsCount: 74,
+    image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&w=700&q=80",
+    specs: ["Galaxy AI Intégrée", "Cadre Titane", "Zoom Optique 100x", "S-Pen Inclus", "Écran Dynamic AMOLED 2X"],
+    description: "Le smartphone le plus puissant du monde avec intelligence artificielle Galaxy AI, capteur photo 200 Mpx et stylet S-Pen intégré."
+  },
+  {
+    id: 9,
+    name: "Xiaomi Redmi 13C (128 Go + 6 Go RAM)",
+    category: "telephonie",
+    price: 74900,
+    oldPrice: 85000,
+    stock: 16,
+    badge: "Bon Plan",
+    rating: 4.8,
+    reviewsCount: 130,
+    image: "https://images.unsplash.com/photo-1546868871-7041f2a55e12?auto=format&fit=crop&w=700&q=80",
+    specs: ["Écran 90Hz 6.74\"", "Capteur 50 MP IA", "Batterie 5000 mAh", "Port USB-C"],
+    description: "Design élégant et moderne, batterie longue durée 5000 mAh avec charge rapide et double capteur photo 50 Mpx."
+  },
+  {
+    id: 10,
+    name: "Xiaomi Redmi Note 13 (256 Go + 8 Go RAM)",
+    category: "telephonie",
+    price: 119000,
+    oldPrice: 135000,
+    stock: 12,
+    badge: "Best Seller",
+    rating: 4.9,
+    reviewsCount: 165,
+    image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=700&q=80",
+    specs: ["256 Go ROM", "Écran AMOLED 120Hz", "Caméra 108 MP Ultra Claire", "Charge Rapide 33W"],
+    description: "Appareil photo 108 Mpx ultra-détaillé, écran AMOLED aux bordures ultra-fines et processeur puissant pour le multitâche."
+  },
+  {
+    id: 11,
+    name: "Infinix Hot 40 Pro (256 Go + 8 Go RAM)",
+    category: "telephonie",
+    price: 109000,
+    oldPrice: 125000,
+    stock: 10,
+    badge: "Gaming Edition",
+    rating: 4.8,
+    reviewsCount: 92,
+    image: "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?auto=format&fit=crop&w=700&q=80",
+    specs: ["256 Go ROM", "Processeur Helio G99", "Appareil 108 MP", "Charge Rapide 33W"],
+    description: "Smartphone gaming haute performance avec processeur Helio G99, mémoire géante 256 Go et caméra photo 108 Mpx."
+  },
+  {
+    id: 12,
+    name: "Itel A70 (128 Go + 4 Go RAM)",
+    category: "telephonie",
+    price: 48500,
+    oldPrice: 55000,
+    stock: 25,
+    badge: "Prix Choc",
+    rating: 4.7,
+    reviewsCount: 110,
+    image: "https://images.unsplash.com/photo-1574944985070-8f3ebc6b79d2?auto=format&fit=crop&w=700&q=80",
+    specs: ["128 Go ROM", "Écran 6.6\" HD+", "Batterie 5000 mAh", "Capteur Empreinte Digitale"],
+    description: "128 Go de stockage à moins de 50 000 FCFA ! Idéal pour les études, le travail et les réseaux sociaux avec autonomie 2 jours."
+  },
+  {
+    id: 13,
+    name: "iPhone 13 (128 Go - Neuf Scellé)",
+    category: "telephonie",
+    price: 325000,
+    oldPrice: 370000,
+    stock: 6,
+    badge: "Apple Certifié",
+    rating: 4.9,
+    reviewsCount: 195,
+    image: "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?auto=format&fit=crop&w=700&q=80",
+    specs: ["128 Go", "Puce A15 Bionic", "Mode Cinématique 4K", "Écran Super Retina XDR"],
+    description: "L'incontournable iPhone 13 d'Apple : autonomie améliorée, puissance de la puce A15 Bionic et enregistrement vidéo cinématographique."
+  },
+  {
+    id: 14,
+    name: "iPhone 15 Pro Max (256 Go Titane Naturel)",
+    category: "telephonie",
+    price: 765000,
+    oldPrice: 890000,
+    stock: 5,
+    badge: "Haut de Gamme",
+    rating: 5.0,
+    reviewsCount: 128,
+    image: "https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=700&q=80",
+    specs: ["256 Go", "Titane Naturel", "Puce A17 Pro", "Zoom Optique 5x", "Port USB-C"],
+    description: "Le sommet de la technologie avec boîtier en titane ultra-résistant, bouton Action personnalisable et téléobjectif 5x d'exception."
+  },
+
+  // ==========================================
+  // 2. RAYON ACCESSOIRES (JUMIA SÉNÉGAL BEST-SELLERS)
+  // ==========================================
+  {
+    id: 15,
+    name: "Écouteurs Sans Fil Oraimo FreePods 4 ANC TWS",
+    category: "accessoires",
+    price: 21500,
+    oldPrice: 28000,
+    stock: 35,
+    badge: "Best Seller",
+    rating: 4.9,
+    reviewsCount: 240,
+    image: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=700&q=80",
+    specs: ["Réduction Active du Bruit (ANC)", "Autonomie 35.5h", "Basses HavyBass", "Application Dédiée Oraimo"],
+    description: "Les écouteurs sans fil de référence en Afrique : réduction de bruit active, basses profondes et autonomie record de 35h."
+  },
+  {
+    id: 16,
+    name: "Écouteurs TWS Pro 3 Wireless Bluetooth 5.3",
+    category: "accessoires",
+    price: 12500,
+    oldPrice: 18000,
+    stock: 45,
+    badge: "Promo -30%",
+    rating: 4.8,
+    reviewsCount: 195,
+    image: "https://images.unsplash.com/photo-1600294037681-c80b4cb5b434?auto=format&fit=crop&w=700&q=80",
+    specs: ["Bluetooth 5.3", "Son Spatial HD", "Autonomie 24h", "Boîtier Tactile & Recharge Rapide"],
+    description: "Qualité audio haute fidélité avec basses percutantes, micro intégré pour vos appels et synchronisation instantanée Android & iPhone."
+  },
+  {
+    id: 17,
+    name: "Power Bank Oraimo 20 000 mAh Fast Charge 22.5W",
+    category: "accessoires",
+    price: 17900,
+    oldPrice: 24000,
+    stock: 30,
+    badge: "Best Seller",
+    rating: 4.9,
+    reviewsCount: 175,
+    image: "https://images.unsplash.com/photo-1609592426504-d533604f86d8?auto=format&fit=crop&w=700&q=80",
+    specs: ["20 000 mAh Réels", "Charge Rapide 22.5W", "2x USB + Type-C", "Affichage LED %"],
+    description: "Batterie externe officielle Oraimo permettant 5 recharges complètes de smartphone. Compatible Quick Charge et Power Delivery."
+  },
+  {
+    id: 18,
+    name: "Power Bank Haute Capacité 30 000 mAh Double Sortie USB",
+    category: "accessoires",
+    price: 23500,
+    oldPrice: 30000,
+    stock: 20,
+    badge: "Voyage & Autonomie",
+    rating: 4.8,
+    reviewsCount: 88,
+    image: "https://images.unsplash.com/photo-1622445262464-84b1456045b6?auto=format&fit=crop&w=700&q=80",
+    specs: ["30 000 mAh Géant", "Lampe Torche Intégrée", "Indicateur Digital", "3 Ports de Sortie"],
+    description: "L'autonomie absolue pour vos déplacements et voyages : jusqu'à 8 recharges de téléphone et lampe LED de secours intégrée."
+  },
+  {
+    id: 19,
+    name: "Chargeur Secteur Rapide GaN 45W Type-C + Câble Original",
+    category: "accessoires",
+    price: 9500,
+    oldPrice: 14000,
+    stock: 60,
+    badge: "Essentiel",
+    rating: 4.9,
+    reviewsCount: 260,
+    image: "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=700&q=80",
+    specs: ["Technologie GaN 45W", "Câble Type-C Tressé 1m", "Protection Contre Surtension"],
+    description: "Chargeur secteur ultra-rapide compatible avec Samsung Super Fast Charge, Tecno Flash Charge, Xiaomi et iPhone."
+  },
+  {
+    id: 20,
+    name: "Smartwatch Ultra 2 AMOLED HD (Appels Bluetooth + Santé)",
+    category: "accessoires",
+    price: 19900,
+    oldPrice: 28000,
+    stock: 22,
+    badge: "Tendance 2024",
+    rating: 4.8,
+    reviewsCount: 110,
+    image: "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=700&q=80",
+    specs: ["Appels & Notifs WhatsApp", "Écran AMOLED HD", "Cardio / SpO2 / Sommeil", "2 Bracelets Offerts"],
+    description: "Montre intelligente complète : répondez à vos appels au poignet, recevez vos messages WhatsApp et suivez vos performances sportives."
+  },
+  {
+    id: 21,
+    name: "Pack Protection 360° : Coque Silicone Antichoc + 2 Verres 9H",
+    category: "accessoires",
+    price: 5000,
+    oldPrice: 8500,
+    stock: 75,
+    badge: "Pack Promo",
+    rating: 4.8,
+    reviewsCount: 320,
+    image: "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?auto=format&fit=crop&w=700&q=80",
+    specs: ["Coque Silicone Renforcée", "2 Verres Trempés 9H", "Protection Intégrale 360°"],
+    description: "La protection indispensable pour votre téléphone contre les chutes et rayures. Disponible pour tous modèles Tecno, Samsung, Xiaomi et iPhone."
+  },
+  {
+    id: 22,
+    name: "Câble de Charge Rapide 3-en-1 Nylon Tressé (Type-C / Lightning / Micro)",
+    category: "accessoires",
+    price: 3500,
+    oldPrice: 5000,
+    stock: 90,
+    badge: "Pratique",
+    rating: 4.7,
+    reviewsCount: 210,
+    image: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=700&q=80",
+    specs: ["3 Connecteurs en 1", "Nylon Tressé Ultra Résistant", "Charge Rapide 3.1A", "Longueur 1.2m"],
+    description: "Rechargez tous vos appareils avec un seul câble résistant et indéchirable en nylon tressé."
+  },
+  {
+    id: 23,
+    name: "Enceinte Bluetooth Portable Waterproof Bass Boost RGB",
+    category: "accessoires",
+    price: 16500,
+    oldPrice: 22000,
+    stock: 24,
+    badge: "Audio HD",
+    rating: 4.9,
+    reviewsCount: 85,
+    image: "https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&w=700&q=80",
+    specs: ["Son Stéréo Bass Boost", "Étanche IPX5", "Autonomie 12h", "Lumières LED Dynamiques"],
+    description: "Enceinte nomade puissante avec basses renforcées, radio FM, lecteur carte mémoire/USB et jeu de lumières festif."
+  },
+  {
+    id: 24,
+    name: "Support Téléphone Magnétique Voiture Rotation 360°",
+    category: "accessoires",
+    price: 4500,
+    oldPrice: 7000,
+    stock: 50,
+    badge: "Auto & Conduite",
+    rating: 4.8,
+    reviewsCount: 140,
+    image: "https://images.unsplash.com/photo-1586105251261-72a756497a11?auto=format&fit=crop&w=700&q=80",
+    specs: ["Aimant Néodyme Puissant", "Fixation Grille Aération", "Rotation 360°", "Compatible tous téléphones"],
+    description: "Fixez votre smartphone en un clin d'œil dans votre véhicule pour utiliser votre GPS en toute sécurité."
+  },
+
+  // ==========================================
+  // 3. RAYON ÉLECTROMÉNAGER (JUMIA SÉNÉGAL BEST-SELLERS)
+  // ==========================================
+  {
+    id: 25,
+    name: "Téléviseur Deska 43\" Smart Android Full HD Sans Bordure",
+    category: "electromenager",
+    price: 119000,
+    oldPrice: 139000,
+    stock: 8,
+    badge: "Best Seller TV",
+    rating: 4.9,
+    reviewsCount: 162,
+    image: "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?auto=format&fit=crop&w=700&q=80",
+    specs: ["Smart Android TV 43\"", "Résolution Full HD 1080p", "YouTube / Netflix / Prime Video", "Décodeur TNT & Satellite"],
+    description: "Téléviseur intelligent Deska 43 pouces Frameless : écran ultra-lumineux, Wi-Fi intégré, Google Play Store et décodeur intégré."
+  },
+  {
+    id: 26,
+    name: "Téléviseur Smart Android 32\" HD Sans Bordure Frameless",
+    category: "electromenager",
+    price: 69900,
+    oldPrice: 85000,
+    stock: 14,
+    badge: "Top Affaire",
+    rating: 4.8,
+    reviewsCount: 130,
+    image: "https://images.unsplash.com/photo-1593784991095-a205069470b6?auto=format&fit=crop&w=700&q=80",
+    specs: ["Écran 32\" HD Frameless", "Smart Android TV", "Wi-Fi / HDMI / USB", "TNT HD Intégrée"],
+    description: "Écran LED 32 pouces sans bordure avec système Android TV complet, idéal pour salon ou chambre avec un son immersif."
+  },
+  {
+    id: 27,
+    name: "Téléviseur 55\" 4K Ultra HD Smart TV HDR10+ Dolby Audio",
+    category: "electromenager",
+    price: 199000,
+    oldPrice: 240000,
+    stock: 5,
+    badge: "Cinéma Maison",
+    rating: 5.0,
+    reviewsCount: 78,
+    image: "https://images.unsplash.com/photo-1509281373149-e957c6296406?auto=format&fit=crop&w=700&q=80",
+    specs: ["55\" 4K UHD (3840x2160)", "HDR10+ & Dolby Audio", "Google TV & Chromecast", "Design Frameless Métal"],
+    description: "Une image 4K spectaculaire avec des couleurs éclatantes et un son cinéma Dolby pour sublimer vos films et matchs de football."
+  },
+  {
+    id: 28,
+    name: "Mini Filtre à Eau de Robinet 5 Couches Charbon Actif",
+    category: "electromenager",
+    price: 2500,
+    oldPrice: 4500,
+    stock: 95,
+    badge: "Santé & Éco",
+    rating: 4.9,
+    reviewsCount: 280,
+    image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=700&q=80",
+    specs: ["5 Niveaux de Filtration", "Charbon Actif Purifiant", "Fixation Universelle Robinet", "Élimine Chlore & Rouille"],
+    description: "Purificateur d'eau compact à charbon actif pour robinet de cuisine ou salle de bain. Élimine impuretés, calcaire, odeurs et résidus."
+  },
+  {
+    id: 29,
+    name: "Friteuse Sans Huile Air Fryer Digitale 6.0L 1800W",
+    category: "electromenager",
+    price: 34500,
+    oldPrice: 45000,
+    stock: 16,
+    badge: "Cuisine Saine",
+    rating: 4.9,
+    reviewsCount: 145,
+    image: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=700&q=80",
+    specs: ["Capacité Familiale 6.0L", "Cuisson 85% moins de gras", "Écran Tactile 8 Programmes", "Minuteur 60 min"],
+    description: "Cuisinez frites croustillantes, poulet doré, poissons et pâtisseries sans huile avec une cuisson rapide par circulation d'air chaud 360°."
+  },
+  {
+    id: 30,
+    name: "Robot Mixeur Blender 2-en-1 Bol Verre 1.5L + Moulin 500W",
+    category: "electromenager",
+    price: 17500,
+    oldPrice: 24000,
+    stock: 25,
+    badge: "Best Seller",
+    rating: 4.8,
+    reviewsCount: 110,
+    image: "https://images.unsplash.com/photo-1570222094114-d054a817e56b?auto=format&fit=crop&w=700&q=80",
+    specs: ["Bol 1.5L Incassable", "Lames Inox Renforcées", "Moulin Épices & Café Inclus", "Moteur Puissant 500W"],
+    description: "Robot mixeur multifonction parfait pour jus frais, smoothies, soupes sénégalaises, et moulin séparé pour piment, café et épices."
+  },
+  {
+    id: 31,
+    name: "Fer à Repasser à Vapeur Céramique 2200W Anticalcaire",
+    category: "electromenager",
+    price: 13500,
+    oldPrice: 18000,
+    stock: 20,
+    badge: "Essentiel",
+    rating: 4.8,
+    reviewsCount: 88,
+    image: "https://images.unsplash.com/photo-1585659722983-3a675dabf23d?auto=format&fit=crop&w=700&q=80",
+    specs: ["Puissance 2200W", "Semelle Céramique Glisse Parfaite", "Jet Vapeur Pressing", "Système Antigoutte"],
+    description: "Repassage rapide et impeccable de vos boubous et vêtements avec débit vapeur haute pression et semelle céramique antiadhésive."
+  },
+  {
+    id: 32,
+    name: "Bouilloire Électrique Inox 2.0 Litres 1500W Arrêt Auto",
+    category: "electromenager",
+    price: 6900,
+    oldPrice: 9500,
+    stock: 40,
+    badge: "Prix Choc",
+    rating: 4.7,
+    reviewsCount: 155,
+    image: "https://images.unsplash.com/photo-1585771724684-38269d6639fd?auto=format&fit=crop&w=700&q=80",
+    specs: ["Capacité 2.0L", "Corps Inox Alimentaire", "Ébullition Rapide en 3 min", "Arrêt Automatique"],
+    description: "Bouilloire robuste en acier inoxydable pour préparer café, thé et eau chaude en un temps record en toute sécurité."
+  },
+  {
+    id: 33,
+    name: "Ventilateur Sur Pied Silencieux 16 Pouces 3 Vitesses",
+    category: "electromenager",
+    price: 15500,
+    oldPrice: 20000,
+    stock: 18,
+    badge: "Confort & Fraîcheur",
+    rating: 4.8,
+    reviewsCount: 95,
+    image: "https://images.unsplash.com/photo-1585338107529-13afc5f02586?auto=format&fit=crop&w=700&q=80",
+    specs: ["Diamètre 40cm (16\")", "Oscillation 90°", "Hauteur Réglable", "Moteur Cuivre Silencieux"],
+    description: "Ventilation puissante et silencieuse pour rafraîchir efficacement vos pièces pendant les journées chaudes à Dakar."
+  },
+  {
+    id: 34,
+    name: "Tondeuse Professionnelle Cheveux & Barbe Vintage T9 Métal",
+    category: "electromenager",
+    price: 7900,
+    oldPrice: 12000,
+    stock: 35,
+    badge: "Coiffure Pro",
+    rating: 4.8,
+    reviewsCount: 170,
+    image: "https://images.unsplash.com/photo-1621607512214-68297480165e?auto=format&fit=crop&w=700&q=80",
+    specs: ["Lames T-Blade Précision 0mm", "Corps Métal Gravé Dragon", "Batterie Lithium USB", "4 Sabots Inclus"],
+    description: "Tondeuse de barbier professionnelle rechargeable par USB pour contours nets, barbe impeccable et coupe de cheveux sans irritation."
+  }
+];
+
 // Helper Currency Formatter (Francs CFA)
 function formatFCFA(amount) {
   if (isNaN(amount) || amount === null || amount === undefined) return "0 FCFA";
@@ -102,7 +592,18 @@ window.handleChangePassword = function(e) {
 // ==========================================================================
 
 function loadData() {
-  const savedProducts = localStorage.getItem("phonepulse_products");
+  const currencyVersion = localStorage.getItem("sunu_currency_ver");
+  let savedProducts = localStorage.getItem("phonepulse_products");
+  
+  if (!savedProducts || currencyVersion !== "v5_jumia_senegal") {
+    // If empty or older version, load from DEFAULT_PRODUCTS if available or fallback
+    if (typeof DEFAULT_PRODUCTS !== 'undefined' && DEFAULT_PRODUCTS.length) {
+      localStorage.setItem("phonepulse_products", JSON.stringify(DEFAULT_PRODUCTS));
+      localStorage.setItem("sunu_currency_ver", "v5_jumia_senegal");
+      savedProducts = JSON.stringify(DEFAULT_PRODUCTS);
+    }
+  }
+
   const savedSales = localStorage.getItem("phonepulse_sales");
 
   products = savedProducts ? JSON.parse(savedProducts) : [];
@@ -182,9 +683,9 @@ function renderStockTable(query = "") {
       <tr>
         <td>
           <div class="table-product-cell">
-            <img src="${p.image}" alt="${p.name}" class="table-product-thumb">
+            <img src="${p.image}" alt="${p.name}" class="table-product-thumb" onclick="openEditProductModal(${p.id})" style="cursor: pointer;" title="Cliquer pour modifier l'image ou les infos">
             <div>
-              <strong>${p.name}</strong>
+              <strong style="cursor: pointer;" onclick="openEditProductModal(${p.id})" title="Modifier">${p.name}</strong>
               <div style="font-size: 0.75rem; color: #64748b;">Réf: #${p.id}</div>
             </div>
           </div>
@@ -196,7 +697,7 @@ function renderStockTable(query = "") {
         <td>${statusBadge}</td>
         <td>
           <div class="table-action-btns">
-            <button class="btn-tbl-action" onclick="openEditProductModal(${p.id})" title="Modifier prix/stock"><i class="fa-solid fa-pen"></i></button>
+            <button class="btn-tbl-action" onclick="openEditProductModal(${p.id})" title="Modifier le produit & l'image"><i class="fa-solid fa-pen"></i></button>
             <button class="btn-tbl-action delete" onclick="deleteProduct(${p.id})" title="Supprimer"><i class="fa-solid fa-trash"></i></button>
           </div>
         </td>
@@ -247,9 +748,187 @@ window.switchAdminTab = function(tabId) {
 };
 
 // ==========================================================================
-// 4. ADD & EDIT PRODUCT LOGIC
+// 4. ADD & EDIT PRODUCT LOGIC WITH IMAGE UPLOADER & COMPRESSOR
 // ==========================================================================
 
+// Global state for uploaded images (Base64 data or URL)
+const currentUploadedImages = {
+  add: null,
+  edit: null
+};
+
+// Switch image mode (File upload vs URL)
+window.switchImageSourceTab = function(context, mode) {
+  const isAdd = context === 'add';
+  const fileTab = document.getElementById(isAdd ? "addImgFileTab" : "editImgFileTab");
+  const urlTab = document.getElementById(isAdd ? "addImgUrlTab" : "editImgUrlTab");
+  const dropzone = document.getElementById(isAdd ? "addImgDropzone" : "editImgDropzone");
+  const urlPanel = document.getElementById(isAdd ? "addImgUrlPanel" : "editImgUrlPanel");
+
+  if (mode === 'file') {
+    fileTab.classList.add("active");
+    urlTab.classList.remove("active");
+    dropzone.style.display = "block";
+    urlPanel.style.display = "none";
+  } else {
+    urlTab.classList.add("active");
+    fileTab.classList.remove("active");
+    dropzone.style.display = "none";
+    urlPanel.style.display = "block";
+  }
+};
+
+window.triggerFileInput = function(inputId) {
+  const input = document.getElementById(inputId);
+  if (input) input.click();
+};
+
+// Client-side Image Resizing & Compression (Max 800x800, quality 0.85)
+function compressAndConvertImage(file, maxWidth = 800, maxHeight = 800, quality = 0.85) {
+  return new Promise((resolve, reject) => {
+    if (!file || !file.type.match(/image.*/)) {
+      return reject(new Error("Veuillez sélectionner un fichier image valide (JPG, PNG, WEBP)."));
+    }
+    const reader = new FileReader();
+    reader.onload = (readerEvent) => {
+      const img = new Image();
+      img.onload = () => {
+        let width = img.width;
+        let height = img.height;
+
+        if (width > height) {
+          if (width > maxWidth) {
+            height = Math.round((height * maxWidth) / width);
+            width = maxWidth;
+          }
+        } else {
+          if (height > maxHeight) {
+            width = Math.round((width * maxHeight) / height);
+            height = maxHeight;
+          }
+        }
+
+        const canvas = document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0, width, height);
+
+        const dataUrl = canvas.toDataURL("image/jpeg", quality);
+        resolve(dataUrl);
+      };
+      img.onerror = () => reject(new Error("Erreur lors de la lecture du fichier image."));
+      img.src = readerEvent.target.result;
+    };
+    reader.onerror = () => reject(new Error("Impossible de lire ce fichier."));
+    reader.readAsDataURL(file);
+  });
+}
+
+// Handle File Selection (Camera / Disk / Gallery)
+window.handleImageFileSelect = async function(event, context) {
+  const file = event.target.files && event.target.files[0];
+  if (!file) return;
+
+  try {
+    const compressedDataUrl = await compressAndConvertImage(file);
+    currentUploadedImages[context] = compressedDataUrl;
+
+    const previewWrap = document.getElementById(context === 'add' ? "addImgPreviewWrap" : "editImgPreviewWrap");
+    const previewImg = document.getElementById(context === 'add' ? "addImgPreview" : "editImgPreview");
+    const statusText = document.getElementById(context === 'add' ? null : "editImgStatusText");
+
+    if (previewImg) previewImg.src = compressedDataUrl;
+    if (previewWrap) previewWrap.style.display = "flex";
+    if (statusText) statusText.innerHTML = '<i class="fa-solid fa-circle-check"></i> Nouvelle photo chargée';
+
+    showToast("Image chargée et optimisée avec succès !", "success");
+  } catch (err) {
+    showToast(err.message || "Erreur lors du chargement de l'image.", "error");
+  }
+};
+
+// Handle URL Input Live Preview
+window.handleImageUrlInput = function(context) {
+  const isAdd = context === 'add';
+  const urlInput = document.getElementById(isAdd ? "newProdImage" : "editProdImage");
+  const url = urlInput ? urlInput.value.trim() : "";
+
+  if (url && (url.startsWith("http://") || url.startsWith("https://") || url.startsWith("data:image"))) {
+    currentUploadedImages[context] = url;
+    const previewWrap = document.getElementById(isAdd ? "addImgPreviewWrap" : "editImgPreviewWrap");
+    const previewImg = document.getElementById(isAdd ? "addImgPreview" : "editImgPreview");
+    if (previewImg) previewImg.src = url;
+    if (previewWrap) previewWrap.style.display = "flex";
+  }
+};
+
+// Clear image selection
+window.clearImageSelection = function(context) {
+  const isAdd = context === 'add';
+  currentUploadedImages[context] = null;
+  const fileInput = document.getElementById(isAdd ? "newProdFileInput" : "editProdFileInput");
+  const urlInput = document.getElementById(isAdd ? "newProdImage" : "editProdImage");
+  const previewWrap = document.getElementById(isAdd ? "addImgPreviewWrap" : "editImgPreviewWrap");
+  const previewImg = document.getElementById(isAdd ? "addImgPreview" : "editImgPreview");
+
+  if (fileInput) fileInput.value = "";
+  if (urlInput) urlInput.value = "";
+  if (previewImg) previewImg.src = "";
+  if (previewWrap) previewWrap.style.display = "none";
+};
+
+// Setup Drag and Drop Listeners
+function setupDropzones() {
+  const addDropzone = document.getElementById("addImgDropzone");
+  const editDropzone = document.getElementById("editImgDropzone");
+
+  [ { el: addDropzone, ctx: 'add' }, { el: editDropzone, ctx: 'edit' } ].forEach(({ el, ctx }) => {
+    if (!el) return;
+
+    ['dragenter', 'dragover'].forEach(eventName => {
+      el.addEventListener(eventName, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        el.classList.add('dragover');
+      }, false);
+    });
+
+    ['dragleave', 'drop'].forEach(eventName => {
+      el.addEventListener(eventName, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        el.classList.remove('dragover');
+      }, false);
+    });
+
+    el.addEventListener('drop', async (e) => {
+      const dt = e.dataTransfer;
+      const file = dt.files && dt.files[0];
+      if (file) {
+        try {
+          const compressedDataUrl = await compressAndConvertImage(file);
+          currentUploadedImages[ctx] = compressedDataUrl;
+
+          const previewWrap = document.getElementById(ctx === 'add' ? "addImgPreviewWrap" : "editImgPreviewWrap");
+          const previewImg = document.getElementById(ctx === 'add' ? "addImgPreview" : "editImgPreview");
+          if (previewImg) previewImg.src = compressedDataUrl;
+          if (previewWrap) previewWrap.style.display = "flex";
+
+          showToast("Photo importée par glisser-déposer !", "success");
+        } catch (err) {
+          showToast(err.message || "Erreur lors du dépôt de l'image.", "error");
+        }
+      }
+    }, false);
+  });
+}
+
+// Initialize Dropzones once DOM is ready
+document.addEventListener("DOMContentLoaded", setupDropzones);
+setTimeout(setupDropzones, 500);
+
+// Add Product Form Submit
 document.getElementById("addProductForm").addEventListener("submit", function(e) {
   e.preventDefault();
 
@@ -259,9 +938,12 @@ document.getElementById("addProductForm").addEventListener("submit", function(e)
   const oldPrice = parseFloat(document.getElementById("newProdOldPrice").value) || null;
   const stock = parseInt(document.getElementById("newProdStock").value, 10);
   const badge = document.getElementById("newProdBadge").value;
-  const image = document.getElementById("newProdImage").value.trim();
+  const urlImage = document.getElementById("newProdImage").value.trim();
   const specsRaw = document.getElementById("newProdSpecs").value.trim();
   const desc = document.getElementById("newProdDesc").value.trim();
+
+  // Selected image resolution priority: Uploaded file/Base64 > Typed URL > Preset fallback
+  const finalImage = currentUploadedImages.add || urlImage || getPresetImageForCategory(category);
 
   const newProd = {
     id: Date.now(),
@@ -273,7 +955,7 @@ document.getElementById("addProductForm").addEventListener("submit", function(e)
     badge,
     rating: 5.0,
     reviewsCount: 1,
-    image: image || "https://images.unsplash.com/photo-1598327105666-5b89351aff97?auto=format&fit=crop&w=700&q=80",
+    image: finalImage,
     specs: specsRaw ? specsRaw.split(",").map(s => s.trim()) : ["Garantie 12 Mois"],
     description: desc || "Article neuf disponible chez SUNU SOLUTION à Dalifort-Foirail."
   };
@@ -283,21 +965,30 @@ document.getElementById("addProductForm").addEventListener("submit", function(e)
   renderDashboard();
 
   this.reset();
+  clearImageSelection('add');
   showToast(`Le produit "${name}" (${formatFCFA(price)}) a été ajouté avec succès !`, "success");
   switchAdminTab("stockTab");
 });
 
-window.setPresetImage = function() {
-  const cat = document.getElementById("newProdCategory").value;
+function getPresetImageForCategory(cat) {
   const presets = {
     telephonie: "https://images.unsplash.com/photo-1598327105666-5b89351aff97?auto=format&fit=crop&w=700&q=80",
-    smartphones: "https://images.unsplash.com/photo-1598327105666-5b89351aff97?auto=format&fit=crop&w=700&q=80",
     accessoires: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=700&q=80",
-    coques: "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?auto=format&fit=crop&w=700&q=80",
-    chargeurs: "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=700&q=80",
     electromenager: "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?auto=format&fit=crop&w=700&q=80"
   };
-  document.getElementById("newProdImage").value = presets[cat] || presets.telephonie;
+  return presets[cat] || presets.telephonie;
+}
+
+window.setPresetImage = function() {
+  const cat = document.getElementById("newProdCategory").value;
+  const preset = getPresetImageForCategory(cat);
+  document.getElementById("newProdImage").value = preset;
+  currentUploadedImages.add = preset;
+  
+  const previewWrap = document.getElementById("addImgPreviewWrap");
+  const previewImg = document.getElementById("addImgPreview");
+  if (previewImg) previewImg.src = preset;
+  if (previewWrap) previewWrap.style.display = "flex";
 };
 
 // Edit Product Modal
@@ -312,11 +1003,26 @@ window.openEditProductModal = function(productId) {
   document.getElementById("editProdStock").value = prod.stock;
   document.getElementById("editProdCategory").value = prod.category;
 
+  // Load existing image into edit state & preview
+  currentUploadedImages.edit = prod.image;
+  const editImgInput = document.getElementById("editProdImage");
+  if (editImgInput) editImgInput.value = prod.image.startsWith("data:") ? "" : prod.image;
+
+  const previewWrap = document.getElementById("editImgPreviewWrap");
+  const previewImg = document.getElementById("editImgPreview");
+  const statusText = document.getElementById("editImgStatusText");
+
+  if (previewImg) previewImg.src = prod.image;
+  if (previewWrap) previewWrap.style.display = "flex";
+  if (statusText) statusText.innerHTML = '<i class="fa-solid fa-circle-check"></i> Image actuelle du produit';
+
+  switchImageSourceTab('edit', 'file');
   document.getElementById("editProductModal").style.display = "flex";
 };
 
 window.closeEditProductModal = function() {
   document.getElementById("editProductModal").style.display = "none";
+  clearImageSelection('edit');
 };
 
 window.saveEditedProduct = function(e) {
@@ -331,10 +1037,18 @@ window.saveEditedProduct = function(e) {
   prod.stock = parseInt(document.getElementById("editProdStock").value, 10);
   prod.category = document.getElementById("editProdCategory").value;
 
+  // Save new or updated image if changed
+  const urlVal = document.getElementById("editProdImage") ? document.getElementById("editProdImage").value.trim() : "";
+  if (currentUploadedImages.edit) {
+    prod.image = currentUploadedImages.edit;
+  } else if (urlVal) {
+    prod.image = urlVal;
+  }
+
   saveProducts();
   renderDashboard();
   closeEditProductModal();
-  showToast(`Mise à jour effectuée pour "${prod.name}" (${formatFCFA(prod.price)})`, "success");
+  showToast(`Mise à jour effectuée avec succès pour "${prod.name}" !`, "success");
 };
 
 window.deleteProduct = function(productId) {
