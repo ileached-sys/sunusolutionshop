@@ -946,6 +946,12 @@ window.closeCartDrawer = function() {
 // 4. CHECKOUT & WHATSAPP ORDERS (SUNU SOLUTION DAKAR)
 // ==========================================================================
 
+const DEFAULT_STORE_EMAIL = "ileached@gmail.com";
+
+function getStoreNotificationEmail() {
+  return localStorage.getItem("sunu_admin_email") || DEFAULT_STORE_EMAIL;
+}
+
 window.openCheckoutModal = function() {
   if (cart.length === 0) {
     showToast("Votre panier est vide. Ajoutez des articles avant de valider.", "warning");
@@ -956,6 +962,13 @@ window.openCheckoutModal = function() {
   const finalTotal = total + (isFree ? 0 : 2000);
 
   document.getElementById("modalRecapTotal").textContent = `${formatFCFA(finalTotal)} (avec livraison ${isFree ? 'offerte' : '2 000 FCFA'})`;
+  
+  // Dynamically update notification email target
+  const emailNoticeEl = document.getElementById("checkoutEmailNoticeTarget");
+  if (emailNoticeEl) {
+    emailNoticeEl.textContent = getStoreNotificationEmail();
+  }
+
   document.getElementById("checkoutModal").style.display = "flex";
   window.closeCartDrawer();
 };
@@ -964,17 +977,44 @@ window.closeCheckoutModal = function() {
   document.getElementById("checkoutModal").style.display = "none";
 };
 
-window.submitOrder = function(event) {
+window.submitOrder = async function(event) {
   event.preventDefault();
+  const submitBtn = document.getElementById("submitOrderBtn");
+  const originalBtnContent = submitBtn ? submitBtn.innerHTML : "Confirmer la Commande";
+
   const name = document.getElementById("orderCustName").value.trim();
   const phone = document.getElementById("orderCustPhone").value.trim();
+  const email = document.getElementById("orderCustEmail") ? document.getElementById("orderCustEmail").value.trim() : "";
   const city = document.getElementById("orderCustCity").value.trim();
   const address = document.getElementById("orderCustAddress").value.trim();
   const payment = document.getElementById("orderPaymentMethod").value;
 
   const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-  const finalTotal = total + (total >= 35000 ? 0 : 2000);
+  const isFreeShipping = total >= 35000;
+  const finalTotal = total + (isFreeShipping ? 0 : 2000);
   const itemsSummary = cart.map(i => `${i.name} (${i.quantity}x)`).join(", ");
+  const itemsDetailText = cart.map((i, idx) => `${idx + 1}. ${i.name} | Quantité: ${i.quantity} | Total: ${formatFCFA(i.price * i.quantity)}`).join(" \n ");
+
+  const storeNotificationEmail = getStoreNotificationEmail();
+
+  // Create new sale record
+  const newOrder = {
+    id: `SUNU-${new Date().getFullYear()}-${String(sales.length + 1).padStart(3, '0')}`,
+    date: new Date().toISOString().replace('T', ' ').substring(0, 16),
+    customer: `${name} (${city})`,
+    phone: phone,
+    email: email || null,
+    items: itemsSummary,
+    total: finalTotal,
+    paymentMethod: payment,
+    status: "En attente de livraison"
+  };
+
+  // Show loading state
+  if (submitBtn) {
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Envoi de la commande...';
+  }
 
   // Deduct stock
   cart.forEach(item => {
@@ -985,29 +1025,75 @@ window.submitOrder = function(event) {
   });
   saveProducts();
 
-  // Create new sale record
-  const newOrder = {
-    id: `SUNU-${new Date().getFullYear()}-${String(sales.length + 1).padStart(3, '0')}`,
-    date: new Date().toISOString().replace('T', ' ').substring(0, 16),
-    customer: `${name} (${city})`,
-    phone: phone,
-    items: itemsSummary,
-    total: finalTotal,
-    paymentMethod: payment,
-    status: "En attente de livraison"
-  };
-
+  // Record sale immediately
   sales.unshift(newOrder);
   saveSales();
 
-  // Reset cart
+  // Send Email Notification to the configured email
+  const emailPayload = {
+    _subject: `🛒 NOUVELLE COMMANDE ${newOrder.id} - ${formatFCFA(finalTotal)} (${name})`,
+    _template: "table",
+    _captcha: "false",
+    "Référence Commande": newOrder.id,
+    "Date & Heure": newOrder.date,
+    "Nom du Client": name,
+    "Téléphone / WhatsApp": phone,
+    "Email Client": email || "Non renseigné",
+    "Ville / Quartier": city,
+    "Adresse de Livraison": address,
+    "Mode de Paiement": payment,
+    "Détail des Articles": itemsDetailText,
+    "Livraison": isFreeShipping ? "Gratuite (0 FCFA)" : "2 000 FCFA",
+    "Total Général TTC": formatFCFA(finalTotal)
+  };
+
+  let emailStatus = "pending";
+  try {
+    const response = await fetch(`https://formsubmit.co/ajax/${storeNotificationEmail}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify(emailPayload)
+    });
+    const resData = await response.json().catch(() => ({}));
+
+    if (resData.success === "true" || resData.success === true) {
+      emailStatus = "success";
+      console.log("Email de commande transmis avec succès à", storeNotificationEmail, resData);
+    } else if (resData.message && resData.message.toLowerCase().includes("activation")) {
+      emailStatus = "activation_needed";
+      console.warn("FormSubmit requiert une activation email:", resData.message);
+    } else {
+      emailStatus = "error";
+      console.warn("Réponse FormSubmit:", resData);
+    }
+  } catch (e) {
+    console.warn("Exception transmission email:", e);
+    emailStatus = "network_error";
+  }
+
+  // Reset cart and UI
   cart = [];
   saveCart();
   updateCartUI();
   renderCatalog();
 
+  if (submitBtn) {
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = originalBtnContent;
+  }
+
   window.closeCheckoutModal();
-  showToast(`Commande ${newOrder.id} (${formatFCFA(finalTotal)}) validée ! Merci ${name}.`, "success");
+
+  if (emailStatus === "success") {
+    showToast(`Commande ${newOrder.id} validée et transmise par email à ${storeNotificationEmail} !`, "success");
+  } else if (emailStatus === "activation_needed") {
+    showToast(`Commande ${newOrder.id} enregistrée ! Note : FormSubmit attend l'activation sur ${storeNotificationEmail}.`, "warning");
+  } else {
+    showToast(`Commande ${newOrder.id} enregistrée avec succès ! Merci ${name}.`, "success");
+  }
 };
 
 // WhatsApp Order Generator

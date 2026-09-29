@@ -516,11 +516,17 @@ function checkAuthStatus() {
   const loginScreen = document.getElementById("adminLoginScreen");
   const dashboardLayout = document.getElementById("adminDashboardLayout");
 
+  if (!loginScreen || !dashboardLayout) return;
+
   if (isLogged) {
     loginScreen.style.display = "none";
     dashboardLayout.style.display = "block";
-    loadData();
-    renderDashboard();
+    try {
+      loadData();
+      renderDashboard();
+    } catch (err) {
+      console.error("Erreur lors de l'initialisation du tableau de bord:", err);
+    }
   } else {
     loginScreen.style.display = "flex";
     dashboardLayout.style.display = "none";
@@ -588,6 +594,157 @@ window.handleChangePassword = function(e) {
 };
 
 // ==========================================================================
+// EMAIL NOTIFICATION SETTINGS (COMMANDE PAR EMAIL)
+// ==========================================================================
+
+const DEFAULT_STORE_EMAIL = "ileached@gmail.com";
+
+function loadOrderEmailSettings() {
+  const emailInput = document.getElementById("orderNotificationEmailInput");
+  if (!emailInput) return;
+  const savedEmail = localStorage.getItem("sunu_admin_email") || DEFAULT_STORE_EMAIL;
+  emailInput.value = savedEmail;
+}
+
+window.saveOrderEmailSettings = function(e) {
+  if (e) e.preventDefault();
+  const emailInput = document.getElementById("orderNotificationEmailInput");
+  if (!emailInput) return;
+  const email = emailInput.value.trim();
+  if (!email || !email.includes("@")) {
+    showToast("Veuillez saisir une adresse email valide.", "warning");
+    return;
+  }
+  localStorage.setItem("sunu_admin_email", email);
+  showToast(`Adresse email de réception enregistrée : ${email}`, "success");
+};
+
+window.testOrderEmailNotification = async function() {
+  const emailInput = document.getElementById("orderNotificationEmailInput");
+  const testBtn = document.getElementById("testEmailBtn");
+  const feedbackDiv = document.getElementById("emailTestFeedback");
+  const email = emailInput ? emailInput.value.trim() : (localStorage.getItem("sunu_admin_email") || DEFAULT_STORE_EMAIL);
+
+  if (!email || !email.includes("@")) {
+    showToast("Veuillez saisir une adresse email valide avant de tester.", "warning");
+    return;
+  }
+
+  // Save current email value
+  localStorage.setItem("sunu_admin_email", email);
+
+  const originalContent = testBtn ? testBtn.innerHTML : "Tester";
+  if (testBtn) {
+    testBtn.disabled = true;
+    testBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Envoi en cours...';
+  }
+  if (feedbackDiv) {
+    feedbackDiv.style.display = "block";
+    feedbackDiv.innerHTML = '<div style="font-size:0.85rem; padding:0.6rem; border-radius:6px; background:#eff6ff; color:#1e40af; border:1px solid #bfdbfe;"><i class="fa-solid fa-circle-notch fa-spin"></i> Envoi d\'un email de test vers <strong>' + email + '</strong>...</div>';
+  }
+
+  const payload = {
+    _subject: `🧪 TEST DE CONNEXION SUNU SOLUTION SHOP - ${new Date().toLocaleTimeString()}`,
+    _template: "table",
+    _captcha: "false",
+    "Statut": "Test de réception email réussi ✅",
+    "Boutique": "SUNU SOLUTION Dakar",
+    "Date & Heure": new Date().toLocaleString("fr-FR"),
+    "Message": "Félicitations ! Votre site SUNU SOLUTION est correctement connecté à votre boîte email. Vous recevrez désormais les commandes du panier directement ici."
+  };
+
+  try {
+    const response = await fetch(`https://formsubmit.co/ajax/${email}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify(payload)
+    });
+
+    const data = await response.json().catch(() => ({}));
+
+    if (data.success === "true" || data.success === true) {
+      showToast(`Email de test envoyé avec succès à ${email} !`, "success");
+      if (feedbackDiv) {
+        feedbackDiv.innerHTML = `
+          <div style="font-size: 0.85rem; padding: 0.75rem; border-radius: 8px; background: #f0fdf4; color: #166534; border: 1px solid #86efac;">
+            <strong style="display:flex; align-items:center; gap:0.5rem;"><i class="fa-solid fa-circle-check"></i> Connexion réussie !</strong>
+            <p style="margin: 0.35rem 0 0 0;">L'email de test a bien été expédié. Vérifiez la boîte de réception (ou le dossier spams) de <strong>${email}</strong>.</p>
+          </div>
+        `;
+      }
+    } else if (data.message && data.message.toLowerCase().includes("activation")) {
+      showToast("Activation requise par FormSubmit !", "warning");
+      if (feedbackDiv) {
+        feedbackDiv.innerHTML = `
+          <div style="font-size: 0.85rem; padding: 0.75rem; border-radius: 8px; background: #fffbeb; color: #92400e; border: 1px solid #fde68a;">
+            <strong style="display:flex; align-items:center; gap:0.5rem;"><i class="fa-solid fa-triangle-exclamation" style="color:#d97706;"></i> Action requise : Activez votre boîte email</strong>
+            <p style="margin: 0.35rem 0 0 0;">FormSubmit vient de vous envoyer un email de confirmation à <strong>${email}</strong>. Ouvrez cet email et cliquez sur le bouton <strong>"Activate Form"</strong> pour commencer à recevoir les commandes.</p>
+          </div>
+        `;
+      }
+    } else if (data.message && data.message.includes("web server")) {
+      showToast("Attention : FormSubmit requiert un serveur web (pas file://).", "warning");
+      if (feedbackDiv) {
+        feedbackDiv.innerHTML = `
+          <div style="font-size: 0.85rem; padding: 0.75rem; border-radius: 8px; background: #fef2f2; color: #991b1b; border: 1px solid #fecaca;">
+            <strong style="display:flex; align-items:center; gap:0.5rem;"><i class="fa-solid fa-circle-exclamation"></i> Exécution en local direct détectée</strong>
+            <p style="margin: 0.35rem 0 0 0;">FormSubmit bloque les requêtes directes ouvertes en fichier (<code>file://</code>). Veuillez lancer le site avec un serveur local (ex: Live Server ou <code>python3 -m http.server</code>) ou le tester une fois déployé sur le web.</p>
+          </div>
+        `;
+      }
+    } else {
+      const errMsg = data.message || "Erreur de transmission.";
+      showToast(errMsg, "error");
+      if (feedbackDiv) {
+        feedbackDiv.innerHTML = `
+          <div style="font-size: 0.85rem; padding: 0.75rem; border-radius: 8px; background: #fef2f2; color: #991b1b; border: 1px solid #fecaca;">
+            <strong><i class="fa-solid fa-circle-xmark"></i> Erreur :</strong> ${errMsg}
+          </div>
+        `;
+      }
+    }
+  } catch (err) {
+    console.error("Test email exception:", err);
+    showToast("Erreur réseau lors du test d'email.", "error");
+    if (feedbackDiv) {
+      feedbackDiv.innerHTML = `
+        <div style="font-size: 0.85rem; padding: 0.75rem; border-radius: 8px; background: #fef2f2; color: #991b1b; border: 1px solid #fecaca;">
+          <strong style="display:flex; align-items:center; gap:0.5rem;"><i class="fa-solid fa-circle-xmark"></i> Échec de connexion :</strong>
+          <p style="margin: 0.35rem 0 0 0;">Impossible de joindre le service d'envoi. Vérifiez votre connexion internet ou assurez-vous d'utiliser un serveur HTTP local.</p>
+        </div>
+      `;
+    }
+  } finally {
+    if (testBtn) {
+      testBtn.disabled = false;
+      testBtn.innerHTML = originalContent;
+    }
+  }
+};
+
+window.triggerDirectActivation = function() {
+  const emailInput = document.getElementById("orderNotificationEmailInput");
+  const email = emailInput ? emailInput.value.trim() : (localStorage.getItem("sunu_admin_email") || DEFAULT_STORE_EMAIL);
+
+  if (!email || !email.includes("@")) {
+    showToast("Veuillez saisir une adresse email valide.", "warning");
+    return;
+  }
+
+  localStorage.setItem("sunu_admin_email", email);
+
+  const form = document.getElementById("directFormSubmitForm");
+  if (form) {
+    form.action = `https://formsubmit.co/${email}`;
+    form.submit();
+    showToast("Page FormSubmit ouverte dans un nouvel onglet pour forcer l'envoi de l'activation.", "info");
+  }
+};
+
+// ==========================================================================
 // 2. DATA MANAGEMENT (LOCALSTORAGE SYNC)
 // ==========================================================================
 
@@ -596,7 +753,6 @@ function loadData() {
   let savedProducts = localStorage.getItem("phonepulse_products");
   
   if (!savedProducts || currencyVersion !== "v5_jumia_senegal") {
-    // If empty or older version, load from DEFAULT_PRODUCTS if available or fallback
     if (typeof DEFAULT_PRODUCTS !== 'undefined' && DEFAULT_PRODUCTS.length) {
       localStorage.setItem("phonepulse_products", JSON.stringify(DEFAULT_PRODUCTS));
       localStorage.setItem("sunu_currency_ver", "v5_jumia_senegal");
@@ -606,8 +762,21 @@ function loadData() {
 
   const savedSales = localStorage.getItem("phonepulse_sales");
 
-  products = savedProducts ? JSON.parse(savedProducts) : [];
-  sales = savedSales ? JSON.parse(savedSales) : [];
+  try {
+    const parsed = savedProducts ? JSON.parse(savedProducts) : null;
+    products = Array.isArray(parsed) && parsed.length ? parsed : (typeof DEFAULT_PRODUCTS !== 'undefined' ? [...DEFAULT_PRODUCTS] : []);
+  } catch (e) {
+    console.error("Erreur lecture produits localStorage:", e);
+    products = typeof DEFAULT_PRODUCTS !== 'undefined' ? [...DEFAULT_PRODUCTS] : [];
+  }
+
+  try {
+    const parsedSales = savedSales ? JSON.parse(savedSales) : null;
+    sales = Array.isArray(parsedSales) ? parsedSales : [];
+  } catch (e) {
+    console.error("Erreur lecture ventes localStorage:", e);
+    sales = [];
+  }
 }
 
 function saveProducts() {
@@ -623,38 +792,54 @@ function saveSales() {
 // ==========================================================================
 
 function renderDashboard() {
+  if (!Array.isArray(products)) products = [];
+  if (!Array.isArray(sales)) sales = [];
+
   // 1. Calculate KPI Metrics
-  const totalStockValue = products.reduce((sum, p) => sum + (p.price * p.stock), 0);
-  const totalUnits = products.reduce((sum, p) => sum + p.stock, 0);
+  const totalStockValue = products.reduce((sum, p) => sum + ((p.price || 0) * (p.stock || 0)), 0);
+  const totalUnits = products.reduce((sum, p) => sum + (p.stock || 0), 0);
   const totalSalesCount = sales.length;
-  const totalSalesRevenue = sales.reduce((sum, s) => sum + s.total, 0);
-  const lowStockCount = products.filter(p => p.stock < 5).length;
+  const totalSalesRevenue = sales.reduce((sum, s) => sum + (s.total || 0), 0);
+  const lowStockCount = products.filter(p => (p.stock || 0) < 5).length;
 
-  document.getElementById("kpiStockValue").textContent = formatFCFA(totalStockValue);
-  document.getElementById("kpiTotalUnits").textContent = totalUnits;
-  document.getElementById("kpiTotalProductsRef").textContent = `${products.length} références`;
-  document.getElementById("kpiTotalSales").textContent = totalSalesCount;
-  document.getElementById("kpiSalesRevenue").textContent = `${formatFCFA(totalSalesRevenue)} encaissés`;
-  document.getElementById("kpiLowStockAlerts").textContent = lowStockCount;
+  const setElText = (id, txt) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = txt;
+  };
 
-  document.getElementById("tabStockCount").textContent = products.length;
-  document.getElementById("tabSalesCount").textContent = sales.length;
+  setElText("kpiStockValue", formatFCFA(totalStockValue));
+  setElText("kpiTotalUnits", totalUnits);
+  setElText("kpiTotalProductsRef", `${products.length} références`);
+  setElText("kpiTotalSales", totalSalesCount);
+  setElText("kpiSalesRevenue", `${formatFCFA(totalSalesRevenue)} encaissés`);
+  setElText("kpiLowStockAlerts", lowStockCount);
+
+  setElText("tabStockCount", products.length);
+  setElText("tabSalesCount", sales.length);
 
   // 2. Render Stock Table
   renderStockTable();
 
   // 3. Render Sales Table
   renderSalesTable();
+
+  // 4. Load Order Email Settings
+  loadOrderEmailSettings();
 }
 
 function renderStockTable(query = "") {
   const tbody = document.getElementById("adminStockTableBody");
   if (!tbody) return;
 
+  if (!Array.isArray(products)) products = [];
+
   const filtered = products.filter(p => {
+    if (!p) return false;
     if (!query) return true;
     const q = query.toLowerCase();
-    return p.name.toLowerCase().includes(q) || p.category.toLowerCase().includes(q);
+    const name = (p.name || "").toLowerCase();
+    const cat = (p.category || "").toLowerCase();
+    return name.includes(q) || cat.includes(q);
   });
 
   if (filtered.length === 0) {
@@ -663,9 +848,10 @@ function renderStockTable(query = "") {
   }
 
   tbody.innerHTML = filtered.map(p => {
-    let statusBadge = `<span class="badge-stock-in">En stock (${p.stock})</span>`;
-    if (p.stock === 0) statusBadge = `<span class="badge-stock-out">Rupture (0)</span>`;
-    else if (p.stock < 5) statusBadge = `<span class="badge-stock-low">Stock Faible (${p.stock})</span>`;
+    const stock = p.stock || 0;
+    let statusBadge = `<span class="badge-stock-in">En stock (${stock})</span>`;
+    if (stock === 0) statusBadge = `<span class="badge-stock-out">Rupture (0)</span>`;
+    else if (stock < 5) statusBadge = `<span class="badge-stock-low">Stock Faible (${stock})</span>`;
 
     const catLabels = {
       telephonie: "📱 Téléphonie",
@@ -677,23 +863,23 @@ function renderStockTable(query = "") {
       montres: "🎧 Accessoires",
       electromenager: "📺 Électroménager"
     };
-    const categoryDisplay = catLabels[p.category] || p.category;
+    const categoryDisplay = catLabels[p.category] || p.category || "Autre";
 
     return `
       <tr>
         <td>
           <div class="table-product-cell">
-            <img src="${p.image}" alt="${p.name}" class="table-product-thumb" onclick="openEditProductModal(${p.id})" style="cursor: pointer;" title="Cliquer pour modifier l'image ou les infos">
+            <img src="${p.image || ''}" alt="${p.name || ''}" class="table-product-thumb" onclick="openEditProductModal(${p.id})" style="cursor: pointer;" title="Cliquer pour modifier l'image ou les infos">
             <div>
-              <strong style="cursor: pointer;" onclick="openEditProductModal(${p.id})" title="Modifier">${p.name}</strong>
-              <div style="font-size: 0.75rem; color: #64748b;">Réf: #${p.id}</div>
+              <strong style="cursor: pointer;" onclick="openEditProductModal(${p.id})" title="Modifier">${p.name || 'Produit sans nom'}</strong>
+              <div style="font-size: 0.75rem; color: #64748b;">Réf: #${p.id || ''}</div>
             </div>
           </div>
         </td>
         <td><span style="font-weight: 600; color: #1e40af;">${categoryDisplay}</span></td>
-        <td><strong>${formatFCFA(p.price)}</strong></td>
+        <td><strong>${formatFCFA(p.price || 0)}</strong></td>
         <td>${p.oldPrice ? `<span style="text-decoration: line-through; color: #94a3b8;">${formatFCFA(p.oldPrice)}</span>` : '-'}</td>
-        <td><strong>${p.stock}</strong> unités</td>
+        <td><strong>${stock}</strong> unités</td>
         <td>${statusBadge}</td>
         <td>
           <div class="table-action-btns">
@@ -710,29 +896,86 @@ function renderSalesTable() {
   const tbody = document.getElementById("adminSalesTableBody");
   if (!tbody) return;
 
-  if (sales.length === 0) {
+  if (!Array.isArray(sales) || sales.length === 0) {
     tbody.innerHTML = `<tr><td colspan="8" style="text-align: center; color: #94a3b8; padding: 2rem;">Aucune vente enregistrée pour le moment.</td></tr>`;
     return;
   }
 
-  tbody.innerHTML = sales.map(s => `
-    <tr>
-      <td><strong>${s.id}</strong></td>
-      <td>${s.date}</td>
-      <td>
-        <div><strong>${s.customer}</strong></div>
-        <div style="font-size: 0.75rem; color: #64748b;"><i class="fa-solid fa-phone"></i> ${s.phone || 'Non renseigné'}</div>
-      </td>
-      <td style="max-width: 250px; white-space: normal; font-size: 0.8rem;">${s.items}</td>
-      <td><strong style="color: #2563eb;">${formatFCFA(s.total)}</strong></td>
-      <td><span class="spec-chip">${s.paymentMethod}</span></td>
-      <td><span class="badge-stock-in">${s.status}</span></td>
-      <td>
-        <button class="btn-tbl-action" onclick="printReceipt('${s.id}')" title="Imprimer le ticket de caisse"><i class="fa-solid fa-receipt"></i></button>
-      </td>
-    </tr>
-  `).join("");
+  tbody.innerHTML = sales.filter(s => s != null).map(s => {
+    let statusBadge = `<span class="badge-stock-in">${s.status || 'Payé'}</span>`;
+    if (s.status === "Annulée") {
+      statusBadge = `<span class="badge-stock-out">Annulée</span>`;
+    } else if (s.status === "En cours") {
+      statusBadge = `<span class="badge-stock-low">En cours</span>`;
+    }
+
+    const isCancelled = s.status === "Annulée";
+
+    return `
+      <tr>
+        <td><strong>${s.id || ''}</strong></td>
+        <td>${s.date || ''}</td>
+        <td>
+          <div><strong>${s.customer || 'Client'}</strong></div>
+          <div style="font-size: 0.75rem; color: #64748b;"><i class="fa-solid fa-phone"></i> ${s.phone || 'Non renseigné'}</div>
+        </td>
+        <td style="max-width: 250px; white-space: normal; font-size: 0.8rem;">${s.items || ''}</td>
+        <td><strong style="color: #2563eb;">${formatFCFA(s.total || 0)}</strong></td>
+        <td><span class="spec-chip">${s.paymentMethod || 'Espèces'}</span></td>
+        <td>${statusBadge}</td>
+        <td>
+          <div style="display: flex; gap: 0.35rem; flex-wrap: wrap;">
+            <button class="btn btn-outline btn-sm" onclick="printReceipt('${s.id}')" title="Imprimer le ticket de caisse" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">
+              <i class="fa-solid fa-receipt"></i> Ticket
+            </button>
+            ${isCancelled ? `
+              <button class="btn btn-outline btn-sm" onclick="restoreSale('${s.id}')" title="Rétablir cette commande" style="padding: 0.25rem 0.5rem; font-size: 0.75rem; color: #16a34a; border-color: #86efac;">
+                <i class="fa-solid fa-rotate-left"></i> Rétablir
+              </button>
+            ` : `
+              <button class="btn btn-sm" onclick="cancelSale('${s.id}')" title="Annuler cette commande" style="padding: 0.25rem 0.5rem; font-size: 0.75rem; background-color: #fef3c7; color: #b45309; border: 1px solid #fcd34d; font-weight: 600; cursor: pointer;">
+                <i class="fa-solid fa-ban"></i> Annuler
+              </button>
+            `}
+            <button class="btn btn-sm" onclick="deleteSale('${s.id}')" title="Supprimer la commande" style="padding: 0.25rem 0.5rem; font-size: 0.75rem; background-color: #fee2e2; color: #dc2626; border: 1px solid #fca5a5; font-weight: 600; cursor: pointer;">
+              <i class="fa-solid fa-trash"></i> Supprimer
+            </button>
+          </div>
+        </td>
+      </tr>
+    `;
+  }).join("");
 }
+
+// Order Management Actions: Cancel, Restore & Delete
+window.cancelSale = function(saleId) {
+  if (!confirm(`Voulez-vous vraiment annuler la commande N° ${saleId} ?`)) return;
+  const sale = sales.find(s => String(s.id) === String(saleId));
+  if (sale) {
+    sale.status = "Annulée";
+    saveSales();
+    renderDashboard();
+    showToast(`La commande ${saleId} a été marquée comme annulée.`, "warning");
+  }
+};
+
+window.restoreSale = function(saleId) {
+  const sale = sales.find(s => String(s.id) === String(saleId));
+  if (sale) {
+    sale.status = "Payé";
+    saveSales();
+    renderDashboard();
+    showToast(`La commande ${saleId} a été réactivée avec succès.`, "success");
+  }
+};
+
+window.deleteSale = function(saleId) {
+  if (!confirm(`Voulez-vous vraiment SUPPRIMER définitivement la commande N° ${saleId} ? Cette action est irréversible.`)) return;
+  sales = sales.filter(s => String(s.id) !== String(saleId));
+  saveSales();
+  renderDashboard();
+  showToast(`La commande ${saleId} a été supprimée définitivement.`, "success");
+};
 
 // Switch tabs in Admin
 window.switchAdminTab = function(tabId) {
@@ -745,6 +988,10 @@ window.switchAdminTab = function(tabId) {
   const btnIndex = ['stockTab', 'addTab', 'salesTab', 'settingsTab'].indexOf(tabId);
   const btns = document.querySelectorAll(".admin-tab-btn");
   if (btns[btnIndex]) btns[btnIndex].classList.add("active");
+
+  if (tabId === 'settingsTab') {
+    loadOrderEmailSettings();
+  }
 };
 
 // ==========================================================================
@@ -929,7 +1176,9 @@ document.addEventListener("DOMContentLoaded", setupDropzones);
 setTimeout(setupDropzones, 500);
 
 // Add Product Form Submit
-document.getElementById("addProductForm").addEventListener("submit", function(e) {
+const addProductFormEl = document.getElementById("addProductForm");
+if (addProductFormEl) {
+  addProductFormEl.addEventListener("submit", function(e) {
   e.preventDefault();
 
   const name = document.getElementById("newProdName").value.trim();
@@ -967,8 +1216,9 @@ document.getElementById("addProductForm").addEventListener("submit", function(e)
   this.reset();
   clearImageSelection('add');
   showToast(`Le produit "${name}" (${formatFCFA(price)}) a été ajouté avec succès !`, "success");
-  switchAdminTab("stockTab");
-});
+    switchAdminTab("stockTab");
+  });
+}
 
 function getPresetImageForCategory(cat) {
   const presets = {

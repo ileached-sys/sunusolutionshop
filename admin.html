@@ -57,7 +57,6 @@
               <i class="fa-solid fa-eye"></i>
             </button>
           </div>
-          <span class="login-hint"><i class="fa-solid fa-circle-info"></i> Mot de passe par défaut : <strong>admin123</strong></span>
         </div>
 
         <button type="submit" class="btn btn-primary btn-block btn-lg">
@@ -366,6 +365,50 @@
             <div class="admin-tab-content" id="settingsTab">
               <div class="settings-grid">
                 
+                <!-- Email Notification Settings Card -->
+                <div class="settings-card">
+                  <h4><i class="fa-solid fa-envelope-open-text" style="color: var(--primary);"></i> Réception des Commandes par Email</h4>
+                  <p>Configurez l'adresse email qui reçoit automatiquement chaque commande validée dans le panier.</p>
+                  
+                  <form id="orderEmailSettingsForm" onsubmit="saveOrderEmailSettings(event)" style="display: flex; flex-direction: column; gap: 0.85rem;">
+                    <div class="form-group">
+                      <label for="orderNotificationEmailInput">Adresse Email de Réception *</label>
+                      <input type="email" id="orderNotificationEmailInput" class="form-control" placeholder="ex: ileached@gmail.com" required>
+                    </div>
+
+                    <div class="order-email-info-box" style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 0.75rem; font-size: 0.825rem; color: #475569; line-height: 1.4;">
+                      <div style="display: flex; align-items: flex-start; gap: 0.5rem;">
+                        <i class="fa-solid fa-circle-info" style="color: #2563eb; margin-top: 2px;"></i>
+                        <div>
+                          <strong>Service actif : FormSubmit</strong> (Gratuit, sécurisé & sans backend).<br>
+                          <em>Note importante :</em> Si c'est une nouvelle adresse, FormSubmit envoie un email avec un bouton <strong>"Activate Form"</strong> à cliquer une seule fois pour activer la réception.
+                        </div>
+                      </div>
+                    </div>
+
+                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.25rem;">
+                      <button type="submit" class="btn btn-primary btn-sm">
+                        <i class="fa-solid fa-floppy-disk"></i> Enregistrer l'adresse
+                      </button>
+                      <button type="button" class="btn btn-outline btn-sm" id="testEmailBtn" onclick="testOrderEmailNotification()">
+                        <i class="fa-solid fa-paper-plane"></i> Tester l'envoi d'un email
+                      </button>
+                      <button type="button" class="btn btn-outline btn-sm" onclick="triggerDirectActivation()" title="Ouvre la page officielle FormSubmit pour forcer l'envoi de l'email d'activation">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i> Forcer l'envoi du mail d'activation
+                      </button>
+                    </div>
+                  </form>
+
+                  <!-- Formulaire direct pour forcer l'activation via navigation navigateur (contourne le blocage file://) -->
+                  <form id="directFormSubmitForm" method="POST" target="_blank" style="display: none;">
+                    <input type="hidden" name="name" value="SUNU SOLUTION Dakar">
+                    <input type="hidden" name="_subject" value="Activation SUNU SOLUTION Dakar">
+                    <input type="hidden" name="message" value="Activation de la boîte de réception des commandes pour la boutique SUNU SOLUTION Dakar.">
+                  </form>
+
+                  <div id="emailTestFeedback" style="margin-top: 0.75rem; display: none;"></div>
+                </div>
+
                 <!-- Change Password Card -->
                 <div class="settings-card">
                   <h4><i class="fa-solid fa-key"></i> Sécurité du Mot de Passe</h4>
@@ -544,6 +587,6 @@
   </div>
 
   <!-- Admin JavaScript Logic -->
-  <script src="admin.js"></script>
+  <script src="admin.js?v=2"></script>
 </body>
 </html>

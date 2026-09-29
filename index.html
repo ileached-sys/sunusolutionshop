@@ -64,7 +64,6 @@
         <a href="#catalogue" class="nav-link" onclick="navFilterCategory('telephonie')"><i class="fa-solid fa-mobile-screen"></i> Téléphonie</a>
         <a href="#catalogue" class="nav-link" onclick="navFilterCategory('accessoires')"><i class="fa-solid fa-headphones"></i> Accessoires</a>
         <a href="#catalogue" class="nav-link" onclick="navFilterCategory('electromenager')"><i class="fa-solid fa-tv"></i> Électroménager</a>
-        <a href="admin.html" class="nav-link admin-nav-link" onclick="openAdminAccessModal(event)"><i class="fa-solid fa-lock"></i> Espace Admin</a>
         <a href="#contacts" class="nav-link"><i class="fa-solid fa-envelope"></i> Contacts</a>
       </nav>
 
@@ -75,13 +74,6 @@
           <i class="fa-solid fa-magnifying-glass"></i>
           <input type="text" id="headerSearchInput" placeholder="Rechercher Tecno, Samsung, iPhone, Coque...">
         </div>
-
-        <!-- Admin Access Button -->
-        <button class="mode-switch-btn" id="modeSwitchBtn" onclick="openAdminAccessModal(event)"
-          title="Accéder à l'espace d'administration sécurisé">
-          <i class="fa-solid fa-lock"></i>
-          <span class="mode-text">Espace Admin</span>
-        </button>
 
         <!-- Cart Button -->
         <button class="cart-btn" id="cartBtn" aria-label="Ouvrir le panier">
@@ -440,38 +432,7 @@
       </div>
     </section>
 
-    <!-- ==============================================
-         SECTION 5: ESPACE GESTION & CRM SÉCURISÉ (ADMIN)
-         ============================================== -->
-    <section class="management-section" id="gestion"
-      style="background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%); color: #ffffff; padding: 4.5rem 0;">
-      <div class="container">
-        <div style="max-width: 800px; margin: 0 auto; text-align: center;">
-          <div class="section-tag"
-            style="background: rgba(37, 99, 235, 0.2); color: #60a5fa; border: 1px solid rgba(96, 165, 250, 0.3); display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.4rem 1rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600; margin-bottom: 1rem;">
-            <i class="fa-solid fa-lock"></i> Espace Réservé • Direction & Gérance
-          </div>
-          <h2
-            style="font-size: 2.2rem; font-family: var(--font-heading); font-weight: 800; margin-bottom: 1rem; color: #ffffff;">
-            Panneau d'Administration <span class="gradient-text">Sécurisé</span>
-          </h2>
-          <p style="color: #cbd5e1; font-size: 1.05rem; line-height: 1.6; margin-bottom: 2rem;">
-            Gérez vos stocks de téléphones (Tecno, Samsung, iPhone), encaissez les ventes en magasin, modifiez les prix
-            en FCFA et exportez vos données en toute confidentialité.
-          </p>
-          <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
-            <button class="btn btn-primary btn-lg" onclick="openAdminAccessModal(event)"
-              style="box-shadow: 0 10px 25px rgba(37, 99, 235, 0.4);">
-              <i class="fa-solid fa-key"></i> Déverrouiller l'Espace Admin
-            </button>
-            <a href="admin.html" class="btn btn-outline btn-lg"
-              style="color: #ffffff; border-color: rgba(255,255,255,0.4);">
-              <i class="fa-solid fa-arrow-up-right-from-square"></i> Accès Direct (admin.html)
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
+
 
   </main>
 
@@ -524,7 +485,6 @@
           <li><a href="#catalogue" onclick="navFilterCategory('telephonie')"><i class="fa-solid fa-angle-right"></i> Téléphonie & Smartphones</a></li>
           <li><a href="#catalogue" onclick="navFilterCategory('accessoires')"><i class="fa-solid fa-angle-right"></i> Accessoires & Chargeurs</a></li>
           <li><a href="#catalogue" onclick="navFilterCategory('electromenager')"><i class="fa-solid fa-angle-right"></i> Électroménager & TV</a></li>
-          <li><a href="admin.html" onclick="openAdminAccessModal(event)"><i class="fa-solid fa-angle-right"></i> Espace Admin 🔒</a></li>
           <li><a href="https://www.facebook.com/sunusolutionshop" target="_blank"><i
                 class="fa-solid fa-angle-right"></i> Page Facebook Officielle</a></li>
         </ul>
@@ -688,9 +648,13 @@
             <input type="tel" id="orderCustPhone" class="form-control" placeholder="ex: 77 123 45 67" required>
           </div>
           <div class="form-group">
+            <label for="orderCustEmail">Adresse Email (pour recevoir le récapitulatif)</label>
+            <input type="email" id="orderCustEmail" class="form-control" placeholder="ex: client@gmail.com">
+          </div>
+          <div class="form-group">
             <label for="orderCustCity">Ville / Quartier *</label>
             <input type="text" id="orderCustCity" class="form-control"
-              placeholder="ex: Dakar, Plateau / Abidjan, Cocody" required>
+              placeholder="ex: Dakar, Médina / Thiès / Pikine" required>
           </div>
           <div class="form-group">
             <label for="orderCustAddress">Adresse de livraison détaillée *</label>
@@ -710,14 +674,18 @@
 
           <div class="order-recap-box">
             <div class="recap-row">
-              <span>Montant à payer :</span>
+              <span>Montant total à payer :</span>
               <strong id="modalRecapTotal">0 FCFA</strong>
+            </div>
+            <div class="order-notice">
+              <i class="fa-solid fa-paper-plane"></i>
+              <span>Notification automatique : la commande sera instantanément transmise par email à la boutique (<strong id="checkoutEmailNoticeTarget">ileached@gmail.com</strong>).</span>
             </div>
           </div>
 
           <div class="modal-footer-btns">
             <button type="button" class="btn btn-outline" onclick="closeCheckoutModal()">Annuler</button>
-            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-check"></i> Confirmer la Vente</button>
+            <button type="submit" class="btn btn-primary" id="submitOrderBtn"><i class="fa-solid fa-check"></i> Confirmer la Commande</button>
           </div>
         </form>
       </div>
@@ -750,8 +718,6 @@
                 <i class="fa-solid fa-eye"></i>
               </button>
             </div>
-            <span class="login-hint"><i class="fa-solid fa-circle-info"></i> Par défaut :
-              <strong>admin123</strong></span>
           </div>
 
           <div class="modal-footer-btns" style="margin-top: 1.5rem;">
