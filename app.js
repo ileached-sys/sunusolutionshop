@@ -1,7 +1,7 @@
 /**
  * SUNU SOLUTION (@sunusolutionshop) - BOUTIQUE & GESTION DE VENTE
  * Rayons : Téléphonie, Accessoires & Électroménager
- * Dalifort-Foirail, Dakar, Sénégal • Tél: +221 76 314 33 33 / +221 78 257 99 99
+ * Dalifort-Foirail, Dakar, Sénégal • Fixe: +221 33 832 10 50 / Mobiles: +221 76 314 33 33 / +221 78 257 99 99
  */
 
 // ==========================================================================
@@ -23,6 +23,7 @@ const DEFAULT_PRODUCTS = [
     rating: 4.9,
     reviewsCount: 184,
     image: "https://images.unsplash.com/photo-1598327105666-5b89351aff97?auto=format&fit=crop&w=700&q=80",
+    image2: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=700&q=80",
     specs: ["128 Go ROM", "8 Go RAM (4+4)", "Batterie 5000 mAh", "Garantie 13 Mois", "Caméra 50 MP"],
     description: "Le n°1 des ventes à Dakar : 128 Go de stockage, 8 Go de RAM, appareil photo 50 Mpx ultra-net et batterie 5000 mAh. Garantie constructeur 13 mois."
   },
@@ -471,7 +472,7 @@ const DEFAULT_PRODUCTS = [
   {
     id: 33,
     name: "Ventilateur Sur Pied Silencieux 16 Pouces 3 Vitesses",
-    category: "electromenager",
+    category: "ventilo",
     price: 15500,
     oldPrice: 20000,
     stock: 18,
@@ -495,6 +496,76 @@ const DEFAULT_PRODUCTS = [
     image: "https://images.unsplash.com/photo-1621607512214-68297480165e?auto=format&fit=crop&w=700&q=80",
     specs: ["Lames T-Blade Précision 0mm", "Corps Métal Gravé Dragon", "Batterie Lithium USB", "4 Sabots Inclus"],
     description: "Tondeuse de barbier professionnelle rechargeable par USB pour contours nets, barbe impeccable et coupe de cheveux sans irritation."
+  },
+  {
+    id: 35,
+    name: "Ventilateur Solaire Rechargeable 16\" + Port USB & LED",
+    category: "ventilo",
+    price: 28500,
+    oldPrice: 35000,
+    stock: 15,
+    badge: "Anti-Coupure",
+    rating: 4.9,
+    reviewsCount: 120,
+    image: "https://images.unsplash.com/photo-1585338107529-13afc5f02586?auto=format&fit=crop&w=700&q=80",
+    specs: ["Autonomie 12h", "Panneau Solaire Inclus", "Port USB Chargeur Téléphone"],
+    description: "Ventilateur solaire rechargeable indispensable pour les coupures d'électricité à Dakar, avec autonomie jusqu'à 12h et port de charge USB."
+  },
+  {
+    id: 36,
+    name: "Ventilateur Climatiseur Brumisateur d'Eau 3-en-1",
+    category: "ventilo",
+    price: 32500,
+    oldPrice: 42000,
+    stock: 10,
+    badge: "Fraîcheur Extrême",
+    rating: 4.8,
+    reviewsCount: 85,
+    image: "https://images.unsplash.com/photo-1585338107529-13afc5f02586?auto=format&fit=crop&w=700&q=80",
+    specs: ["Brumisateur d'Eau Ultra-Fin", "Réservoir 2.5L", "Télécommande & Minuteur"],
+    description: "Système de refroidissement par brumisation d'eau pour abaisser instantanément la température ambiante de votre salon ou chambre."
+  },
+  {
+    id: 37,
+    name: "Climatiseur Split Smart Inverter 9000 BTU R410a Eco",
+    category: "climatiseur",
+    price: 165000,
+    oldPrice: 195000,
+    stock: 6,
+    badge: "Éco Énergie",
+    rating: 5.0,
+    reviewsCount: 64,
+    image: "https://images.unsplash.com/photo-1631545806061-c8a77a94469a?auto=format&fit=crop&w=700&q=80",
+    specs: ["9000 BTU Inverter", "Gaz R410a Écologique", "Super Silencieux 19dB", "Garantie 24 Mois"],
+    description: "Climatiseur split Inverter tropicalisé haute performance à très faible consommation d'énergie pour une température idéale en permanence."
+  },
+  {
+    id: 38,
+    name: "Climatiseur Split 12 000 BTU Tropicalisé Refroidissement Rapide",
+    category: "climatiseur",
+    price: 195000,
+    oldPrice: 230000,
+    stock: 5,
+    badge: "Puissance Max",
+    rating: 4.9,
+    reviewsCount: 42,
+    image: "https://images.unsplash.com/photo-1631545806061-c8a77a94469a?auto=format&fit=crop&w=700&q=80",
+    specs: ["12 000 BTU Power", "Filtre Anti-Bactérien", "Télécommande LCD"],
+    description: "Puissant climatiseur split 12 000 BTU conçu spécialement pour résister aux très fortes chaleurs tropicales et rafraîchir de grands espaces."
+  },
+  {
+    id: 39,
+    name: "Climatiseur Mobile Portable 1.5 CV Silencieux sur Roulettes",
+    category: "climatiseur",
+    price: 145000,
+    oldPrice: 175000,
+    stock: 8,
+    badge: "Sans Travaux",
+    rating: 4.8,
+    reviewsCount: 51,
+    image: "https://images.unsplash.com/photo-1631545806061-c8a77a94469a?auto=format&fit=crop&w=700&q=80",
+    specs: ["1.5 CV (9000 BTU)", "Mobile sur Roulettes", "Kit Évacuation Fenêtre"],
+    description: "Climatiseur portable prêt à brancher sans installation murale requise, déplaçable facilement d'une pièce à l'autre."
   }
 ];
 
@@ -587,7 +658,7 @@ function saveCart() {
 function normalizeCategory(cat) {
   if (cat === "smartphones" || cat === "telephonie") return "telephonie";
   if (cat === "coques" || cat === "chargeurs" || cat === "audio" || cat === "montres" || cat === "accessoires") return "accessoires";
-  if (cat === "electromenager" || cat === "maison") return "electromenager";
+  if (cat === "electromenager" || cat === "maison" || cat === "ventilo" || cat === "climatiseur") return "electromenager";
   return cat;
 }
 
@@ -605,8 +676,20 @@ function renderCatalog() {
   // Filter products
   let filtered = products.filter(prod => {
     const prodCat = normalizeCategory(prod.category);
-    // Category filter
-    const matchesCategory = (currentCategory === "all") || (prodCat === currentCategory);
+
+    // Sub-category and main category filter
+    let matchesCategory = false;
+    if (currentCategory === "all") {
+      matchesCategory = true;
+    } else if (currentCategory === "electromenager") {
+      matchesCategory = (prodCat === "electromenager");
+    } else if (currentCategory === "ventilo") {
+      matchesCategory = (prod.category === "ventilo" || prod.name.toLowerCase().includes("venti") || prod.name.toLowerCase().includes("fan"));
+    } else if (currentCategory === "climatiseur") {
+      matchesCategory = (prod.category === "climatiseur" || prod.name.toLowerCase().includes("clim") || prod.name.toLowerCase().includes("split"));
+    } else {
+      matchesCategory = (prodCat === currentCategory);
+    }
     
     // Search query filter
     const q = currentSearch.toLowerCase().trim();
@@ -685,7 +768,9 @@ function renderCatalog() {
       chargeurs: "Accessoires",
       audio: "Accessoires",
       montres: "Accessoires",
-      electromenager: "Électroménager"
+      electromenager: "Électroménager",
+      ventilo: "Ventilateurs",
+      climatiseur: "Climatiseurs"
     };
     const categoryLabel = categoryLabels[prod.category] || "Rayon SUNU";
 
@@ -697,7 +782,9 @@ function renderCatalog() {
         ${badgeHtml}
         
         <div class="product-img-holder" onclick="openProductModal(${prod.id})">
-          <img src="${prod.image}" alt="${prod.name}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=600&q=80'">
+          <img src="${prod.image}" alt="${prod.name}" class="main-prod-img" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=600&q=80'">
+          ${prod.image2 ? `<img src="${prod.image2}" alt="${prod.name}" class="hover-prod-img" loading="lazy">` : ''}
+          ${prod.image2 ? `<span class="multi-img-badge"><i class="fa-solid fa-images"></i> 2 photos</span>` : ''}
           <span class="quick-view-trigger"><i class="fa-solid fa-eye"></i> Spécifications</span>
         </div>
 
@@ -1127,6 +1214,20 @@ window.orderSingleViaWhatsApp = function(productId) {
 // 5. PRODUCT DETAILS MODAL (Spécifications)
 // ==========================================================================
 
+window.switchModalMainImg = function(thumbEl, src) {
+  const mainImg = document.getElementById("modalMainImg");
+  if (mainImg) {
+    mainImg.style.opacity = "0.3";
+    setTimeout(() => {
+      mainImg.src = src;
+      mainImg.style.opacity = "1";
+    }, 120);
+  }
+  const thumbs = document.querySelectorAll(".modal-thumb-item");
+  thumbs.forEach(t => t.classList.remove("active"));
+  if (thumbEl) thumbEl.classList.add("active");
+};
+
 window.openProductModal = function(productId) {
   const prod = products.find(p => p.id === productId);
   if (!prod) return;
@@ -1140,10 +1241,21 @@ window.openProductModal = function(productId) {
     </li>
   `).join("");
 
+  const escapedImg1 = (prod.image || "").replace(/'/g, "\\'");
+  const escapedImg2 = (prod.image2 || "").replace(/'/g, "\\'");
+
   modalBody.innerHTML = `
     <div class="product-modal-grid">
-      <div style="background-color: #f8fafc; border-radius: 16px; padding: 2rem; display: flex; justify-content: center; align-items: center;">
-        <img src="${prod.image}" alt="${prod.name}" class="prod-modal-img">
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 1rem;">
+        <div style="background-color: #f8fafc; border-radius: 16px; padding: 1.5rem; display: flex; justify-content: center; align-items: center; width: 100%; min-height: 250px;">
+          <img src="${prod.image}" alt="${prod.name}" class="prod-modal-img" id="modalMainImg" style="transition: opacity 0.2s ease;">
+        </div>
+        ${prod.image2 ? `
+          <div class="modal-thumbs-row" style="display: flex; gap: 0.75rem; justify-content: center; align-items: center;">
+            <img src="${prod.image}" class="modal-thumb-item active" onclick="switchModalMainImg(this, '${escapedImg1}')" alt="Photo 1" title="Photo 1 (Principale)">
+            <img src="${prod.image2}" class="modal-thumb-item" onclick="switchModalMainImg(this, '${escapedImg2}')" alt="Photo 2" title="Photo 2">
+          </div>
+        ` : ''}
       </div>
       <div>
         <span class="product-category-label">${normalizeCategory(prod.category).toUpperCase()} • SUNU SOLUTION</span>

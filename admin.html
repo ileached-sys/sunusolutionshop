@@ -129,11 +129,20 @@
         <!-- 4 KPI Cards -->
         <div class="kpi-cards-grid">
           <div class="kpi-card">
+            <div class="kpi-icon" style="background: rgba(99, 102, 241, 0.12); color: #4f46e5;"><i class="fa-solid fa-boxes-packing"></i></div>
+            <div class="kpi-data">
+              <span class="kpi-label">Stock (Prix d'Achat)</span>
+              <h3 class="kpi-value" id="kpiPurchaseStockValue">0 FCFA</h3>
+              <span class="kpi-trend neutral"><i class="fa-solid fa-calculator"></i> Coût d'achat total</span>
+            </div>
+          </div>
+
+          <div class="kpi-card">
             <div class="kpi-icon icon-blue"><i class="fa-solid fa-wallet"></i></div>
             <div class="kpi-data">
-              <span class="kpi-label">Valeur du Stock Total</span>
+              <span class="kpi-label">Stock (Prix de Vente)</span>
               <h3 class="kpi-value" id="kpiStockValue">0 FCFA</h3>
-              <span class="kpi-trend positive"><i class="fa-solid fa-arrow-trend-up"></i> Inventaire valorisé</span>
+              <span class="kpi-trend positive" id="kpiStockMarginTrend"><i class="fa-solid fa-arrow-trend-up"></i> Marge estimée</span>
             </div>
           </div>
 
@@ -186,11 +195,32 @@
             
             <!-- TAB 1: INVENTAIRE DES STOCKS -->
             <div class="admin-tab-content active" id="stockTab">
+              
+              <!-- Sous-Totaux des Prix d'Achat par Catégorie (Badges interactifs) -->
+              <div class="category-subtotals-wrapper" id="categorySubtotalsWrapper">
+                <!-- Dynamic category purchase subtotals -->
+              </div>
+
+              <!-- Toolbar avec filtre Recherche & Catégorie -->
               <div class="tab-toolbar">
-                <div class="tab-search">
-                  <i class="fa-solid fa-magnifying-glass"></i>
-                  <input type="text" id="adminStockSearch" placeholder="Rechercher par nom, marque, catégorie...">
+                <div class="tab-search" style="display: flex; gap: 0.75rem; flex: 1; flex-wrap: wrap;">
+                  <div style="position: relative; flex: 1; min-width: 200px;">
+                    <i class="fa-solid fa-magnifying-glass" style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: #94a3b8;"></i>
+                    <input type="text" id="adminStockSearch" placeholder="Rechercher par nom, marque..." style="width: 100%; padding-left: 2.75rem;">
+                  </div>
+
+                  <div style="min-width: 210px;">
+                    <select id="adminStockCategoryFilter" class="form-control" style="font-weight: 600; cursor: pointer; height: 100%;">
+                      <option value="all">🔍 Toutes les catégories</option>
+                      <option value="telephonie">📱 Téléphonie</option>
+                      <option value="accessoires">🎧 Accessoires</option>
+                      <option value="electromenager">📺 Électroménager</option>
+                      <option value="ventilo">🌀 Ventilateurs (Ventilo)</option>
+                      <option value="climatiseur">❄️ Climatiseurs (Clim)</option>
+                    </select>
+                  </div>
                 </div>
+
                 <div class="tab-actions">
                   <button class="btn btn-primary btn-sm" onclick="switchAdminTab('addTab')">
                     <i class="fa-solid fa-plus"></i> Ajouter un Article
@@ -201,12 +231,18 @@
                 </div>
               </div>
 
+              <!-- Bannière Synthèse du Filtre Sélectionné -->
+              <div id="filteredSubtotalBanner" class="filtered-subtotal-banner">
+                <!-- Dynamic filter subtotal synthesis -->
+              </div>
+
               <div class="table-responsive">
                 <table class="data-table">
                   <thead>
                     <tr>
                       <th>Produit</th>
                       <th>Catégorie</th>
+                      <th>Prix d'Achat (FCFA)</th>
                       <th>Prix Vente (FCFA)</th>
                       <th>Prix Promo</th>
                       <th>Stock Actuel</th>
@@ -236,8 +272,15 @@
                     <select id="newProdCategory" class="form-control" required>
                       <option value="telephonie">📱 Téléphonie (Smartphones & Téléphones)</option>
                       <option value="accessoires">🎧 Accessoires (Écouteurs, Chargeurs, Coques...)</option>
-                      <option value="electromenager">📺 Électroménager & Maison (TV, Électronique...)</option>
+                      <option value="electromenager">📺 Électroménager Général</option>
+                      <option value="ventilo">🌀 Ventilateurs (Ventilo)</option>
+                      <option value="climatiseur">❄️ Climatiseurs (Climatisation)</option>
                     </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="newProdPurchasePrice">Prix d'Achat (FCFA) *</label>
+                    <input type="number" id="newProdPurchasePrice" class="form-control" step="100" min="0" placeholder="ex: 65000" required>
                   </div>
 
                   <div class="form-group">
@@ -267,46 +310,88 @@
                   </div>
 
                   <div class="form-group full-width">
-                    <label>Image du Produit *</label>
-                    <div class="image-upload-card">
-                      <!-- Mode Switcher -->
-                      <div class="image-source-tabs">
-                        <button type="button" class="img-tab-btn active" id="addImgFileTab" onclick="switchImageSourceTab('add', 'file')">
-                          <i class="fa-solid fa-cloud-arrow-up"></i> Charger une Image / Photo
-                        </button>
-                        <button type="button" class="img-tab-btn" id="addImgUrlTab" onclick="switchImageSourceTab('add', 'url')">
-                          <i class="fa-solid fa-link"></i> Lien URL Web
-                        </button>
-                      </div>
-
-                      <!-- Dropzone / File Picker -->
-                      <div class="image-dropzone" id="addImgDropzone" onclick="triggerFileInput('newProdFileInput')">
-                        <input type="file" id="newProdFileInput" accept="image/*" style="display: none;" onchange="handleImageFileSelect(event, 'add')">
-                        <div class="dropzone-content">
-                          <i class="fa-solid fa-cloud-arrow-up dropzone-icon"></i>
-                          <p class="dropzone-title">Cliquez pour choisir une photo ou glissez-la ici</p>
-                          <span class="dropzone-sub">Formats : JPG, PNG, WEBP (compression & optimisation auto)</span>
+                    <label><i class="fa-solid fa-images" style="color: #4f46e5;"></i> Photos du Produit (1 à 2 images au choix)</label>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
+                      
+                      <!-- IMAGE 1 (Principale) -->
+                      <div class="image-upload-card">
+                        <div style="font-size: 0.85rem; font-weight: 700; color: #1e293b; margin-bottom: 0.5rem; display: flex; align-items: center; justify-content: space-between;">
+                          <span>📷 Image 1 (Principale) *</span>
+                          <span style="font-size: 0.7rem; color: #64748b;">Obligatoire</span>
                         </div>
-                      </div>
-
-                      <!-- URL Input -->
-                      <div class="image-url-panel" id="addImgUrlPanel" style="display: none;">
-                        <div class="image-input-row">
-                          <input type="url" id="newProdImage" class="form-control" placeholder="https://images.unsplash.com/..." oninput="handleImageUrlInput('add')">
-                          <button type="button" class="btn btn-outline btn-sm" onclick="setPresetImage()">Image suggérée</button>
-                        </div>
-                      </div>
-
-                      <!-- Live Preview -->
-                      <div class="image-preview-wrapper" id="addImgPreviewWrap" style="display: none;">
-                        <div class="image-preview-box">
-                          <img id="addImgPreview" src="" alt="Aperçu">
-                          <button type="button" class="remove-img-btn" onclick="clearImageSelection('add')" title="Supprimer">
-                            <i class="fa-solid fa-trash-can"></i>
+                        <div class="image-source-tabs">
+                          <button type="button" class="img-tab-btn active" id="add1ImgFileTab" onclick="switchImageSourceTab('add1', 'file')">
+                            <i class="fa-solid fa-cloud-arrow-up"></i> Photo
+                          </button>
+                          <button type="button" class="img-tab-btn" id="add1ImgUrlTab" onclick="switchImageSourceTab('add1', 'url')">
+                            <i class="fa-solid fa-link"></i> Lien URL
                           </button>
                         </div>
-                        <span class="preview-status-text"><i class="fa-solid fa-circle-check"></i> Image prête</span>
+
+                        <div class="image-dropzone" id="add1ImgDropzone" onclick="triggerFileInput('newProdFileInput1')">
+                          <input type="file" id="newProdFileInput1" accept="image/*" style="display: none;" onchange="handleImageFileSelect(event, 'add1')">
+                          <div class="dropzone-content">
+                            <i class="fa-solid fa-cloud-arrow-up dropzone-icon"></i>
+                            <p class="dropzone-title">Glisser ou cliquer pour l'image 1</p>
+                          </div>
+                        </div>
+
+                        <div class="image-url-panel" id="add1ImgUrlPanel" style="display: none;">
+                          <div class="image-input-row">
+                            <input type="url" id="newProdImage1" class="form-control" placeholder="https://..." oninput="handleImageUrlInput('add1')">
+                            <button type="button" class="btn btn-outline btn-sm" onclick="setPresetImage()">Suggérée</button>
+                          </div>
+                        </div>
+
+                        <div class="image-preview-wrapper" id="add1ImgPreviewWrap" style="display: none;">
+                          <div class="image-preview-box">
+                            <img id="add1ImgPreview" src="" alt="Aperçu 1">
+                            <button type="button" class="remove-img-btn" onclick="clearImageSelection('add1')" title="Supprimer">
+                              <i class="fa-solid fa-trash-can"></i>
+                            </button>
+                          </div>
+                          <span class="preview-status-text"><i class="fa-solid fa-circle-check"></i> Image 1 prête</span>
+                        </div>
                       </div>
+
+                      <!-- IMAGE 2 (Optionnelle) -->
+                      <div class="image-upload-card" style="border-style: dashed;">
+                        <div style="font-size: 0.85rem; font-weight: 700; color: #1e293b; margin-bottom: 0.5rem; display: flex; align-items: center; justify-content: space-between;">
+                          <span>🖼️ Image 2 (Optionnelle)</span>
+                          <span style="font-size: 0.7rem; color: #059669; font-weight: 600;">Au choix</span>
+                        </div>
+                        <div class="image-source-tabs">
+                          <button type="button" class="img-tab-btn active" id="add2ImgFileTab" onclick="switchImageSourceTab('add2', 'file')">
+                            <i class="fa-solid fa-cloud-arrow-up"></i> Photo
+                          </button>
+                          <button type="button" class="img-tab-btn" id="add2ImgUrlTab" onclick="switchImageSourceTab('add2', 'url')">
+                            <i class="fa-solid fa-link"></i> Lien URL
+                          </button>
+                        </div>
+
+                        <div class="image-dropzone" id="add2ImgDropzone" onclick="triggerFileInput('newProdFileInput2')">
+                          <input type="file" id="newProdFileInput2" accept="image/*" style="display: none;" onchange="handleImageFileSelect(event, 'add2')">
+                          <div class="dropzone-content">
+                            <i class="fa-solid fa-plus dropzone-icon" style="color: #059669;"></i>
+                            <p class="dropzone-title">Ajouter photo 2 (facultatif)</p>
+                          </div>
+                        </div>
+
+                        <div class="image-url-panel" id="add2ImgUrlPanel" style="display: none;">
+                          <input type="url" id="newProdImage2" class="form-control" placeholder="https://..." oninput="handleImageUrlInput('add2')">
+                        </div>
+
+                        <div class="image-preview-wrapper" id="add2ImgPreviewWrap" style="display: none;">
+                          <div class="image-preview-box">
+                            <img id="add2ImgPreview" src="" alt="Aperçu 2">
+                            <button type="button" class="remove-img-btn" onclick="clearImageSelection('add2')" title="Supprimer">
+                              <i class="fa-solid fa-trash-can"></i>
+                            </button>
+                          </div>
+                          <span class="preview-status-text" style="color: #059669;"><i class="fa-solid fa-circle-check"></i> Image 2 prête</span>
+                        </div>
+                      </div>
+
                     </div>
                   </div>
 
@@ -469,15 +554,43 @@
         </div>
         <form id="manualSaleForm" onsubmit="submitManualSale(event)">
           <div class="form-group">
-            <label for="saleProductSelect">Sélectionner le Produit *</label>
-            <select id="saleProductSelect" class="form-control" required>
-              <!-- Options filled dynamically -->
+            <label for="saleCategoryFilter"><i class="fa-solid fa-filter" style="color: #4f46e5;"></i> Filtrer par Catégorie</label>
+            <select id="saleCategoryFilter" class="form-control" onchange="onSaleCategoryChange()">
+              <option value="all">-- Toutes les catégories --</option>
+              <option value="telephonie">📱 Téléphonie</option>
+              <option value="accessoires">🎧 Accessoires</option>
+              <option value="electromenager">📺 Électroménager Général</option>
+              <option value="ventilo">🌀 Électroménager - Ventilateurs</option>
+              <option value="climatiseur">❄️ Électroménager - Climatiseurs</option>
             </select>
           </div>
           <div class="form-group">
-            <label for="saleQuantity">Quantité vendue *</label>
-            <input type="number" id="saleQuantity" class="form-control" min="1" value="1" required>
+            <label for="saleProductSelect"><i class="fa-solid fa-box" style="color: #4f46e5;"></i> Sélectionner le Produit *</label>
+            <select id="saleProductSelect" class="form-control" required onchange="onSaleProductChange()">
+              <!-- Options filled dynamically with optgroup sorted by category -->
+            </select>
           </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div class="form-group">
+              <label for="saleUnitPrice"><i class="fa-solid fa-tag" style="color: #059669;"></i> Prix de Vente Unitaire (FCFA) *</label>
+              <input type="number" id="saleUnitPrice" class="form-control" min="0" step="500" required oninput="calculateSaleTotal()">
+            </div>
+            <div class="form-group">
+              <label for="saleQuantity"><i class="fa-solid fa-arrow-up-1-9" style="color: #2563eb;"></i> Quantité vendue *</label>
+              <input type="number" id="saleQuantity" class="form-control" min="1" value="1" required oninput="calculateSaleTotal()">
+            </div>
+          </div>
+          
+          <div class="sale-total-summary-card" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(5, 150, 105, 0.18) 100%); border: 1.5px solid rgba(16, 185, 129, 0.4); border-radius: 12px; padding: 1rem 1.25rem; margin: 1rem 0; display: flex; align-items: center; justify-content: space-between;">
+            <div>
+              <div style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: #047857;">Total à Encaisser</div>
+              <div style="font-size: 0.8rem; color: #4b5563; margin-top: 2px;" id="saleTotalDetail">1 x 0 FCFA</div>
+            </div>
+            <div style="font-size: 1.4rem; font-weight: 800; color: #047857; display: flex; align-items: center; gap: 0.5rem;" id="saleTotalDisplay">
+              <i class="fa-solid fa-money-bill-wave"></i> 0 FCFA
+            </div>
+          </div>
+
           <div class="form-group">
             <label for="saleCustName">Nom du Client / Quartier</label>
             <input type="text" id="saleCustName" class="form-control" placeholder="ex: Client Comptoir Dalifort">
@@ -485,11 +598,11 @@
           <div class="form-group">
             <label for="salePaymentMethod">Mode de Règlement *</label>
             <select id="salePaymentMethod" class="form-control" required>
-              <option value="Espèces">Espèces</option>
-              <option value="Wave">Wave</option>
-              <option value="Orange Money">Orange Money</option>
-              <option value="Carte Bancaire">Carte Bancaire (TPE)</option>
-              <option value="Virement">Virement Bancaire</option>
+              <option value="Espèces">💵 Espèces</option>
+              <option value="Wave">🌊 Wave</option>
+              <option value="Orange Money">🍊 Orange Money</option>
+              <option value="Carte Bancaire">💳 Carte Bancaire (TPE)</option>
+              <option value="Virement">🏦 Virement Bancaire</option>
             </select>
           </div>
           <div class="modal-footer-btns">
@@ -517,6 +630,10 @@
             <input type="text" id="editProdName" class="form-control" required>
           </div>
           <div class="form-group">
+            <label for="editProdPurchasePrice">Prix d'Achat (FCFA) *</label>
+            <input type="number" id="editProdPurchasePrice" class="form-control" step="100" min="0" required>
+          </div>
+          <div class="form-group">
             <label for="editProdPrice">Prix de Vente (FCFA) *</label>
             <input type="number" id="editProdPrice" class="form-control" step="100" min="0" required>
           </div>
@@ -533,48 +650,92 @@
             <select id="editProdCategory" class="form-control" required>
               <option value="telephonie">📱 Téléphonie (Smartphones & Téléphones)</option>
               <option value="accessoires">🎧 Accessoires (Écouteurs, Chargeurs, Coques...)</option>
-              <option value="electromenager">📺 Électroménager & Maison (TV, Électronique...)</option>
+              <option value="electromenager">📺 Électroménager Général</option>
+              <option value="ventilo">🌀 Ventilateurs (Ventilo)</option>
+              <option value="climatiseur">❄️ Climatiseurs (Climatisation)</option>
             </select>
           </div>
 
-          <!-- Image modifier -->
+          <!-- Image modifier (2 Images au choix) -->
           <div class="form-group full-width">
-            <label>Image du Produit *</label>
-            <div class="image-upload-card">
-              <div class="image-source-tabs">
-                <button type="button" class="img-tab-btn active" id="editImgFileTab" onclick="switchImageSourceTab('edit', 'file')">
-                  <i class="fa-solid fa-cloud-arrow-up"></i> Remplacer par une Photo
-                </button>
-                <button type="button" class="img-tab-btn" id="editImgUrlTab" onclick="switchImageSourceTab('edit', 'url')">
-                  <i class="fa-solid fa-link"></i> Modifier Lien URL
-                </button>
-              </div>
-
-              <!-- Dropzone -->
-              <div class="image-dropzone" id="editImgDropzone" onclick="triggerFileInput('editProdFileInput')">
-                <input type="file" id="editProdFileInput" accept="image/*" style="display: none;" onchange="handleImageFileSelect(event, 'edit')">
-                <div class="dropzone-content">
-                  <i class="fa-solid fa-cloud-arrow-up dropzone-icon"></i>
-                  <p class="dropzone-title">Cliquez pour importer une nouvelle photo</p>
-                  <span class="dropzone-sub">Formats : JPG, PNG, WEBP</span>
+            <label><i class="fa-solid fa-images" style="color: #4f46e5;"></i> Photos du Produit (1 à 2 images au choix)</label>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem;">
+              
+              <!-- EDIT IMAGE 1 -->
+              <div class="image-upload-card">
+                <div style="font-size: 0.85rem; font-weight: 700; color: #1e293b; margin-bottom: 0.5rem; display: flex; justify-content: space-between;">
+                  <span>📷 Image 1 (Principale) *</span>
                 </div>
-              </div>
-
-              <!-- URL Input -->
-              <div class="image-url-panel" id="editImgUrlPanel" style="display: none;">
-                <input type="url" id="editProdImage" class="form-control" placeholder="https://images.unsplash.com/..." oninput="handleImageUrlInput('edit')">
-              </div>
-
-              <!-- Preview -->
-              <div class="image-preview-wrapper" id="editImgPreviewWrap">
-                <div class="image-preview-box">
-                  <img id="editImgPreview" src="" alt="Aperçu">
-                  <button type="button" class="remove-img-btn" onclick="clearImageSelection('edit')" title="Retirer l'image">
-                    <i class="fa-solid fa-trash-can"></i>
+                <div class="image-source-tabs">
+                  <button type="button" class="img-tab-btn active" id="edit1ImgFileTab" onclick="switchImageSourceTab('edit1', 'file')">
+                    <i class="fa-solid fa-cloud-arrow-up"></i> Photo
+                  </button>
+                  <button type="button" class="img-tab-btn" id="edit1ImgUrlTab" onclick="switchImageSourceTab('edit1', 'url')">
+                    <i class="fa-solid fa-link"></i> Lien URL
                   </button>
                 </div>
-                <span class="preview-status-text" id="editImgStatusText"><i class="fa-solid fa-circle-check"></i> Image active</span>
+
+                <div class="image-dropzone" id="edit1ImgDropzone" onclick="triggerFileInput('editProdFileInput1')">
+                  <input type="file" id="editProdFileInput1" accept="image/*" style="display: none;" onchange="handleImageFileSelect(event, 'edit1')">
+                  <div class="dropzone-content">
+                    <i class="fa-solid fa-cloud-arrow-up dropzone-icon"></i>
+                    <p class="dropzone-title">Changer la photo 1</p>
+                  </div>
+                </div>
+
+                <div class="image-url-panel" id="edit1ImgUrlPanel" style="display: none;">
+                  <input type="url" id="editProdImage1" class="form-control" placeholder="https://..." oninput="handleImageUrlInput('edit1')">
+                </div>
+
+                <div class="image-preview-wrapper" id="edit1ImgPreviewWrap">
+                  <div class="image-preview-box">
+                    <img id="edit1ImgPreview" src="" alt="Aperçu 1">
+                    <button type="button" class="remove-img-btn" onclick="clearImageSelection('edit1')" title="Retirer">
+                      <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                  </div>
+                  <span class="preview-status-text" id="edit1ImgStatusText"><i class="fa-solid fa-circle-check"></i> Image 1 active</span>
+                </div>
               </div>
+
+              <!-- EDIT IMAGE 2 -->
+              <div class="image-upload-card" style="border-style: dashed;">
+                <div style="font-size: 0.85rem; font-weight: 700; color: #1e293b; margin-bottom: 0.5rem; display: flex; justify-content: space-between;">
+                  <span>🖼️ Image 2 (Optionnelle)</span>
+                  <span style="font-size: 0.7rem; color: #059669; font-weight: 600;">Au choix</span>
+                </div>
+                <div class="image-source-tabs">
+                  <button type="button" class="img-tab-btn active" id="edit2ImgFileTab" onclick="switchImageSourceTab('edit2', 'file')">
+                    <i class="fa-solid fa-cloud-arrow-up"></i> Photo
+                  </button>
+                  <button type="button" class="img-tab-btn" id="edit2ImgUrlTab" onclick="switchImageSourceTab('edit2', 'url')">
+                    <i class="fa-solid fa-link"></i> Lien URL
+                  </button>
+                </div>
+
+                <div class="image-dropzone" id="edit2ImgDropzone" onclick="triggerFileInput('editProdFileInput2')">
+                  <input type="file" id="editProdFileInput2" accept="image/*" style="display: none;" onchange="handleImageFileSelect(event, 'edit2')">
+                  <div class="dropzone-content">
+                    <i class="fa-solid fa-plus dropzone-icon" style="color: #059669;"></i>
+                    <p class="dropzone-title">Ajouter / Changer photo 2</p>
+                  </div>
+                </div>
+
+                <div class="image-url-panel" id="edit2ImgUrlPanel" style="display: none;">
+                  <input type="url" id="editProdImage2" class="form-control" placeholder="https://..." oninput="handleImageUrlInput('edit2')">
+                </div>
+
+                <div class="image-preview-wrapper" id="edit2ImgPreviewWrap" style="display: none;">
+                  <div class="image-preview-box">
+                    <img id="edit2ImgPreview" src="" alt="Aperçu 2">
+                    <button type="button" class="remove-img-btn" onclick="clearImageSelection('edit2')" title="Retirer">
+                      <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                  </div>
+                  <span class="preview-status-text" id="edit2ImgStatusText" style="color: #059669;"><i class="fa-solid fa-circle-check"></i> Image 2</span>
+                </div>
+              </div>
+
             </div>
           </div>
           <div class="modal-footer-btns">

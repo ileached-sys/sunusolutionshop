@@ -36,7 +36,8 @@
       </div>
       <div class="top-bar-right">
         <span class="live-status"><span class="pulse-dot"></span> Boutique Ouverte 7j/7</span>
-        <a href="tel:+221763143333"><i class="fa-solid fa-phone"></i> +221 76 314 33 33</a>
+        <a href="tel:+221338321050"><i class="fa-solid fa-phone-flip"></i> Fixe: 33 832 10 50</a>
+        <a href="tel:+221763143333"><i class="fa-solid fa-mobile-screen"></i> +221 76 314 33 33</a>
         <a href="https://wa.me/221763143333" target="_blank" class="whatsapp-top-link"><i
             class="fa-brands fa-whatsapp"></i> SAV WhatsApp</a>
         <a href="https://www.facebook.com/sunusolutionshop" target="_blank" style="color: #60a5fa;"><i
@@ -63,7 +64,25 @@
         <a href="#accueil" class="nav-link active"><i class="fa-solid fa-house"></i> Accueil</a>
         <a href="#catalogue" class="nav-link" onclick="navFilterCategory('telephonie')"><i class="fa-solid fa-mobile-screen"></i> Téléphonie</a>
         <a href="#catalogue" class="nav-link" onclick="navFilterCategory('accessoires')"><i class="fa-solid fa-headphones"></i> Accessoires</a>
-        <a href="#catalogue" class="nav-link" onclick="navFilterCategory('electromenager')"><i class="fa-solid fa-tv"></i> Électroménager</a>
+        
+        <!-- Électroménager Sub-Menu Dropdown -->
+        <div class="nav-dropdown">
+          <a href="#catalogue" class="nav-link nav-dropdown-toggle" onclick="navFilterCategory('electromenager')">
+            <i class="fa-solid fa-tv"></i> Électroménager <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+          </a>
+          <div class="dropdown-menu">
+            <a href="#catalogue" class="dropdown-item" onclick="navFilterCategory('electromenager')">
+              <i class="fa-solid fa-border-all"></i> Tous les Électroménagers
+            </a>
+            <a href="#catalogue" class="dropdown-item" onclick="navFilterCategory('ventilo')">
+              <i class="fa-solid fa-fan"></i> Ventilateurs (Ventilo)
+            </a>
+            <a href="#catalogue" class="dropdown-item" onclick="navFilterCategory('climatiseur')">
+              <i class="fa-solid fa-snowflake"></i> Climatiseurs (Clim)
+            </a>
+          </div>
+        </div>
+
         <a href="#contacts" class="nav-link"><i class="fa-solid fa-envelope"></i> Contacts</a>
       </nav>
 
@@ -202,6 +221,12 @@
           </div>
           <div class="cat-pill" onclick="filterByCategory('electromenager')">
             <i class="fa-solid fa-tv"></i> Électroménager
+          </div>
+          <div class="cat-pill" onclick="filterByCategory('ventilo')">
+            <i class="fa-solid fa-fan"></i> Ventilateurs (Ventilo)
+          </div>
+          <div class="cat-pill" onclick="filterByCategory('climatiseur')">
+            <i class="fa-solid fa-snowflake"></i> Climatiseurs (Clim)
           </div>
         </div>
       </div>
@@ -504,8 +529,15 @@
           <li>
             <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
             <div>
-              <strong>Téléphones Directs :</strong>
+              <strong>Mobiles Directs :</strong>
               <a href="tel:+221763143333">+221 76 314 33 33</a> / <a href="tel:+221782579999">+221 78 257 99 99</a>
+            </div>
+          </li>
+          <li>
+            <div class="contact-icon"><i class="fa-solid fa-phone-flip"></i></div>
+            <div>
+              <strong>Téléphone Fixe Boutique :</strong>
+              <a href="tel:+221338321050">+221 33 832 10 50</a>
             </div>
           </li>
           <li>

@@ -19,6 +19,7 @@ const DEFAULT_PRODUCTS = [
     id: 1,
     name: "Tecno Spark 20 (128 Go + 8 Go RAM)",
     category: "telephonie",
+    purchasePrice: 65000,
     price: 84900,
     oldPrice: 95000,
     stock: 15,
@@ -33,6 +34,7 @@ const DEFAULT_PRODUCTS = [
     id: 2,
     name: "Tecno Pop 8 (64 Go + 3 Go RAM)",
     category: "telephonie",
+    purchasePrice: 38000,
     price: 49900,
     oldPrice: 59000,
     stock: 22,
@@ -47,6 +49,7 @@ const DEFAULT_PRODUCTS = [
     id: 3,
     name: "Tecno Camon 30 (256 Go + 8 Go RAM)",
     category: "telephonie",
+    purchasePrice: 110000,
     price: 139000,
     oldPrice: 155000,
     stock: 8,
@@ -61,6 +64,7 @@ const DEFAULT_PRODUCTS = [
     id: 4,
     name: "Samsung Galaxy A05 (64 Go / 4 Go RAM)",
     category: "telephonie",
+    purchasePrice: 46000,
     price: 59900,
     oldPrice: 69000,
     stock: 18,
@@ -75,6 +79,7 @@ const DEFAULT_PRODUCTS = [
     id: 5,
     name: "Samsung Galaxy A15 4G (128 Go + 6 Go RAM)",
     category: "telephonie",
+    purchasePrice: 78000,
     price: 99900,
     oldPrice: 115000,
     stock: 14,
@@ -89,6 +94,7 @@ const DEFAULT_PRODUCTS = [
     id: 6,
     name: "Samsung Galaxy A25 5G (128 Go + 6 Go RAM)",
     category: "telephonie",
+    purchasePrice: 115000,
     price: 145000,
     oldPrice: 165000,
     stock: 9,
@@ -103,6 +109,7 @@ const DEFAULT_PRODUCTS = [
     id: 7,
     name: "Samsung Galaxy A55 5G (256 Go + 8 Go RAM)",
     category: "telephonie",
+    purchasePrice: 185000,
     price: 235000,
     oldPrice: 265000,
     stock: 7,
@@ -117,6 +124,7 @@ const DEFAULT_PRODUCTS = [
     id: 8,
     name: "Samsung Galaxy S24 Ultra (256 Go Titane)",
     category: "telephonie",
+    purchasePrice: 560000,
     price: 685000,
     oldPrice: 790000,
     stock: 4,
@@ -131,6 +139,7 @@ const DEFAULT_PRODUCTS = [
     id: 9,
     name: "Xiaomi Redmi 13C (128 Go + 6 Go RAM)",
     category: "telephonie",
+    purchasePrice: 58000,
     price: 74900,
     oldPrice: 85000,
     stock: 16,
@@ -145,6 +154,7 @@ const DEFAULT_PRODUCTS = [
     id: 10,
     name: "Xiaomi Redmi Note 13 (256 Go + 8 Go RAM)",
     category: "telephonie",
+    purchasePrice: 94000,
     price: 119000,
     oldPrice: 135000,
     stock: 12,
@@ -159,6 +169,7 @@ const DEFAULT_PRODUCTS = [
     id: 11,
     name: "Infinix Hot 40 Pro (256 Go + 8 Go RAM)",
     category: "telephonie",
+    purchasePrice: 85000,
     price: 109000,
     oldPrice: 125000,
     stock: 10,
@@ -173,6 +184,7 @@ const DEFAULT_PRODUCTS = [
     id: 12,
     name: "Itel A70 (128 Go + 4 Go RAM)",
     category: "telephonie",
+    purchasePrice: 37000,
     price: 48500,
     oldPrice: 55000,
     stock: 25,
@@ -187,6 +199,7 @@ const DEFAULT_PRODUCTS = [
     id: 13,
     name: "iPhone 13 (128 Go - Neuf Scellé)",
     category: "telephonie",
+    purchasePrice: 260000,
     price: 325000,
     oldPrice: 370000,
     stock: 6,
@@ -201,6 +214,7 @@ const DEFAULT_PRODUCTS = [
     id: 14,
     name: "iPhone 15 Pro Max (256 Go Titane Naturel)",
     category: "telephonie",
+    purchasePrice: 630000,
     price: 765000,
     oldPrice: 890000,
     stock: 5,
@@ -219,6 +233,7 @@ const DEFAULT_PRODUCTS = [
     id: 15,
     name: "Écouteurs Sans Fil Oraimo FreePods 4 ANC TWS",
     category: "accessoires",
+    purchasePrice: 14000,
     price: 21500,
     oldPrice: 28000,
     stock: 35,
@@ -233,6 +248,7 @@ const DEFAULT_PRODUCTS = [
     id: 16,
     name: "Écouteurs TWS Pro 3 Wireless Bluetooth 5.3",
     category: "accessoires",
+    purchasePrice: 7500,
     price: 12500,
     oldPrice: 18000,
     stock: 45,
@@ -247,6 +263,7 @@ const DEFAULT_PRODUCTS = [
     id: 17,
     name: "Power Bank Oraimo 20 000 mAh Fast Charge 22.5W",
     category: "accessoires",
+    purchasePrice: 11500,
     price: 17900,
     oldPrice: 24000,
     stock: 30,
@@ -261,6 +278,7 @@ const DEFAULT_PRODUCTS = [
     id: 18,
     name: "Power Bank Haute Capacité 30 000 mAh Double Sortie USB",
     category: "accessoires",
+    purchasePrice: 15500,
     price: 23500,
     oldPrice: 30000,
     stock: 20,
@@ -269,12 +287,13 @@ const DEFAULT_PRODUCTS = [
     reviewsCount: 88,
     image: "https://images.unsplash.com/photo-1622445262464-84b1456045b6?auto=format&fit=crop&w=700&q=80",
     specs: ["30 000 mAh Géant", "Lampe Torche Intégrée", "Indicateur Digital", "3 Ports de Sortie"],
-    description: "L'autonomie absolue pour vos déplacements et voyages : jusqu'à 8 recharges de téléphone et lampe LED de secours intégrée."
+    description: "L'autonomie absolute pour vos déplacements et voyages : jusqu'à 8 recharges de téléphone et lampe LED de secours intégrée."
   },
   {
     id: 19,
     name: "Chargeur Secteur Rapide GaN 45W Type-C + Câble Original",
     category: "accessoires",
+    purchasePrice: 5500,
     price: 9500,
     oldPrice: 14000,
     stock: 60,
@@ -289,6 +308,7 @@ const DEFAULT_PRODUCTS = [
     id: 20,
     name: "Smartwatch Ultra 2 AMOLED HD (Appels Bluetooth + Santé)",
     category: "accessoires",
+    purchasePrice: 12000,
     price: 19900,
     oldPrice: 28000,
     stock: 22,
@@ -303,6 +323,7 @@ const DEFAULT_PRODUCTS = [
     id: 21,
     name: "Pack Protection 360° : Coque Silicone Antichoc + 2 Verres 9H",
     category: "accessoires",
+    purchasePrice: 2500,
     price: 5000,
     oldPrice: 8500,
     stock: 75,
@@ -317,6 +338,7 @@ const DEFAULT_PRODUCTS = [
     id: 22,
     name: "Câble de Charge Rapide 3-en-1 Nylon Tressé (Type-C / Lightning / Micro)",
     category: "accessoires",
+    purchasePrice: 1500,
     price: 3500,
     oldPrice: 5000,
     stock: 90,
@@ -331,6 +353,7 @@ const DEFAULT_PRODUCTS = [
     id: 23,
     name: "Enceinte Bluetooth Portable Waterproof Bass Boost RGB",
     category: "accessoires",
+    purchasePrice: 10000,
     price: 16500,
     oldPrice: 22000,
     stock: 24,
@@ -345,6 +368,7 @@ const DEFAULT_PRODUCTS = [
     id: 24,
     name: "Support Téléphone Magnétique Voiture Rotation 360°",
     category: "accessoires",
+    purchasePrice: 2000,
     price: 4500,
     oldPrice: 7000,
     stock: 50,
@@ -363,6 +387,7 @@ const DEFAULT_PRODUCTS = [
     id: 25,
     name: "Téléviseur Deska 43\" Smart Android Full HD Sans Bordure",
     category: "electromenager",
+    purchasePrice: 92000,
     price: 119000,
     oldPrice: 139000,
     stock: 8,
@@ -377,6 +402,7 @@ const DEFAULT_PRODUCTS = [
     id: 26,
     name: "Téléviseur Smart Android 32\" HD Sans Bordure Frameless",
     category: "electromenager",
+    purchasePrice: 52000,
     price: 69900,
     oldPrice: 85000,
     stock: 14,
@@ -391,6 +417,7 @@ const DEFAULT_PRODUCTS = [
     id: 27,
     name: "Téléviseur 55\" 4K Ultra HD Smart TV HDR10+ Dolby Audio",
     category: "electromenager",
+    purchasePrice: 155000,
     price: 199000,
     oldPrice: 240000,
     stock: 5,
@@ -405,6 +432,7 @@ const DEFAULT_PRODUCTS = [
     id: 28,
     name: "Mini Filtre à Eau de Robinet 5 Couches Charbon Actif",
     category: "electromenager",
+    purchasePrice: 1000,
     price: 2500,
     oldPrice: 4500,
     stock: 95,
@@ -419,6 +447,7 @@ const DEFAULT_PRODUCTS = [
     id: 29,
     name: "Friteuse Sans Huile Air Fryer Digitale 6.0L 1800W",
     category: "electromenager",
+    purchasePrice: 23000,
     price: 34500,
     oldPrice: 45000,
     stock: 16,
@@ -433,6 +462,7 @@ const DEFAULT_PRODUCTS = [
     id: 30,
     name: "Robot Mixeur Blender 2-en-1 Bol Verre 1.5L + Moulin 500W",
     category: "electromenager",
+    purchasePrice: 11500,
     price: 17500,
     oldPrice: 24000,
     stock: 25,
@@ -447,6 +477,7 @@ const DEFAULT_PRODUCTS = [
     id: 31,
     name: "Fer à Repasser à Vapeur Céramique 2200W Anticalcaire",
     category: "electromenager",
+    purchasePrice: 8500,
     price: 13500,
     oldPrice: 18000,
     stock: 20,
@@ -461,6 +492,7 @@ const DEFAULT_PRODUCTS = [
     id: 32,
     name: "Bouilloire Électrique Inox 2.0 Litres 1500W Arrêt Auto",
     category: "electromenager",
+    purchasePrice: 4000,
     price: 6900,
     oldPrice: 9500,
     stock: 40,
@@ -475,6 +507,7 @@ const DEFAULT_PRODUCTS = [
     id: 33,
     name: "Ventilateur Sur Pied Silencieux 16 Pouces 3 Vitesses",
     category: "electromenager",
+    purchasePrice: 10000,
     price: 15500,
     oldPrice: 20000,
     stock: 18,
@@ -489,6 +522,7 @@ const DEFAULT_PRODUCTS = [
     id: 34,
     name: "Tondeuse Professionnelle Cheveux & Barbe Vintage T9 Métal",
     category: "electromenager",
+    purchasePrice: 4500,
     price: 7900,
     oldPrice: 12000,
     stock: 35,
@@ -770,6 +804,13 @@ function loadData() {
     products = typeof DEFAULT_PRODUCTS !== 'undefined' ? [...DEFAULT_PRODUCTS] : [];
   }
 
+  // Ensure each product has a purchasePrice (fall back to ~75% of price if omitted)
+  products.forEach(p => {
+    if (p && (!p.purchasePrice || isNaN(p.purchasePrice) || p.purchasePrice <= 0)) {
+      p.purchasePrice = Math.round((p.price || 0) * 0.75);
+    }
+  });
+
   try {
     const parsedSales = savedSales ? JSON.parse(savedSales) : null;
     sales = Array.isArray(parsedSales) ? parsedSales : [];
@@ -796,7 +837,9 @@ function renderDashboard() {
   if (!Array.isArray(sales)) sales = [];
 
   // 1. Calculate KPI Metrics
+  const totalPurchaseStockValue = products.reduce((sum, p) => sum + ((p.purchasePrice || Math.round((p.price || 0) * 0.75)) * (p.stock || 0)), 0);
   const totalStockValue = products.reduce((sum, p) => sum + ((p.price || 0) * (p.stock || 0)), 0);
+  const estimatedMargin = totalStockValue - totalPurchaseStockValue;
   const totalUnits = products.reduce((sum, p) => sum + (p.stock || 0), 0);
   const totalSalesCount = sales.length;
   const totalSalesRevenue = sales.reduce((sum, s) => sum + (s.total || 0), 0);
@@ -807,7 +850,9 @@ function renderDashboard() {
     if (el) el.textContent = txt;
   };
 
+  setElText("kpiPurchaseStockValue", formatFCFA(totalPurchaseStockValue));
   setElText("kpiStockValue", formatFCFA(totalStockValue));
+  setElText("kpiStockMarginTrend", `+${formatFCFA(estimatedMargin)} marge brute`);
   setElText("kpiTotalUnits", totalUnits);
   setElText("kpiTotalProductsRef", `${products.length} références`);
   setElText("kpiTotalSales", totalSalesCount);
@@ -827,28 +872,152 @@ function renderDashboard() {
   loadOrderEmailSettings();
 }
 
-function renderStockTable(query = "") {
+function renderCategorySubtotals() {
+  const container = document.getElementById("categorySubtotalsWrapper");
+  if (!container) return;
+
+  if (!Array.isArray(products)) products = [];
+
+  const categories = [
+    { key: "telephonie", label: "📱 Téléphonie", icon: "fa-mobile-screen" },
+    { key: "accessoires", label: "🎧 Accessoires", icon: "fa-headphones" },
+    { key: "electromenager", label: "📺 Électroménager", icon: "fa-tv" },
+    { key: "ventilo", label: "🌀 Ventilateurs", icon: "fa-fan" },
+    { key: "climatiseur", label: "❄️ Climatiseurs", icon: "fa-snowflake" }
+  ];
+
+  const select = document.getElementById("adminStockCategoryFilter");
+  const activeCat = select ? select.value : "all";
+
+  container.innerHTML = categories.map(cat => {
+    const catProducts = products.filter(p => p && (p.category === cat.key || (cat.key === "electromenager" && (p.category === "maison" || p.category === "electromenager"))));
+    const catUnits = catProducts.reduce((sum, p) => sum + (p.stock || 0), 0);
+    const catPurchaseTotal = catProducts.reduce((sum, p) => sum + ((p.purchasePrice || Math.round((p.price || 0) * 0.75)) * (p.stock || 0)), 0);
+    const catSellingTotal = catProducts.reduce((sum, p) => sum + ((p.price || 0) * (p.stock || 0)), 0);
+    const isActive = activeCat === cat.key;
+
+    return `
+      <div class="cat-subtotal-chip ${isActive ? 'active' : ''}" onclick="selectCategorySubtotalFilter('${cat.key}')" title="Filtrer uniquement la catégorie ${cat.label}">
+        <div class="cat-subtotal-header">
+          <span>${cat.label}</span>
+          <span style="background: rgba(79, 70, 229, 0.1); color: #4f46e5; padding: 0.15rem 0.45rem; border-radius: 99px; font-size: 0.7rem; font-weight: 700;">${catProducts.length} réf.</span>
+        </div>
+        <div class="cat-subtotal-amount">${formatFCFA(catPurchaseTotal)}</div>
+        <div class="cat-subtotal-meta">
+          <span>Achat total (${catUnits} u.)</span>
+          <span style="color: #059669; font-weight: 600;">Vente: ${formatFCFA(catSellingTotal)}</span>
+        </div>
+      </div>
+    `;
+  }).join("");
+}
+
+window.selectCategorySubtotalFilter = function(catKey) {
+  const select = document.getElementById("adminStockCategoryFilter");
+  if (!select) return;
+  
+  // Toggle selection if already active
+  if (select.value === catKey) {
+    select.value = "all";
+  } else {
+    select.value = catKey;
+  }
+  
+  const searchInput = document.getElementById("adminStockSearch");
+  const query = searchInput ? searchInput.value : "";
+  renderStockTable(query, select.value);
+};
+
+function renderStockTable(query = "", categoryFilter = "") {
   const tbody = document.getElementById("adminStockTableBody");
   if (!tbody) return;
 
   if (!Array.isArray(products)) products = [];
 
+  const catSelect = document.getElementById("adminStockCategoryFilter");
+  const selectedCat = categoryFilter || (catSelect ? catSelect.value : "all");
+
+  // Render category breakdown chips
+  renderCategorySubtotals();
+
   const filtered = products.filter(p => {
     if (!p) return false;
-    if (!query) return true;
-    const q = query.toLowerCase();
+
+    // 1. Category Filter
+    let matchesCategory = true;
+    if (selectedCat !== "all") {
+      if (selectedCat === "electromenager") {
+        matchesCategory = (p.category === "electromenager" || p.category === "maison");
+      } else {
+        matchesCategory = (p.category === selectedCat);
+      }
+    }
+
+    // 2. Text Search Query Filter
+    if (!query) return matchesCategory;
+    const q = query.toLowerCase().trim();
     const name = (p.name || "").toLowerCase();
     const cat = (p.category || "").toLowerCase();
-    return name.includes(q) || cat.includes(q);
+    const matchesSearch = name.includes(q) || cat.includes(q);
+
+    return matchesCategory && matchesSearch;
   });
 
+  // Calculate Subtotals for the Filtered Selection
+  const filteredPurchaseTotal = filtered.reduce((sum, p) => sum + ((p.purchasePrice || Math.round((p.price || 0) * 0.75)) * (p.stock || 0)), 0);
+  const filteredSellingTotal = filtered.reduce((sum, p) => sum + ((p.price || 0) * (p.stock || 0)), 0);
+  const filteredMargin = filteredSellingTotal - filteredPurchaseTotal;
+  const filteredUnits = filtered.reduce((sum, p) => sum + (p.stock || 0), 0);
+
+  // Render Filtered Subtotal Banner
+  const banner = document.getElementById("filteredSubtotalBanner");
+  if (banner) {
+    const catLabels = {
+      all: "Toutes les catégories",
+      telephonie: "📱 Téléphonie",
+      accessoires: "🎧 Accessoires",
+      electromenager: "📺 Électroménager",
+      ventilo: "🌀 Ventilateurs",
+      climatiseur: "❄️ Climatiseurs"
+    };
+    const currentLabel = catLabels[selectedCat] || selectedCat;
+
+    banner.innerHTML = `
+      <div style="display: flex; align-items: center; gap: 0.75rem;">
+        <div style="width: 42px; height: 42px; border-radius: 10px; background: rgba(99, 102, 241, 0.2); display: flex; align-items: center; justify-content: center; color: #818cf8; font-size: 1.25rem;">
+          <i class="fa-solid fa-calculator"></i>
+        </div>
+        <div>
+          <strong style="font-size: 1.05rem; color: #ffffff;">Sous-totaux d'Achat : ${currentLabel}</strong>
+          <div style="font-size: 0.8rem; color: #cbd5e1;">${filtered.length} référence(s) sélectionnée(s) • ${filteredUnits} unités physiques en stock</div>
+        </div>
+      </div>
+      
+      <div style="display: flex; gap: 1.5rem; flex-wrap: wrap; align-items: center;">
+        <div class="subtotal-stat-item">
+          <span class="subtotal-stat-label">Total Prix d'Achat (Coût)</span>
+          <span class="subtotal-stat-value achat">${formatFCFA(filteredPurchaseTotal)}</span>
+        </div>
+        <div class="subtotal-stat-item">
+          <span class="subtotal-stat-label">Total Prix de Vente (Valeur)</span>
+          <span class="subtotal-stat-value vente">${formatFCFA(filteredSellingTotal)}</span>
+        </div>
+        <div class="subtotal-stat-item">
+          <span class="subtotal-stat-label">Marge Brute Potentielle</span>
+          <span class="subtotal-stat-value marge">+${formatFCFA(filteredMargin)}</span>
+        </div>
+      </div>
+    `;
+  }
+
   if (filtered.length === 0) {
-    tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; color: #94a3b8; padding: 2rem;">Aucun article ne correspond à votre recherche.</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="8" style="text-align: center; color: #94a3b8; padding: 2rem;">Aucun article ne correspond aux filtres de recherche.</td></tr>`;
     return;
   }
 
   tbody.innerHTML = filtered.map(p => {
     const stock = p.stock || 0;
+    const purchasePrice = p.purchasePrice || Math.round((p.price || 0) * 0.75);
     let statusBadge = `<span class="badge-stock-in">En stock (${stock})</span>`;
     if (stock === 0) statusBadge = `<span class="badge-stock-out">Rupture (0)</span>`;
     else if (stock < 5) statusBadge = `<span class="badge-stock-low">Stock Faible (${stock})</span>`;
@@ -861,7 +1030,9 @@ function renderStockTable(query = "") {
       chargeurs: "🎧 Accessoires",
       audio: "🎧 Accessoires",
       montres: "🎧 Accessoires",
-      electromenager: "📺 Électroménager"
+      electromenager: "📺 Électroménager",
+      ventilo: "🌀 Ventilateurs",
+      climatiseur: "❄️ Climatiseurs"
     };
     const categoryDisplay = catLabels[p.category] || p.category || "Autre";
 
@@ -869,14 +1040,18 @@ function renderStockTable(query = "") {
       <tr>
         <td>
           <div class="table-product-cell">
-            <img src="${p.image || ''}" alt="${p.name || ''}" class="table-product-thumb" onclick="openEditProductModal(${p.id})" style="cursor: pointer;" title="Cliquer pour modifier l'image ou les infos">
+            <div style="position: relative; display: inline-block;">
+              <img src="${p.image || ''}" alt="${p.name || ''}" class="table-product-thumb" onclick="openEditProductModal(${p.id})" style="cursor: pointer;" title="Cliquer pour modifier les photos ou infos">
+              ${p.image2 ? `<span style="position: absolute; bottom: -2px; right: -2px; background: #059669; color: white; font-size: 0.6rem; font-weight: 800; padding: 0.1rem 0.25rem; border-radius: 4px; border: 1px solid white;" title="2 photos disponibles">2📷</span>` : ''}
+            </div>
             <div>
               <strong style="cursor: pointer;" onclick="openEditProductModal(${p.id})" title="Modifier">${p.name || 'Produit sans nom'}</strong>
-              <div style="font-size: 0.75rem; color: #64748b;">Réf: #${p.id || ''}</div>
+              <div style="font-size: 0.75rem; color: #64748b;">Réf: #${p.id || ''} ${p.image2 ? '• <span style="color:#059669; font-weight:600;"><i class="fa-solid fa-images"></i> 2 photos</span>' : ''}</div>
             </div>
           </div>
         </td>
         <td><span style="font-weight: 600; color: #1e40af;">${categoryDisplay}</span></td>
+        <td><span style="font-weight: 600; color: #475569; background: #f1f5f9; padding: 0.25rem 0.5rem; border-radius: 6px; font-size: 0.85rem;">${formatFCFA(purchasePrice)}</span></td>
         <td><strong>${formatFCFA(p.price || 0)}</strong></td>
         <td>${p.oldPrice ? `<span style="text-decoration: line-through; color: #94a3b8;">${formatFCFA(p.oldPrice)}</span>` : '-'}</td>
         <td><strong>${stock}</strong> unités</td>
@@ -999,29 +1174,31 @@ window.switchAdminTab = function(tabId) {
 // ==========================================================================
 
 // Global state for uploaded images (Base64 data or URL)
+// Global state for uploaded images (Base64 data or URL for 2 image slots)
 const currentUploadedImages = {
-  add: null,
-  edit: null
+  add1: null,
+  add2: null,
+  edit1: null,
+  edit2: null
 };
 
 // Switch image mode (File upload vs URL)
 window.switchImageSourceTab = function(context, mode) {
-  const isAdd = context === 'add';
-  const fileTab = document.getElementById(isAdd ? "addImgFileTab" : "editImgFileTab");
-  const urlTab = document.getElementById(isAdd ? "addImgUrlTab" : "editImgUrlTab");
-  const dropzone = document.getElementById(isAdd ? "addImgDropzone" : "editImgDropzone");
-  const urlPanel = document.getElementById(isAdd ? "addImgUrlPanel" : "editImgUrlPanel");
+  const fileTab = document.getElementById(`${context}ImgFileTab`);
+  const urlTab = document.getElementById(`${context}ImgUrlTab`);
+  const dropzone = document.getElementById(`${context}ImgDropzone`);
+  const urlPanel = document.getElementById(`${context}ImgUrlPanel`);
 
   if (mode === 'file') {
-    fileTab.classList.add("active");
-    urlTab.classList.remove("active");
-    dropzone.style.display = "block";
-    urlPanel.style.display = "none";
+    if (fileTab) fileTab.classList.add("active");
+    if (urlTab) urlTab.classList.remove("active");
+    if (dropzone) dropzone.style.display = "block";
+    if (urlPanel) urlPanel.style.display = "none";
   } else {
-    urlTab.classList.add("active");
-    fileTab.classList.remove("active");
-    dropzone.style.display = "none";
-    urlPanel.style.display = "block";
+    if (urlTab) urlTab.classList.add("active");
+    if (fileTab) fileTab.classList.remove("active");
+    if (dropzone) dropzone.style.display = "none";
+    if (urlPanel) urlPanel.style.display = "block";
   }
 };
 
@@ -1081,15 +1258,15 @@ window.handleImageFileSelect = async function(event, context) {
     const compressedDataUrl = await compressAndConvertImage(file);
     currentUploadedImages[context] = compressedDataUrl;
 
-    const previewWrap = document.getElementById(context === 'add' ? "addImgPreviewWrap" : "editImgPreviewWrap");
-    const previewImg = document.getElementById(context === 'add' ? "addImgPreview" : "editImgPreview");
-    const statusText = document.getElementById(context === 'add' ? null : "editImgStatusText");
+    const previewWrap = document.getElementById(`${context}ImgPreviewWrap`);
+    const previewImg = document.getElementById(`${context}ImgPreview`);
+    const statusText = document.getElementById(`${context}ImgStatusText`);
 
     if (previewImg) previewImg.src = compressedDataUrl;
     if (previewWrap) previewWrap.style.display = "flex";
     if (statusText) statusText.innerHTML = '<i class="fa-solid fa-circle-check"></i> Nouvelle photo chargée';
 
-    showToast("Image chargée et optimisée avec succès !", "success");
+    showToast("Photo chargée et optimisée !", "success");
   } catch (err) {
     showToast(err.message || "Erreur lors du chargement de l'image.", "error");
   }
@@ -1097,14 +1274,18 @@ window.handleImageFileSelect = async function(event, context) {
 
 // Handle URL Input Live Preview
 window.handleImageUrlInput = function(context) {
-  const isAdd = context === 'add';
-  const urlInput = document.getElementById(isAdd ? "newProdImage" : "editProdImage");
+  let inputId = "newProdImage1";
+  if (context === 'add2') inputId = "newProdImage2";
+  if (context === 'edit1') inputId = "editProdImage1";
+  if (context === 'edit2') inputId = "editProdImage2";
+
+  const urlInput = document.getElementById(inputId);
   const url = urlInput ? urlInput.value.trim() : "";
 
   if (url && (url.startsWith("http://") || url.startsWith("https://") || url.startsWith("data:image"))) {
     currentUploadedImages[context] = url;
-    const previewWrap = document.getElementById(isAdd ? "addImgPreviewWrap" : "editImgPreviewWrap");
-    const previewImg = document.getElementById(isAdd ? "addImgPreview" : "editImgPreview");
+    const previewWrap = document.getElementById(`${context}ImgPreviewWrap`);
+    const previewImg = document.getElementById(`${context}ImgPreview`);
     if (previewImg) previewImg.src = url;
     if (previewWrap) previewWrap.style.display = "flex";
   }
@@ -1112,12 +1293,18 @@ window.handleImageUrlInput = function(context) {
 
 // Clear image selection
 window.clearImageSelection = function(context) {
-  const isAdd = context === 'add';
   currentUploadedImages[context] = null;
-  const fileInput = document.getElementById(isAdd ? "newProdFileInput" : "editProdFileInput");
-  const urlInput = document.getElementById(isAdd ? "newProdImage" : "editProdImage");
-  const previewWrap = document.getElementById(isAdd ? "addImgPreviewWrap" : "editImgPreviewWrap");
-  const previewImg = document.getElementById(isAdd ? "addImgPreview" : "editImgPreview");
+
+  let fileInputId = "newProdFileInput1";
+  let urlInputId = "newProdImage1";
+  if (context === 'add2') { fileInputId = "newProdFileInput2"; urlInputId = "newProdImage2"; }
+  if (context === 'edit1') { fileInputId = "editProdFileInput1"; urlInputId = "editProdImage1"; }
+  if (context === 'edit2') { fileInputId = "editProdFileInput2"; urlInputId = "editProdImage2"; }
+
+  const fileInput = document.getElementById(fileInputId);
+  const urlInput = document.getElementById(urlInputId);
+  const previewWrap = document.getElementById(`${context}ImgPreviewWrap`);
+  const previewImg = document.getElementById(`${context}ImgPreview`);
 
   if (fileInput) fileInput.value = "";
   if (urlInput) urlInput.value = "";
@@ -1125,12 +1312,11 @@ window.clearImageSelection = function(context) {
   if (previewWrap) previewWrap.style.display = "none";
 };
 
-// Setup Drag and Drop Listeners
+// Setup Drag and Drop Listeners for dropzones
 function setupDropzones() {
-  const addDropzone = document.getElementById("addImgDropzone");
-  const editDropzone = document.getElementById("editImgDropzone");
-
-  [ { el: addDropzone, ctx: 'add' }, { el: editDropzone, ctx: 'edit' } ].forEach(({ el, ctx }) => {
+  const contexts = ['add1', 'add2', 'edit1', 'edit2'];
+  contexts.forEach(ctx => {
+    const el = document.getElementById(`${ctx}ImgDropzone`);
     if (!el) return;
 
     ['dragenter', 'dragover'].forEach(eventName => {
@@ -1157,8 +1343,8 @@ function setupDropzones() {
           const compressedDataUrl = await compressAndConvertImage(file);
           currentUploadedImages[ctx] = compressedDataUrl;
 
-          const previewWrap = document.getElementById(ctx === 'add' ? "addImgPreviewWrap" : "editImgPreviewWrap");
-          const previewImg = document.getElementById(ctx === 'add' ? "addImgPreview" : "editImgPreview");
+          const previewWrap = document.getElementById(`${ctx}ImgPreviewWrap`);
+          const previewImg = document.getElementById(`${ctx}ImgPreview`);
           if (previewImg) previewImg.src = compressedDataUrl;
           if (previewWrap) previewWrap.style.display = "flex";
 
@@ -1184,27 +1370,33 @@ if (addProductFormEl) {
   const name = document.getElementById("newProdName").value.trim();
   const category = document.getElementById("newProdCategory").value;
   const price = parseFloat(document.getElementById("newProdPrice").value);
+  const purchasePriceInput = document.getElementById("newProdPurchasePrice");
+  const purchasePrice = (purchasePriceInput && purchasePriceInput.value) ? parseFloat(purchasePriceInput.value) : Math.round(price * 0.75);
   const oldPrice = parseFloat(document.getElementById("newProdOldPrice").value) || null;
   const stock = parseInt(document.getElementById("newProdStock").value, 10);
   const badge = document.getElementById("newProdBadge").value;
-  const urlImage = document.getElementById("newProdImage").value.trim();
+  const urlImage1 = document.getElementById("newProdImage1") ? document.getElementById("newProdImage1").value.trim() : "";
+  const urlImage2 = document.getElementById("newProdImage2") ? document.getElementById("newProdImage2").value.trim() : "";
   const specsRaw = document.getElementById("newProdSpecs").value.trim();
   const desc = document.getElementById("newProdDesc").value.trim();
 
-  // Selected image resolution priority: Uploaded file/Base64 > Typed URL > Preset fallback
-  const finalImage = currentUploadedImages.add || urlImage || getPresetImageForCategory(category);
+  // Selected image 1 & 2 resolution priority
+  const finalImage1 = currentUploadedImages.add1 || urlImage1 || getPresetImageForCategory(category);
+  const finalImage2 = currentUploadedImages.add2 || urlImage2 || null;
 
   const newProd = {
     id: Date.now(),
     name,
     category,
+    purchasePrice,
     price,
     oldPrice,
     stock,
     badge,
     rating: 5.0,
     reviewsCount: 1,
-    image: finalImage,
+    image: finalImage1,
+    image2: finalImage2,
     specs: specsRaw ? specsRaw.split(",").map(s => s.trim()) : ["Garantie 12 Mois"],
     description: desc || "Article neuf disponible chez SUNU SOLUTION à Dalifort-Foirail."
   };
@@ -1214,7 +1406,8 @@ if (addProductFormEl) {
   renderDashboard();
 
   this.reset();
-  clearImageSelection('add');
+  clearImageSelection('add1');
+  clearImageSelection('add2');
   showToast(`Le produit "${name}" (${formatFCFA(price)}) a été ajouté avec succès !`, "success");
     switchAdminTab("stockTab");
   });
@@ -1232,11 +1425,12 @@ function getPresetImageForCategory(cat) {
 window.setPresetImage = function() {
   const cat = document.getElementById("newProdCategory").value;
   const preset = getPresetImageForCategory(cat);
-  document.getElementById("newProdImage").value = preset;
-  currentUploadedImages.add = preset;
+  const input1 = document.getElementById("newProdImage1");
+  if (input1) input1.value = preset;
+  currentUploadedImages.add1 = preset;
   
-  const previewWrap = document.getElementById("addImgPreviewWrap");
-  const previewImg = document.getElementById("addImgPreview");
+  const previewWrap = document.getElementById("add1ImgPreviewWrap");
+  const previewImg = document.getElementById("add1ImgPreview");
   if (previewImg) previewImg.src = preset;
   if (previewWrap) previewWrap.style.display = "flex";
 };
@@ -1248,31 +1442,44 @@ window.openEditProductModal = function(productId) {
 
   document.getElementById("editProdId").value = prod.id;
   document.getElementById("editProdName").value = prod.name;
+  const purchaseInput = document.getElementById("editProdPurchasePrice");
+  if (purchaseInput) purchaseInput.value = prod.purchasePrice || Math.round((prod.price || 0) * 0.75);
   document.getElementById("editProdPrice").value = prod.price;
   document.getElementById("editProdOldPrice").value = prod.oldPrice || "";
   document.getElementById("editProdStock").value = prod.stock;
   document.getElementById("editProdCategory").value = prod.category;
 
-  // Load existing image into edit state & preview
-  currentUploadedImages.edit = prod.image;
-  const editImgInput = document.getElementById("editProdImage");
-  if (editImgInput) editImgInput.value = prod.image.startsWith("data:") ? "" : prod.image;
+  // Load existing images into edit state & preview
+  currentUploadedImages.edit1 = prod.image || null;
+  currentUploadedImages.edit2 = prod.image2 || null;
 
-  const previewWrap = document.getElementById("editImgPreviewWrap");
-  const previewImg = document.getElementById("editImgPreview");
-  const statusText = document.getElementById("editImgStatusText");
+  const editImg1Input = document.getElementById("editProdImage1");
+  if (editImg1Input) editImg1Input.value = (prod.image && !prod.image.startsWith("data:")) ? prod.image : "";
 
-  if (previewImg) previewImg.src = prod.image;
-  if (previewWrap) previewWrap.style.display = "flex";
-  if (statusText) statusText.innerHTML = '<i class="fa-solid fa-circle-check"></i> Image actuelle du produit';
+  const editImg2Input = document.getElementById("editProdImage2");
+  if (editImg2Input) editImg2Input.value = (prod.image2 && !prod.image2.startsWith("data:")) ? prod.image2 : "";
 
-  switchImageSourceTab('edit', 'file');
+  // Preview 1
+  const previewWrap1 = document.getElementById("edit1ImgPreviewWrap");
+  const previewImg1 = document.getElementById("edit1ImgPreview");
+  if (previewImg1) previewImg1.src = prod.image || "";
+  if (previewWrap1) previewWrap1.style.display = prod.image ? "flex" : "none";
+
+  // Preview 2
+  const previewWrap2 = document.getElementById("edit2ImgPreviewWrap");
+  const previewImg2 = document.getElementById("edit2ImgPreview");
+  if (previewImg2) previewImg2.src = prod.image2 || "";
+  if (previewWrap2) previewWrap2.style.display = prod.image2 ? "flex" : "none";
+
+  switchImageSourceTab('edit1', 'file');
+  switchImageSourceTab('edit2', 'file');
   document.getElementById("editProductModal").style.display = "flex";
 };
 
 window.closeEditProductModal = function() {
   document.getElementById("editProductModal").style.display = "none";
-  clearImageSelection('edit');
+  clearImageSelection('edit1');
+  clearImageSelection('edit2');
 };
 
 window.saveEditedProduct = function(e) {
@@ -1282,17 +1489,34 @@ window.saveEditedProduct = function(e) {
   if (!prod) return;
 
   prod.name = document.getElementById("editProdName").value.trim();
+  const purchaseInput = document.getElementById("editProdPurchasePrice");
+  if (purchaseInput && purchaseInput.value) {
+    prod.purchasePrice = parseFloat(purchaseInput.value);
+  } else if (!prod.purchasePrice) {
+    prod.purchasePrice = Math.round((prod.price || 0) * 0.75);
+  }
   prod.price = parseFloat(document.getElementById("editProdPrice").value);
   prod.oldPrice = parseFloat(document.getElementById("editProdOldPrice").value) || null;
   prod.stock = parseInt(document.getElementById("editProdStock").value, 10);
   prod.category = document.getElementById("editProdCategory").value;
 
-  // Save new or updated image if changed
-  const urlVal = document.getElementById("editProdImage") ? document.getElementById("editProdImage").value.trim() : "";
-  if (currentUploadedImages.edit) {
-    prod.image = currentUploadedImages.edit;
-  } else if (urlVal) {
-    prod.image = urlVal;
+  // Save new or updated images if changed
+  const urlVal1 = document.getElementById("editProdImage1") ? document.getElementById("editProdImage1").value.trim() : "";
+  const urlVal2 = document.getElementById("editProdImage2") ? document.getElementById("editProdImage2").value.trim() : "";
+
+  if (currentUploadedImages.edit1) {
+    prod.image = currentUploadedImages.edit1;
+  } else if (urlVal1) {
+    prod.image = urlVal1;
+  }
+
+  if (currentUploadedImages.edit2) {
+    prod.image2 = currentUploadedImages.edit2;
+  } else if (urlVal2) {
+    prod.image2 = urlVal2;
+  } else if (urlVal2 === "") {
+    // cleared image 2
+    prod.image2 = null;
   }
 
   saveProducts();
@@ -1314,16 +1538,114 @@ window.deleteProduct = function(productId) {
 };
 
 // ==========================================================================
-// 5. MANUAL POS SALE RECORDING
+// 5. MANUAL POS SALE RECORDING (ENCAISSEMENT VENTE PAR CATÉGORIE ET PRIX DE VENTE)
 // ==========================================================================
 
-window.openManualSaleModal = function() {
+const POS_CATEGORY_MAP = {
+  telephonie: "📱 Téléphonie",
+  accessoires: "🎧 Accessoires",
+  electromenager: "📺 Électroménager Général",
+  ventilo: "🌀 Électroménager - Ventilateurs",
+  climatiseur: "❄️ Électroménager - Climatiseurs",
+  maison: "🏠 Équipement Maison"
+};
+
+window.renderSaleProductOptions = function() {
+  const categoryFilterSelect = document.getElementById("saleCategoryFilter");
+  const categoryFilter = categoryFilterSelect ? categoryFilterSelect.value : "all";
   const select = document.getElementById("saleProductSelect");
-  select.innerHTML = products.map(p => `
-    <option value="${p.id}" ${p.stock <= 0 ? 'disabled' : ''}>
-      ${p.name} - ${formatFCFA(p.price)} (Stock: ${p.stock})
-    </option>
-  `).join("");
+  if (!select) return;
+
+  if (!Array.isArray(products)) products = [];
+
+  let filtered = products;
+  if (categoryFilter !== "all") {
+    if (categoryFilter === "electromenager") {
+      filtered = products.filter(p => p.category === "electromenager" || p.category === "maison");
+    } else {
+      filtered = products.filter(p => p.category === categoryFilter);
+    }
+  }
+
+  if (filtered.length === 0) {
+    select.innerHTML = `<option value="" disabled selected>Aucun produit disponible dans cette catégorie</option>`;
+    return;
+  }
+
+  // Group products by category
+  const groups = {};
+  filtered.forEach(p => {
+    const catKey = p.category || "autre";
+    if (!groups[catKey]) groups[catKey] = [];
+    groups[catKey].push(p);
+  });
+
+  let optionsHTML = "";
+  for (const [catKey, prods] of Object.entries(groups)) {
+    const groupLabel = POS_CATEGORY_MAP[catKey] || `📦 ${catKey.toUpperCase()}`;
+    optionsHTML += `<optgroup label="${groupLabel}">`;
+    prods.forEach(p => {
+      const stockBadge = p.stock > 0 ? `Stock: ${p.stock}` : `Rupture de stock`;
+      optionsHTML += `
+        <option value="${p.id}" ${p.stock <= 0 ? 'disabled' : ''}>
+          ${p.name} — Prix de vente: ${formatFCFA(p.price || 0)} (${stockBadge})
+        </option>
+      `;
+    });
+    optionsHTML += `</optgroup>`;
+  }
+
+  select.innerHTML = optionsHTML;
+};
+
+window.onSaleCategoryChange = function() {
+  renderSaleProductOptions();
+  onSaleProductChange();
+};
+
+window.onSaleProductChange = function() {
+  const select = document.getElementById("saleProductSelect");
+  const unitPriceInput = document.getElementById("saleUnitPrice");
+  if (!select || !unitPriceInput) return;
+
+  const prodId = parseInt(select.value, 10);
+  const prod = products.find(p => p.id === prodId);
+  if (prod) {
+    unitPriceInput.value = prod.price || 0;
+  } else {
+    unitPriceInput.value = 0;
+  }
+
+  calculateSaleTotal();
+};
+
+window.calculateSaleTotal = function() {
+  const unitPriceInput = document.getElementById("saleUnitPrice");
+  const quantityInput = document.getElementById("saleQuantity");
+  const totalDisplay = document.getElementById("saleTotalDisplay");
+  const totalDetail = document.getElementById("saleTotalDetail");
+
+  const unitPrice = parseFloat(unitPriceInput ? unitPriceInput.value : 0) || 0;
+  const quantity = parseInt(quantityInput ? quantityInput.value : 1, 10) || 1;
+  const total = unitPrice * quantity;
+
+  if (totalDisplay) {
+    totalDisplay.innerHTML = `<i class="fa-solid fa-money-bill-wave"></i> ${formatFCFA(total)}`;
+  }
+  if (totalDetail) {
+    totalDetail.textContent = `${quantity} x ${formatFCFA(unitPrice)} (Prix de vente unitaire)`;
+  }
+};
+
+window.openManualSaleModal = function() {
+  const catFilter = document.getElementById("saleCategoryFilter");
+  if (catFilter) catFilter.value = "all";
+
+  const qtyInput = document.getElementById("saleQuantity");
+  if (qtyInput) qtyInput.value = 1;
+
+  renderSaleProductOptions();
+  onSaleProductChange();
 
   document.getElementById("manualSaleModal").style.display = "flex";
 };
@@ -1334,31 +1656,39 @@ window.closeManualSaleModal = function() {
 
 window.submitManualSale = function(e) {
   e.preventDefault();
-  const prodId = parseInt(document.getElementById("saleProductSelect").value, 10);
-  const qty = parseInt(document.getElementById("saleQuantity").value, 10);
+  const select = document.getElementById("saleProductSelect");
+  const prodId = parseInt(select ? select.value : 0, 10);
+  const qty = parseInt(document.getElementById("saleQuantity").value, 10) || 1;
   const custName = document.getElementById("saleCustName").value.trim() || "Client Comptoir Dalifort";
   const payment = document.getElementById("salePaymentMethod").value;
 
   const prod = products.find(p => p.id === prodId);
-  if (!prod) return;
-
-  if (prod.stock < qty) {
-    showToast(`Stock insuffisant (${prod.stock} disponibles).`, "error");
+  if (!prod) {
+    showToast("Veuillez sélectionner un produit valide.", "error");
     return;
   }
 
+  if (prod.stock < qty) {
+    showToast(`Stock insuffisant pour ${prod.name} (${prod.stock} disponibles).`, "error");
+    return;
+  }
+
+  const unitPriceInput = document.getElementById("saleUnitPrice");
+  const unitPrice = parseFloat(unitPriceInput ? unitPriceInput.value : prod.price) || prod.price || 0;
+  const totalAmount = unitPrice * qty;
+
+  // Deduct stock
   prod.stock -= qty;
   saveProducts();
-
-  const totalAmount = prod.price * qty;
 
   const newSale = {
     id: `SUNU-${new Date().getFullYear()}-${String(sales.length + 1).padStart(3, '0')}`,
     date: new Date().toISOString().replace('T', ' ').substring(0, 16),
     customer: custName,
     phone: "Comptoir",
-    items: `${prod.name} (${qty}x)`,
+    items: `${prod.name} (${qty}x @ ${formatFCFA(unitPrice)})`,
     total: totalAmount,
+    unitPrice: unitPrice,
     paymentMethod: payment,
     status: "Payé & Emporté"
   };
@@ -1368,7 +1698,7 @@ window.submitManualSale = function(e) {
 
   renderDashboard();
   closeManualSaleModal();
-  showToast(`Vente enregistrée : ${formatFCFA(totalAmount)} encaissés !`, "success");
+  showToast(`Encaissement réussi : ${formatFCFA(totalAmount)} enregistrés !`, "success");
 };
 
 window.printReceipt = function(saleId) {
@@ -1379,7 +1709,8 @@ window.printReceipt = function(saleId) {
 =============================================
              SUNU SOLUTION
          Dalifort-Foirail, Dakar
-    Tél / WhatsApp: +221 76 314 33 33
+    Tél Fixe: +221 33 832 10 50
+    Mobile / WhatsApp: +221 76 314 33 33
     Facebook: @sunusolutionshop
 =============================================
 Facture N°: ${sale.id}
@@ -1421,9 +1752,10 @@ window.exportDatabaseJSON = function() {
 };
 
 window.exportStockCSV = function() {
-  let csv = "ID,Nom,Categorie,Prix_FCFA,Prix_Barre_FCFA,Stock,Note\n";
+  let csv = "ID,Nom,Categorie,Prix_Achat_FCFA,Prix_Vente_FCFA,Prix_Barre_FCFA,Stock,Note\n";
   products.forEach(p => {
-    csv += `"${p.id}","${p.name}","${p.category}",${p.price},${p.oldPrice || ''},${p.stock},${p.rating}\n`;
+    const purchase = p.purchasePrice || Math.round((p.price || 0) * 0.75);
+    csv += `"${p.id}","${p.name}","${p.category}",${purchase},${p.price},${p.oldPrice || ''},${p.stock},${p.rating}\n`;
   });
   const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
   const url = URL.createObjectURL(blob);
@@ -1484,9 +1816,19 @@ document.addEventListener("DOMContentLoaded", () => {
   checkAuthStatus();
 
   const adminStockSearch = document.getElementById("adminStockSearch");
+  const adminStockCategoryFilter = document.getElementById("adminStockCategoryFilter");
+
   if (adminStockSearch) {
     adminStockSearch.addEventListener("input", (e) => {
-      renderStockTable(e.target.value);
+      const catVal = adminStockCategoryFilter ? adminStockCategoryFilter.value : "all";
+      renderStockTable(e.target.value, catVal);
+    });
+  }
+
+  if (adminStockCategoryFilter) {
+    adminStockCategoryFilter.addEventListener("change", (e) => {
+      const queryVal = adminStockSearch ? adminStockSearch.value : "";
+      renderStockTable(queryVal, e.target.value);
     });
   }
 });
